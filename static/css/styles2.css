@@ -1,0 +1,481 @@
+/* Breadcrumbs */
+.breadcrumbs {
+    margin: 20px 0;
+    font-size: 14px;
+    color: var(--light-text);
+}
+
+.breadcrumbs a {
+    color: var(--primary-green);
+    text-decoration: none;
+}
+
+/* Section Headers */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-header h1,
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.all-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--white);
+    border: 1px solid #e0e0e0;
+    border-radius: 30px;
+    color: var(--dark-text);
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.all-link:hover {
+    background-color: #f5f5f5;
+}
+
+/* Search Bar */
+.search-bar {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 5px rgba(0, 192, 135, 0.2);
+}
+
+.search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Services Dropdown Styles */
+.services-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+.services-dropdown-content {
+    padding: 20px;
+}
+
+.services-dropdown h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--dark-text);
+    text-align: center;
+}
+
+.services-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.services-column h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.services-column h4:first-child {
+    margin-top: 0;
+}
+
+.services-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.services-column li {
+    margin-bottom: 8px;
+}
+
+.services-column a {
+    color: var(--light-text);
+    font-size: 13px;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    transition: color 0.3s ease;
+}
+
+.services-column a:hover {
+    color: var(--primary-green);
+}
+
+/* Services Section */
+.services-section {
+    padding: 40px 0;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.service-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    height: 180px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.service-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.circle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.circle-btn:hover {
+    transform: scale(1.1);
+}
+
+.service-image {
+    width: 50%;
+    overflow: hidden;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Examinations Section */
+.examinations-section {
+    padding: 60px 0;
+}
+
+.examinations-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.examination-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.examination-card:hover {
+    transform: translateY(-5px);
+}
+
+.examination-card .icon {
+    margin-bottom: 20px;
+}
+
+.examination-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+/* Specialists Section */
+.specialists-section {
+    padding: 60px 0;
+}
+
+.specialists-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.specialist-card {
+    background-color: var(--light-green);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.specialist-card:hover {
+    transform: translateY(-5px);
+}
+
+.specialist-image {
+    position: relative;
+    height: 300px;
+}
+
+.specialist-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.price-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.specialist-info {
+    padding: 20px;
+}
+
+.specialist-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.specialist-position {
+    color: var(--light-text);
+    font-size: 14px;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 60px 0;
+}
+
+.contact-card {
+    display: flex;
+    background: linear-gradient(90deg, #00c087 0%, #00a876 100%);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    color: var(--white);
+    margin-bottom: 40px;
+}
+
+.contact-info {
+    padding: 40px;
+    width: 50%;
+}
+
+.contact-info h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    max-width: 400px;
+}
+
+.address,
+.phone {
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.appointment-info {
+    padding: 40px;
+    width: 50%;
+    position: relative;
+    background-color: var(--white);
+    color: var(--dark-text);
+}
+
+.appointment-info h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    max-width: 400px;
+}
+
+.medical-image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-height: 200px;
+}
+
+/* Скроллбар для выпадающего списка */
+.services-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.services-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.services-dropdown::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 10px;
+}
+
+.services-dropdown::-webkit-scrollbar-thumb:hover {
+    background: #00a876;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .specialists-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .services-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-dropdown {
+        max-height: 400px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .examinations-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .specialists-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-card {
+        flex-direction: column;
+    }
+
+    .contact-info,
+    .appointment-info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .search-bar {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .services-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .services-dropdown {
+        max-height: 350px;
+        left: -20px;
+        right: -20px;
+    }
+
+    .examinations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .specialists-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-content {
+        width: 60%;
+    }
+
+    .service-image {
+        width: 40%;
+    }
+}

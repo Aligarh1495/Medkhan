@@ -1,0 +1,253 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style5.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Хлебные крошки -->
+<div class="container">
+    <div class="breadcrumbs">
+        <a href="{% url 'main' %}">Главная</a> / <span>Акции</span>
+    </div>
+</div>
+
+<!-- Секция акций -->
+<section class="promotions-section">
+    <div class="container">
+        <div class="section-header">
+            <h1>АКЦИИ</h1>
+            <div class="filter-dropdown">
+                <select>
+                    <option value="">Все</option>
+                    <option value="male">Мужской</option>
+                    <option value="female">Женский</option>
+                    <option value="all">Ребёнок</option>
+                </select>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="promotions-grid">
+            <!-- Главная акция с фото -->
+            <div class="promotion-card featured">
+                <div class="promotion-background">
+                    <img src="{% static 'images/woman-profile.png' %}" alt="Женщина в профиль" class="featured-image">
+                </div>
+                <div class="promotion-content">
+                    <div class="promotion-header">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="top-badges">
+                            <div class="validity">до 5 марта</div>
+                            <div class="discount">-15%</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="current-price">14 730 ₽</span>
+                        <span class="old-price">16 375 ₽</span>
+                    </div>
+                    <h3>CHECK UP<br>«Боль в спине<br>Расширенный»</h3>
+                </div>
+            </div>
+
+            <!-- Акция 2 -->
+            <div class="promotion-card">
+                <div class="promotion-background2"></div>
+                <div class="promotion-content">
+                    <div class="promotion-header">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="top-badges">
+                            <div class="validity">до 5 марта</div>
+                            <div class="discount">-15%</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="current-price">6 000 ₽</span>
+                        <span class="old-price">7 200 ₽</span>
+                    </div>
+                    <h3>CHECK UP<br>«Женское здоровье» (Пакет S)</h3>
+                </div>
+            </div>
+
+            <!-- Акция 3 -->
+            <div class="promotion-card">
+                <div class="promotion-background"></div>
+                <div class="promotion-content">
+                    <div class="promotion-header">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="top-badges">
+                            <div class="validity">до 5 марта</div>
+                            <div class="discount">-12%</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="current-price">8 160 ₽</span>
+                        <span class="old-price">9 070 ₽</span>
+                    </div>
+                    <h3>CHECK UP<br>«Репродуктивность»</h3>
+                </div>
+            </div>
+
+            <!-- Акция 4 -->
+            <div class="promotion-card">
+                <div class="promotion-background"></div>
+                <div class="promotion-content">
+                    <div class="promotion-header">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="top-badges">
+                            <div class="validity">до 5 марта</div>
+                            <div class="discount">-12%</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="current-price">6 000 ₽</span>
+                        <span class="old-price">7 045 ₽</span>
+                    </div>
+                    <h3>CHECK UP<br>«Здоровый желудок»</h3>
+                </div>
+            </div>
+
+            <!-- Акция 5 -->
+            <div class="promotion-card">
+                <div class="promotion-background"></div>
+                <div class="promotion-content">
+                    <div class="promotion-header">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="top-badges">
+                            <div class="validity">до 5 марта</div>
+                            <div class="discount">-15%</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="current-price">10 300 ₽</span>
+                        <span class="old-price">11 545 ₽</span>
+                    </div>
+                    <h3>CHECK UP<br>Гастрологический «Расширенный»</h3>
+                </div>
+            </div>
+
+            <!-- Акция 6 -->
+            <div class="promotion-card">
+                <div class="promotion-background"></div>
+                <div class="promotion-content">
+                    <div class="promotion-header">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="top-badges">
+                            <div class="validity">до 5 марта</div>
+                            <div class="discount">-10%</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="current-price">18 900 ₽</span>
+                        <span class="old-price">20 735 ₽</span>
+                    </div>
+                    <h3>CHECK UP<br>Гастрологический «Комплекс»</h3>
+                </div>
+            </div>
+
+            <!-- Акция 7 -->
+            <div class="promotion-card">
+                <div class="promotion-background"></div>
+                <div class="promotion-content">
+                    <div class="promotion-header">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="5" stroke="white" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="top-badges">
+                            <div class="validity">до 5 марта</div>
+                            <div class="discount">-12%</div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="current-price">6 500 ₽</span>
+                        <span class="old-price">7 375 ₽</span>
+                    </div>
+                    <h3>CHECK UP<br>«Боль в спине»</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="show-more">
+            <button class="btn btn-outline">Показать ещё</button>
+        </div>
+    </div>
+</section>
+
+<!-- Секция контактной информации -->
+<section class="contact-info-section">
+    <div class="container">
+        <div class="contact-info-grid">
+            <div class="info-block">
+                <h2>Нужна дополнительная информация?</h2>
+                <p>Не нашли ответ на свой вопрос? Оставьте заявку и наши специалисты проконсультируют Вас.</p>
+                <p class="contact-methods">или напишите нам в чат</p>
+                <div class="contact-icons">
+                    <a href="mailto:" class="contact-icon email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="contact-icon telegram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="contact-icon whatsapp">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 11.5C21 16.75 16.75 21 11.5 21C9.54 21 7.73 20.38 6.22 19.3L3 20.5L4.2 17.28C3.12 15.77 2.5 13.96 2.5 12C2.5 6.75 6.75 2.5 12 2.5C17.25 2.5 21.5 6.75 21.5 12V12.5H21Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <input type="text" placeholder="Как вас зовут?" required>
+                    <input type="tel" placeholder="Ваш номер телефона" required>
+                    <p class="privacy-notice">Нажимая на кнопку, вы соглашаетесь с условиями обработки данных в соответствии с Политикой конфиденциальности</p>
+                    <button type="submit" class="btn btn-primary">Оставить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
