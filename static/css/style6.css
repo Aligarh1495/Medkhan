@@ -1,0 +1,518 @@
+/* Breadcrumbs */
+.breadcrumbs {
+  margin: 20px 0;
+  font-size: 14px;
+  color: var(--light-text);
+}
+
+.breadcrumbs a {
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+/* Promotion Hero */
+.promotion-hero {
+  background-image: url("{% static 'images/stocks2.png' %}");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+  margin: 20px 0 60px;
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 450px;
+}
+
+.promotion-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  gap: 40px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 30px;
+  line-height: 1.1;
+}
+
+.price-block {
+  margin-bottom: 30px;
+}
+
+.current-price {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-right: 15px;
+}
+
+.old-price {
+  font-size: 24px;
+  color: var(--light-text);
+  text-decoration: line-through;
+}
+
+.hero-image {
+  position: relative;
+  width: 400px;
+  height: 350px;
+  overflow: visible;
+  flex-shrink: 0;
+  transform: scale(1.35);
+}
+
+.hero-image img {
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.validity-badge {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--dark-text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+}
+
+.search-bar {
+  position: absolute;
+  top: 0px;
+  right: -130px;
+  width: 300px;
+  z-index: 0;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  outline: none;
+  box-shadow: var(--shadow);
+}
+
+.search-bar svg {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* About Promotion */
+.about-promotion {
+  padding: 60px 0;
+}
+
+.about-promotion h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.service-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--dark-text);
+}
+
+.service-card ul {
+  list-style: none;
+}
+
+.service-card li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: var(--light-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.service-card li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+  font-weight: bold;
+}
+
+/* Discount Info */
+.discount-info {
+  padding: 60px 0;
+  background-color: var(--white);
+}
+
+.discount-info h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.discount-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.discount-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.method {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.method-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.method-text {
+  color: var(--dark-text);
+  line-height: 1.5;
+}
+
+.appointment-form {
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  padding: 40px;
+  text-align: center;
+  position: relative;
+}
+
+.appointment-form h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: var(--dark-text);
+}
+
+.form-image {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 200px;
+  height: 150px;
+  opacity: 0.7;
+}
+
+.form-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Doctors Section */
+.doctors-section {
+  padding: 60px 0;
+}
+
+.doctors-section h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.doctor-card {
+  background-color: var(--light-green);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+}
+
+.doctor-image {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.doctor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.price-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--white);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.doctor-info {
+  padding: 25px;
+}
+
+.doctor-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--dark-text);
+  line-height: 1.3;
+}
+
+.doctor-info p {
+  color: var(--light-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Contact Form Section */
+.contact-form-section {
+  padding: 60px 0;
+  background-color: #f8f9fa;
+}
+
+.contact-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.contact-info-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 40px;
+  box-shadow: var(--shadow);
+}
+
+.contact-info-card h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--dark-text);
+}
+
+.contact-info-card p {
+  margin-bottom: 30px;
+  line-height: 1.7;
+  font-size: 16px;
+  color: var(--light-text);
+}
+
+.contact-features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.contact-form-card {
+  background: linear-gradient(135deg, var(--primary-green) 0%, #00a876 100%);
+  border-radius: var(--border-radius);
+  padding: 40px;
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  background-color: var(--white);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.form-group input::placeholder {
+  color: var(--light-text);
+}
+
+.form-note {
+  margin-bottom: 25px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.form-note a {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.contact-form-card .btn {
+  width: 100%;
+  background-color: var(--white);
+  color: var(--primary-green);
+  font-weight: 600;
+  padding: 15px;
+  font-size: 16px;
+}
+
+.contact-form-card .btn:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .search-bar {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .discount-grid,
+  .contact-form-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doctors-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .promotion-hero {
+    padding: 40px 0;
+    min-height: 400px;
+  }
+
+  .hero-image {
+    height: 280px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .current-price {
+    font-size: 28px;
+  }
+
+  .old-price {
+    font-size: 18px;
+  }
+
+  .contact-form-card {
+    padding: 30px 20px;
+  }
+
+  .hero-image {
+    height: 250px;
+  }
+}

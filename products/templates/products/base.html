@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+
+    <!-- Базовые стили -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="{% url 'main' %}" class="logo">
+                <img src="{% static 'images/лого_верх.png' %}" alt="MedKhan">
+            </a>
+            <div class="phone-number">
+                <a href="tel:+79011433434">+7 (901) 143-34-34</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="{% url 'services' %}">Услуги</a></li>
+                    <li><a href="{% url 'stocks' %}" class="active">Акции</a></li>
+                    <li><a href="{% url 'specialists' %}">Специалисты</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="{% url 'magazine' %}">Журнал</a></li>
+                </ul>
+            </nav>
+            <a href="#appointment" class="btn btn-primary">Записаться</a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Информационный блок -->
+    <section class="info-section">
+        <div class="container">
+            <div class="magazine-info-section">
+                <!-- Контактный блок -->
+                <div class="contact-block">
+                    <div class="logo-container">
+                        <div class="logo-text">
+                            <img src="{% static 'images/logo.png' %}" alt="MedKhan Logo">
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-address">Набережные Челны,<br>43-й комплекс, 25А</p>
+                        <a href="tel:+79011433434" class="contact-phone">+7 (901) 143-34-34</a>
+                    </div>
+                    <div class="contact-message">
+                        <p>Пишите<br>нам по любым<br>вопросам</p>
+                        <div class="contact-icons">
+                            <a href="#" class="icon-email">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="icon-telegram">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="icon-whatsapp">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 6V12L16 14M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Лицензия -->
+                <div class="license-block">
+                    <h3>Лицензия<br>на медицинскую<br>деятельность</h3>
+                    <a href="#" class="verify-license">проверить лицензию</a>
+                </div>
+
+                <!-- Рейтинги -->
+                <div class="ratings-block">
+                    <div class="rating-card">
+                        <span class="rating-score">4.9</span>
+                        <img src="{% static 'images/yandex_logo.png' %}" alt="Яндекс" class="rating-logo yandex-logo">
+                    </div>
+                    <div class="rating-card">
+                        <span class="rating-score">4.7</span>
+                        <img src="{% static 'images/gis_logo.png' %}" alt="2ГИС" class="rating-logo gis-logo">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Социальные сети -->
+            <div class="magazine-social-links">
+                <a href="#" class="magazine-social-link telegram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    MedKhan в tг
+                </a>
+                <a href="#" class="magazine-social-link vk">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 10H11V15H13V10Z" fill="#00C087"/>
+                        <path d="M15 10H17V15H15V10Z" fill="#00C087"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM14 7H10C8.34315 7 7 8.34315 7 10V14C7 15.6569 8.34315 17 10 17H14C15.6569 17 17 15.6569 17 14V10C17 8.34315 15.6569 7 14 7Z" fill="#00C087"/>
+                    </svg>
+                    MedKhan в вк
+                </a>
+                <a href="#" class="magazine-social-link youtube">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.5401 6.42C22.4237 5.94541 22.1929 5.51057 21.8703 5.15941C21.5477 4.80824 21.1446 4.55318 20.7001 4.42C18.9001 4 12.0001 4 12.0001 4C12.0001 4 5.10008 4 3.30008 4.46C2.85557 4.59318 2.45251 4.84824 2.12991 5.19941C1.80731 5.55057 1.57649 5.98541 1.46008 6.46C1.14577 8.20556 0.991404 9.97631 1.00008 11.75C0.988639 13.537 1.14276 15.3213 1.46008 17.08C1.58686 17.5398 1.82345 17.9581 2.14462 18.2945C2.46579 18.6308 2.86259 18.8738 3.30008 19C5.10008 19.46 12.0001 19.46 12.0001 19.46C12.0001 19.46 18.9001 19.46 20.7001 19C21.1446 18.8668 21.5477 18.6118 21.8703 18.2606C22.1929 17.9094 22.4237 17.4746 22.5401 17C22.8524 15.2676 23.0053 13.5103 23.0001 11.75C23.0115 9.96295 22.8574 8.1787 22.5401 6.42Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.75 15.02L15.5 11.75L9.75 8.47998V15.02Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    MedKhan в youtube
+                </a>
+            </div>
+
+            <!-- Футер -->
+            <footer class="magazine-footer">
+                <p class="copyright">© 2023-2025 г. «Медицинский центр МедХан»</p>
+                <div class="footer-links">
+                    <a href="#" class="privacy-policy">Политика конфиденциальности</a>
+                    <a href="#" class="requisites">Реквизиты</a>
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Дополнительные скрипты -->
+    {% block extra_js %}{% endblock %}
+
+    <!-- Базовые скрипты -->
+    <script>
+        // Мобильное меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+
+            if (mobileMenuToggle && mainNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
