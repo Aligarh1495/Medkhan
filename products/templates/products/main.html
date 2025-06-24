@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<!-- Address Bar -->
+
 <div class="address-bar">
     <div class="container">
         <div class="address">
@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<!-- Hero Section with Slides -->
+
 <section class="hero-container" id="main">
     <!-- Slide 1: Комфортное взятие -->
     <div class="hero-slide active">
@@ -49,7 +49,6 @@
             </div>
         </div>
     </div>
-
     <!-- Slide 2: Консультация прямо из дома -->
     <div class="hero-slide">
         <div class="hero-background" style="background-image: url('{% static 'images/ГЛАВНАЯ.png' %}');"></div>
@@ -72,7 +71,7 @@
         </div>
     </div>
 
-    <!-- Navigation Arrows -->
+    <!-- Навигация -->
     <div class="hero-navigation">
         <button class="nav-arrow prev" id="prevSlide">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +85,7 @@
         </button>
     </div>
 
-    <!-- Slide Indicators -->
+
     <div class="hero-indicators">
         <div class="indicator active" data-slide="0"></div>
         <div class="indicator" data-slide="1"></div>
@@ -94,7 +93,7 @@
     </div>
 </section>
 
-<!-- Popular Services -->
+<!-- Популярные услуги -->
 <section class="container" id="services">
     <div class="services-header">
         <h1>Популярные услуги</h1>
@@ -174,7 +173,7 @@
     </div>
 </section>
 
-<!-- Medical Promotions -->
+<!--Promotions -->
 <section class="container" id="promotions">
     <div class="promotions-header">
         <h1>Акции</h1>
@@ -291,9 +290,8 @@
     </div>
 </section>
 
-<!-- Остальные секции: Specialists, Reviews, Media, Magazine -->
-<!-- Здесь будет остальной контент главной страницы... -->
- <!-- Specialists -->
+
+ <!-- Специалисты -->
 <section class="container" id="specialists">
         <!-- Секция команды специалистов -->
         <section class="specialists-section">
@@ -370,7 +368,7 @@
                         <img src="{% static 'images/equipment.png' %}" alt="Медицинский центр МедХан" class="clinic-photo">
                     </div>
                 </div>
-            </>>
+            </a>
 
             <div class="stats-grid">
                 <!-- Статистика 1 -->
@@ -420,7 +418,7 @@
         </section>
 </section>
 
-    <!-- Reviews & Media -->
+    <!-- Отзывы и Медиа -->
 <section class="container" id="reviews">
         <!-- Секция отзывов -->
         <section class="reviews-section">
