@@ -98,15 +98,17 @@
 
             <div class="specialist-card" data-gender="male" data-specialization="urologist">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят">
-                    <div class="experience-badge">Стаж 25 лет</div>
+                    <a href="{% url 'HanYmar' %}">
+                        <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят">
+                        <div class="experience-badge">Стаж 25 лет</div>
+                    </a>
                 </div>
                 <div class="specialist-info">
                     <h3>Хан<br>Умар Хаят</h3>
                     <p class="specialist-position">Андролог, главный врач, уролог</p>
-                    <a href="{% url 'HanYmar' %}">
-                        <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
-                    </a>
+
+                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
+
                 </div>
             </div>
 
