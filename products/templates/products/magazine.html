@@ -1,8 +1,7 @@
-
 {% extends 'products/base.html' %}
 {% load static %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{{ title}}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/style7.css' %}">
@@ -12,96 +11,98 @@
 
 <div class="container">
     <div class="breadcrumbs">
-        <a href="{% url 'main' %}">Главная</a> / <span>Журнал о здоровье</span>
+        <a href="/">Главная</a> / <span>Журнал о здоровье</span>
     </div>
 </div>
+ <div class="section-header">
+     <h1>Журнал о здоровье</h1>
+ </div>
+<!-- Заголовок журнала -->
+<section class="container" id="magazine">
 
-<!-- Секция журнала -->
-<section class="magazine-section">
-    <div class="container">
-        <div class="section-header">
-            <h1>Журнал о здоровье</h1>
-        </div>
 
-        <div class="blog-grid">
-            <article class="blog-card">
-                <div class="blog-image">
+        <!-- Статьи журнала -->
+        <div class="magazine-articles-grid">
+            <!-- Статья 1 -->
+            <article class="magazine-article-card">
+                <div class="magazine-article-image">
                     <img src="{% static 'images/lotos.png' %}" alt="Интимное омоложение фракционным лазером CO2">
                 </div>
-                <div class="blog-content">
-                    <h3>Интимное омоложение фракционным лазером CO2</h3>
+                <div class="magazine-article-content">
+                    <h2>Интимное омоложение фракционным лазером CO2</h2>
                     <p>Интимное омоложение CO2-лазером показано пациенткам любого возраста при наличии показаний.</p>
                 </div>
             </article>
 
-            <article class="blog-card">
-                <div class="blog-image">
-                    <img src="{% static 'images/laser.png' %}" alt="Хронический простатит и ЭУВТ–Терапия ударно-волновым методом">
+            <!-- Статья 2 -->
+            <article class="magazine-article-card">
+                <div class="magazine-article-image">
+                    <img src="{% static 'images/laser.png' %}" alt="Хронический простатит и ЭУВТ-Терапия ударно-волновым методом">
                 </div>
-                <div class="blog-content">
-                    <h3>Хронический простатит и ЭУВТ–Терапия ударно-волновым методом</h3>
-                    <p>Терапия ударно-волновым методом – это современный и эффективный подход в лечении хронических заболеваний.</p>
+                <div class="magazine-article-content">
+                    <h2>Хронический простатит и ЭУВТ-Терапия ударно-волновым методом</h2>
+                    <p>Терапия ударно-волновым методом — это современный и эффективный подход к лечению хронических заболеваний.</p>
                 </div>
             </article>
 
-            <article class="blog-card">
-                <div class="blog-image">
+            <!-- Статья 3 -->
+            <article class="magazine-article-card">
+                <div class="magazine-article-image">
                     <img src="{% static 'images/doctor.png' %}" alt="Доктор Хан Умар Хаят – пионер ударно-волновой терапии в РТ">
                 </div>
-                <div class="blog-content">
-                    <h3>Доктор Хан Умар Хаят – пионер ударно-волновой терапии в РТ</h3>
+                <div class="magazine-article-content">
+                    <h2>Доктор Хан Умар Хаят – пионер ударно-волновой терапии в РТ</h2>
                     <p>Хан Умар Хаят – главный врач клиники "МедХан" первым в Республике Татарстан начал внедрение ударно-волновой терапии (УВТ) для лечения урологических заболеваний.</p>
                 </div>
             </article>
 
-            <article class="blog-card">
-                <div class="blog-image">
+            <!-- Статья 4 -->
+            <article class="magazine-article-card">
+                <div class="magazine-article-image">
                     <img src="{% static 'images/hirurgia.png' %}" alt="Эффективные операции для мужского здоровья в клинике «МедХан»">
                 </div>
-                <div class="blog-content">
-                    <h3>Эффективные операции для мужского здоровья в клинике «МедХан»</h3>
-                    <p>Лечение урологических заболеваний - широкий спектр хирургических операций, направленных на восстановление здоровья мужчин. Онлайн запись к специалисту</p>
+                <div class="magazine-article-content">
+                    <h2>Эффективные операции для мужского здоровья в клинике «МедХан»</h2>
+                    <p>Лечение урологических заболеваний - широкий спектр хирургических операций, направленных на восстановление здоровья мужчины.<br>Онлайн запись к специалисту</p>
                 </div>
             </article>
+        </div>
+</section>
 
-
-
-        <!-- Кнопка "Показать еще" -->
-        <div class="show-more">
-            <button class="btn btn-outline">Показать ещё статьи</button>
+<!-- Секция контактов -->
+<section class="contact-section" id="contacts">
+    <div class="container">
+        <div class="contact-card">
+            <div class="contact-info">
+                <h2>Можете связаться с нами удобным для вас способом</h2>
+                <p class="address">Набережные Челны,<br>62-й комплекс, 30А</p>
+                <p class="phone">+7 (901) 143-34-34</p>
+                <div class="social-links">
+                    <a href="#" class="social-link email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link telegram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link whatsapp">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 11.5C21 16.75 16.75 21 11.5 21C9.54 21 7.73 20.38 6.22 19.3L3 20.5L4.2 17.28C3.12 15.77 2.5 13.96 2.5 12C2.5 6.75 6.75 2.5 12 2.5C17.25 2.5 21.5 6.75 21.5 12V12.5H21Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="appointment-info">
+                <h2>Или заполните анкету первичного приёма</h2>
+                <a href="#" class="btn btn-primary">Перейти к заполнению</a>
+                <img src="{% static 'images/tools.png' %}" alt="Медицинские инструменты" class="medical-image">
+            </div>
         </div>
     </div>
 </section>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Функциональность для кнопки "Показать еще"
-    const showMoreBtn = document.querySelector('.show-more .btn');
-    const blogGrid = document.querySelector('.blog-grid');
-
-    if (showMoreBtn) {
-        showMoreBtn.addEventListener('click', function() {
-            // Здесь можно добавить логику загрузки дополнительных статей
-            console.log('Загрузка дополнительных статей...');
-
-            // Пример: скрыть кнопку после клика
-            // this.style.display = 'none';
-        });
-    }
-
-    // Добавляем анимацию при наведении на карточки
-    const blogCards = document.querySelectorAll('.blog-card');
-    blogCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
-        });
-
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-    });
-});
-</script>
 {% endblock %}
