@@ -1,7 +1,64 @@
 {% extends 'products/base.html' %}
 {% load static %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Врачи-специалисты клиники МедХан в Набережных Челнах{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Опытные врачи-специалисты клиники МедХан: урологи, гинекологи, неврологи, терапевты. Запись на прием онлайн. Набережные Челны, 52-й комплекс, 20А">
+{% endblock %}
+
+{% block meta_keywords %}
+<meta name="keywords" content="врачи, специалисты, уролог, гинеколог, невролог, терапевт, хирург, проктолог, Набережные Челны, МедХан, запись к врачу">
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  "name": "МедХан",
+  "description": "Команда опытных врачей-специалистов в клинике МедХан",
+  "url": "{{ request.build_absolute_uri }}",
+  "telephone": "+7 (901) 143-34-34",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "52-й комплекс, 20А",
+    "addressLocality": "Набережные Челны",
+    "addressRegion": "Республика Татарстан",
+    "addressCountry": "RU"
+  },
+  "employee": [
+    {
+      "@type": "Person",
+      "name": "Нудельман Наталия Федоровна",
+      "jobTitle": "Врач-невролог",
+      "worksFor": {
+        "@type": "MedicalOrganization",
+        "name": "МедХан"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Хан Умар Хаят",
+      "jobTitle": "Андролог, главный врач, уролог",
+      "worksFor": {
+        "@type": "MedicalOrganization",
+        "name": "МедХан"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Хан Тюльпан Тимергалиевна",
+      "jobTitle": "Акушер-гинеколог, врач УЗИ, генеральный директор",
+      "worksFor": {
+        "@type": "MedicalOrganization",
+        "name": "МедХан"
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/style8.css' %}">
@@ -9,24 +66,26 @@
 
 {% block content %}
 <!-- Секция специалистов -->
-<section class="specialists-section" id="specialists">
+<section class="specialists-section" id="specialists" aria-labelledby="specialists-heading">
     <div class="container">
-        <div class="breadcrumbs">
+        <nav class="breadcrumbs" aria-label="Навигация по сайту">
             <a href="{% url 'main' %}">Главная</a> / <span>Специалисты</span>
-        </div>
+        </nav>
 
-        <div class="section-header">
-            <h1>Команда специалистов</h1>
-            <div class="filters">
+        <header class="section-header">
+            <h1 id="specialists-heading">Команда специалистов</h1>
+            <div class="filters" role="group" aria-label="Фильтры поиска врачей">
                 <div class="filter-dropdown">
-                    <select id="gender-filter">
+                    <label for="gender-filter" class="sr-only">Фильтр по полу врача</label>
+                    <select id="gender-filter" aria-label="Выберите пол врача">
                         <option value="">Пол</option>
                         <option value="male">Мужчина</option>
                         <option value="female">Женщина</option>
                     </select>
                 </div>
                 <div class="filter-dropdown">
-                    <select id="specialization-filter">
+                    <label for="specialization-filter" class="sr-only">Фильтр по специализации</label>
+                    <select id="specialization-filter" aria-label="Выберите специализацию">
                         <option value="">Специализация</option>
                         <option value="neurologist">Невролог</option>
                         <option value="urologist">Уролог</option>
@@ -36,162 +95,160 @@
                         <option value="proctologist">Проктолог</option>
                     </select>
                 </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Поиск" id="doctor-search">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="search-bar" role="search">
+                    <label for="doctor-search" class="sr-only">Поиск врача по имени</label>
+                    <input type="text" placeholder="Поиск" id="doctor-search" aria-describedby="search-help">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M9 16C13.4183 16 17 12.4183 17 8C17 3.58172 13.4183 0 9 0C4.58172 0 1 3.58172 1 8C1 12.4183 4.58172 16 9 16Z" stroke="#999999" stroke-width="2"/>
                         <path d="M15 14L19 18" stroke="#999999" stroke-width="2" stroke-linecap="round"/>
                     </svg>
+                    <div id="search-help" class="sr-only">Введите имя врача для поиска</div>
                 </div>
             </div>
-        </div>
+        </header>
 
         <!-- Алфавитный фильтр -->
-        <div class="alphabet-filter">
-            <button class="alphabet-btn active" data-letter="">Уролог</button>
-            <button class="alphabet-btn" data-letter="">Все</button>
-            <button class="alphabet-btn" data-letter="А">А</button>
-            <button class="alphabet-btn" data-letter="Б">Б</button>
-            <button class="alphabet-btn" data-letter="В">В</button>
-            <button class="alphabet-btn" data-letter="Г">Г</button>
-            <button class="alphabet-btn" data-letter="Д">Д</button>
-            <button class="alphabet-btn" data-letter="Е">Е</button>
-            <button class="alphabet-btn" data-letter="Ж">Ж</button>
-            <button class="alphabet-btn" data-letter="З">З</button>
-            <button class="alphabet-btn" data-letter="И">И</button>
-            <button class="alphabet-btn" data-letter="К">К</button>
-            <button class="alphabet-btn" data-letter="Л">Л</button>
-            <button class="alphabet-btn" data-letter="М">М</button>
-            <button class="alphabet-btn" data-letter="Н">Н</button>
-            <button class="alphabet-btn" data-letter="О">О</button>
-            <button class="alphabet-btn" data-letter="П">П</button>
-            <button class="alphabet-btn" data-letter="Р">Р</button>
-            <button class="alphabet-btn" data-letter="С">С</button>
-            <button class="alphabet-btn" data-letter="Т">Т</button>
-            <button class="alphabet-btn" data-letter="У">У</button>
-            <button class="alphabet-btn" data-letter="Ф">Ф</button>
-            <button class="alphabet-btn" data-letter="Х">Х</button>
-            <button class="alphabet-btn" data-letter="Ц">Ц</button>
-            <button class="alphabet-btn" data-letter="Ч">Ч</button>
-            <button class="alphabet-btn" data-letter="Ш">Ш</button>
-            <button class="alphabet-btn" data-letter="Щ">Щ</button>
-            <button class="alphabet-btn" data-letter="Ъ">Ъ</button>
-            <button class="alphabet-btn" data-letter="Ы">Ы</button>
-            <button class="alphabet-btn" data-letter="Ь">Ь</button>
-            <button class="alphabet-btn" data-letter="Э">Э</button>
-            <button class="alphabet-btn" data-letter="Ю">Ю</button>
-            <button class="alphabet-btn" data-letter="Я">Я</button>
+        <div class="alphabet-filter" role="group" aria-label="Алфавитный фильтр врачей">
+            <button class="alphabet-btn active" data-letter="" aria-pressed="true">Уролог</button>
+            <button class="alphabet-btn" data-letter="" aria-pressed="false">Все</button>
+            <button class="alphabet-btn" data-letter="А" aria-pressed="false">А</button>
+            <button class="alphabet-btn" data-letter="Б" aria-pressed="false">Б</button>
+            <button class="alphabet-btn" data-letter="В" aria-pressed="false">В</button>
+            <button class="alphabet-btn" data-letter="Г" aria-pressed="false">Г</button>
+            <button class="alphabet-btn" data-letter="Д" aria-pressed="false">Д</button>
+            <button class="alphabet-btn" data-letter="Е" aria-pressed="false">Е</button>
+            <button class="alphabet-btn" data-letter="Ж" aria-pressed="false">Ж</button>
+            <button class="alphabet-btn" data-letter="З" aria-pressed="false">З</button>
+            <button class="alphabet-btn" data-letter="И" aria-pressed="false">И</button>
+            <button class="alphabet-btn" data-letter="К" aria-pressed="false">К</button>
+            <button class="alphabet-btn" data-letter="Л" aria-pressed="false">Л</button>
+            <button class="alphabet-btn" data-letter="М" aria-pressed="false">М</button>
+            <button class="alphabet-btn" data-letter="Н" aria-pressed="false">Н</button>
+            <button class="alphabet-btn" data-letter="О" aria-pressed="false">О</button>
+            <button class="alphabet-btn" data-letter="П" aria-pressed="false">П</button>
+            <button class="alphabet-btn" data-letter="Р" aria-pressed="false">Р</button>
+            <button class="alphabet-btn" data-letter="С" aria-pressed="false">С</button>
+            <button class="alphabet-btn" data-letter="Т" aria-pressed="false">Т</button>
+            <button class="alphabet-btn" data-letter="У" aria-pressed="false">У</button>
+            <button class="alphabet-btn" data-letter="Ф" aria-pressed="false">Ф</button>
+            <button class="alphabet-btn" data-letter="Х" aria-pressed="false">Х</button>
+            <button class="alphabet-btn" data-letter="Ц" aria-pressed="false">Ц</button>
+            <button class="alphabet-btn" data-letter="Ч" aria-pressed="false">Ч</button>
+            <button class="alphabet-btn" data-letter="Ш" aria-pressed="false">Ш</button>
+            <button class="alphabet-btn" data-letter="Щ" aria-pressed="false">Щ</button>
+            <button class="alphabet-btn" data-letter="Ъ" aria-pressed="false">Ъ</button>
+            <button class="alphabet-btn" data-letter="Ы" aria-pressed="false">Ы</button>
+            <button class="alphabet-btn" data-letter="Ь" aria-pressed="false">Ь</button>
+            <button class="alphabet-btn" data-letter="Э" aria-pressed="false">Э</button>
+            <button class="alphabet-btn" data-letter="Ю" aria-pressed="false">Ю</button>
+            <button class="alphabet-btn" data-letter="Я" aria-pressed="false">Я</button>
         </div>
 
-        <div class="specialists-grid">
-            <div class="specialist-card" data-gender="female" data-specialization="neurologist">
+        <div class="specialists-grid" role="list" aria-label="Список врачей-специалистов">
+            <article class="specialist-card" data-gender="female" data-specialization="neurologist" role="listitem">
                 <div class="specialist-image">
-                    <a href="{% url 'NudelmanNatalia' %}">
-                        <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна">
+                    <a href="{% url 'NudelmanNatalia' %}" aria-label="Профиль врача Нудельман Наталия Федоровна">
+                        <img src="{% static 'images/specialist-1.png' %}" alt="Фото врача Нудельман Наталия Федоровна, невролог" loading="lazy">
                         <div class="experience-badge">Стаж 31 год</div>
                     </a>
-
                 </div>
                 <div class="specialist-info">
                     <h3>Нудельман<br>Наталия Федоровна</h3>
                     <p class="specialist-position">Врач-невролог</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
+                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Нудельман Наталия Федоровна">Записаться</button>
                 </div>
-            </div>
+            </article>
 
-            <div class="specialist-card" data-gender="male" data-specialization="urologist">
+            <article class="specialist-card" data-gender="male" data-specialization="urologist" role="listitem">
                 <div class="specialist-image">
-                    <a href="{% url 'HanYmar' %}">
-                        <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят">
+                    <a href="{% url 'HanYmar' %}" aria-label="Профиль врача Хан Умар Хаят">
+                        <img src="{% static 'images/specialist-2.png' %}" alt="Фото врача Хан Умар Хаят, андролог, главный врач, уролог" loading="lazy">
                         <div class="experience-badge">Стаж 25 лет</div>
                     </a>
                 </div>
                 <div class="specialist-info">
                     <h3>Хан<br>Умар Хаят</h3>
                     <p class="specialist-position">Андролог, главный врач, уролог</p>
-
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
-
+                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Хан Умар Хаят">Записаться</button>
                 </div>
-            </div>
+            </article>
 
-            <div class="specialist-card" data-gender="female" data-specialization="gynecologist">
+            <article class="specialist-card" data-gender="female" data-specialization="gynecologist" role="listitem">
                 <div class="specialist-image">
-                    <a href="{% url 'HanTulpan' %}">
-                        <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна">
+                    <a href="{% url 'HanTulpan' %}" aria-label="Профиль врача Хан Тюльпан Тимергалиевна">
+                        <img src="{% static 'images/specialist-3.png' %}" alt="Фото врача Хан Тюльпан Тимергалиевна, акушер-гинеколог, врач УЗИ" loading="lazy">
                         <div class="experience-badge">Стаж 27 лет</div>
                     </a>
-
                 </div>
                 <div class="specialist-info">
                     <h3>Хан<br>Тюльпан Тимергалиевна</h3>
                     <p class="specialist-position">Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
+                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Хан Тюльпан Тимергалиевна">Записаться</button>
                 </div>
-            </div>
+            </article>
 
-            <div class="specialist-card" data-gender="female" data-specialization="therapist">
+            <article class="specialist-card" data-gender="female" data-specialization="therapist" role="listitem">
                 <div class="specialist-image">
-                    <a href="{% url 'BasharovaAlena' %}">
-                        <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна">
+                    <a href="{% url 'BasharovaAlena' %}" aria-label="Профиль врача Башарова Альбина Шарипяновна">
+                        <img src="{% static 'images/specialist-4.png' %}" alt="Фото врача Башарова Альбина Шарипяновна, врач УЗИ, кардиолог, терапевт" loading="lazy">
                         <div class="experience-badge">Стаж 15 лет</div>
                     </a>
-                    <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна">
-                    <div class="experience-badge">Стаж 15 лет</div>
                 </div>
                 <div class="specialist-info">
                     <h3>Башарова<br>Альбина Шарипяновна</h3>
                     <p class="specialist-position">Врач УЗИ, врач функциональной диагностики, кардиолог, терапевт</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
+                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Башарова Альбина Шарипяновна">Записаться</button>
                 </div>
-            </div>
+            </article>
 
-            <div class="specialist-card" data-gender="male" data-specialization="surgeon">
+            <article class="specialist-card" data-gender="male" data-specialization="surgeon" role="listitem">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-5.png' %}" alt="Мартьянов Иван Сергеевич">
+                    <img src="{% static 'images/specialist-5.png' %}" alt="Фото врача Мартьянов Иван Сергеевич, хирург" loading="lazy">
                     <div class="experience-badge">Стаж 6 лет</div>
                 </div>
                 <div class="specialist-info">
                     <h3>Мартьянов<br>Иван Сергеевич</h3>
                     <p class="specialist-position">Хирург</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
+                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Мартьянов Иван Сергеевич">Записаться</button>
                 </div>
-            </div>
+            </article>
 
-            <div class="specialist-card" data-gender="male" data-specialization="proctologist">
+            <article class="specialist-card" data-gender="male" data-specialization="proctologist" role="listitem">
                 <div class="specialist-image">
-                    <a href="{% url 'Uldashev' %}">
-                        <img src="{% static 'images/specialist-6.png' %}" alt="Юлдашев Фарход Талибович">
+                    <a href="{% url 'Uldashev' %}" aria-label="Профиль врача Юлдашев Фарход Талибович">
+                        <img src="{% static 'images/specialist-6.png' %}" alt="Фото врача Юлдашев Фарход Талибович, проктолог, эндоскопист" loading="lazy">
                         <div class="experience-badge">Стаж 14 лет</div>
                     </a>
-
                 </div>
                 <div class="specialist-info">
                     <h3>Юлдашев<br>Фарход Талибович</h3>
                     <p class="specialist-position">Проктолог, эндоскопист</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)">Записаться</button>
+                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Юлдашев Фарход Талибович">Записаться</button>
                 </div>
-            </div>
+            </article>
         </div>
 
         <div class="show-more">
-            <button class="btn btn-secondary">Показать ещё</button>
+            <button class="btn btn-secondary" aria-label="Показать больше врачей">Показать ещё</button>
         </div>
     </div>
 </section>
 
 <!-- Модальное окно записи к врачу -->
-<div id="appointmentModal" class="modal">
+<div id="appointmentModal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-search">
-                <input type="text" placeholder="Поиск">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <header class="modal-header">
+            <h2 id="modal-title" class="sr-only">Запись на приём к врачу</h2>
+            <div class="modal-search" role="search">
+                <label for="modal-search-input" class="sr-only">Поиск врача</label>
+                <input type="text" placeholder="Поиск" id="modal-search-input">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M9 16C13.4183 16 17 12.4183 17 8C17 3.58172 13.4183 0 9 0C4.58172 0 1 3.58172 1 8C1 12.4183 4.58172 16 9 16Z" stroke="#999999" stroke-width="2"/>
                     <path d="M15 14L19 18" stroke="#999999" stroke-width="2" stroke-linecap="round"/>
                 </svg>
             </div>
-            <div class="gender-filters">
+            <fieldset class="gender-filters">
+                <legend class="sr-only">Фильтр по полу врача</legend>
                 <label class="gender-option">
                     <input type="checkbox" checked>
                     <span>Все</span>
@@ -204,11 +261,16 @@
                     <input type="checkbox">
                     <span>Женщина</span>
                 </label>
-            </div>
-        </div>
+            </fieldset>
+            <button type="button" class="modal-close" aria-label="Закрыть окно записи" onclick="closeAppointmentModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
 
         <div class="modal-body">
-            <div class="specializations-list">
+            <div class="specializations-list" role="group" aria-label="Список специализаций">
                 <label class="specialization-item">
                     <input type="checkbox">
                     <span>Абдоминальный хирург</span>
@@ -234,7 +296,7 @@
             <div class="appointment-section">
                 <h3>Запись на приём к врачу</h3>
                 <div class="doctor-info">
-                    <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна" class="doctor-avatar">
+                    <img src="{% static 'images/specialist-4.png' %}" alt="Фото врача Башарова Альбина Шарипяновна" class="doctor-avatar" loading="lazy">
                     <div class="doctor-details">
                         <h4>Башарова<br>Альбина Шарипяновна</h4>
                         <p>Врач УЗИ, врач функциональной диагностики, кардиолог, терапевт</p>
@@ -242,44 +304,44 @@
                 </div>
 
                 <div class="clinic-location">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M10 2C7.79086 2 6 3.79086 6 6C6 8.20914 7.79086 10 10 10C12.2091 10 14 8.20914 14 6C14 3.79086 12.2091 2 10 2Z" stroke="#00C087" stroke-width="2"/>
                         <path d="M10 18C10 18 16 12 16 6C16 2.68629 13.3137 0 10 0C6.68629 0 4 2.68629 4 6C4 12 10 18 10 18Z" stroke="#00C087" stroke-width="2"/>
                     </svg>
                     <div>
                         <strong>МедХан</strong>
-                        <p>Набережные Челны, 52-й комплекс, 20А</p>
+                        <address>Набережные Челны, 52-й комплекс, 20А</address>
                     </div>
                 </div>
 
-                <div class="services-prices">
-                    <div class="service-item">
+                <div class="services-prices" role="list" aria-label="Стоимость услуг">
+                    <div class="service-item" role="listitem">
                         <span>Врач УЗИ</span>
                         <span>от 2500 ₽</span>
                     </div>
-                    <div class="service-item">
+                    <div class="service-item" role="listitem">
                         <span>Врач функциональной диагностики</span>
                         <span>от 2500 ₽</span>
                     </div>
-                    <div class="service-item">
+                    <div class="service-item" role="listitem">
                         <span>Кардиолог</span>
                         <span>от 2500 ₽</span>
                     </div>
-                    <div class="service-item">
+                    <div class="service-item" role="listitem">
                         <span>Терапевт</span>
                         <span>от 2500 ₽</span>
                     </div>
                 </div>
 
                 <div class="appointment-date">
-                    <a href="#" class="date-link">9 апреля (ср)</a>
+                    <a href="#" class="date-link" aria-label="Выбрать дату 9 апреля">9 апреля (ср)</a>
                 </div>
 
-                <div class="time-slots">
-                    <button class="time-slot">14:30</button>
-                    <button class="time-slot">15:20</button>
-                    <button class="time-slot">16:10</button>
-                    <button class="time-slot">17:00</button>
+                <div class="time-slots" role="group" aria-label="Доступное время записи">
+                    <button class="time-slot" aria-label="Записаться на 14:30">14:30</button>
+                    <button class="time-slot" aria-label="Записаться на 15:20">15:20</button>
+                    <button class="time-slot" aria-label="Записаться на 16:10">16:10</button>
+                    <button class="time-slot" aria-label="Записаться на 17:00">17:00</button>
                 </div>
             </div>
         </div>
@@ -290,16 +352,46 @@
 {% block extra_js %}
 <script>
 function openAppointmentModal(button) {
-    document.getElementById('appointmentModal').style.display = 'flex';
+    const modal = document.getElementById('appointmentModal');
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+
+    // Фокус на первом интерактивном элементе
+    const firstInput = modal.querySelector('input');
+    if (firstInput) {
+        firstInput.focus();
+    }
+
+    // Блокировка прокрутки страницы
+    document.body.style.overflow = 'hidden';
+}
+
+function closeAppointmentModal() {
+    const modal = document.getElementById('appointmentModal');
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+
+    // Восстановление прокрутки страницы
+    document.body.style.overflow = '';
 }
 
 // Закрытие модального окна при клике вне его
 window.onclick = function(event) {
     const modal = document.getElementById('appointmentModal');
     if (event.target === modal) {
-        modal.style.display = 'none';
+        closeAppointmentModal();
     }
 }
+
+// Закрытие модального окна по Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('appointmentModal');
+        if (modal.style.display === 'flex') {
+            closeAppointmentModal();
+        }
+    }
+});
 
 // Фильтрация специалистов
 document.getElementById('gender-filter').addEventListener('change', filterSpecialists);
@@ -312,6 +404,7 @@ function filterSpecialists() {
     const searchQuery = document.getElementById('doctor-search').value.toLowerCase();
 
     const cards = document.querySelectorAll('.specialist-card');
+    let visibleCount = 0;
 
     cards.forEach(card => {
         const gender = card.dataset.gender;
@@ -326,27 +419,60 @@ function filterSpecialists() {
         if (searchQuery && !name.includes(searchQuery) && !position.includes(searchQuery)) show = false;
 
         card.style.display = show ? 'block' : 'none';
+        if (show) visibleCount++;
     });
+
+    // Обновление счетчика результатов для скрин-ридеров
+    const resultsAnnouncement = document.getElementById('search-results-announcement');
+    if (resultsAnnouncement) {
+        resultsAnnouncement.textContent = `Найдено ${visibleCount} врачей`;
+    }
 }
 
 // Алфавитный фильтр
 document.querySelectorAll('.alphabet-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-        document.querySelectorAll('.alphabet-btn').forEach(b => b.classList.remove('active'));
+        // Обновление состояния кнопок
+        document.querySelectorAll('.alphabet-btn').forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+        });
         this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
 
         const letter = this.dataset.letter;
         const cards = document.querySelectorAll('.specialist-card');
+        let visibleCount = 0;
 
         cards.forEach(card => {
             const name = card.querySelector('h3').textContent;
-            if (letter === '' || name.startsWith(letter)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
+            const show = letter === '' || name.startsWith(letter);
+            card.style.display = show ? 'block' : 'none';
+            if (show) visibleCount++;
         });
+
+        // Объявление результатов для скрин-ридеров
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('aria-atomic', 'true');
+        announcement.className = 'sr-only';
+        announcement.textContent = `Показано ${visibleCount} врачей`;
+        document.body.appendChild(announcement);
+
+        setTimeout(() => {
+            document.body.removeChild(announcement);
+        }, 1000);
     });
+});
+
+// Добавление скрытого элемента для объявления результатов поиска
+document.addEventListener('DOMContentLoaded', function() {
+    const announcement = document.createElement('div');
+    announcement.id = 'search-results-announcement';
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'sr-only';
+    document.body.appendChild(announcement);
 });
 </script>
 {% endblock %}

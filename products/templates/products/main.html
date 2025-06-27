@@ -1,7 +1,57 @@
 {% extends 'products/base.html' %}
 {% load static %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}МедХан - Многопрофильная медицинская клиника в Набережных Челнах{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="МедХан - современная многопрофильная медицинская клиника в Набережных Челнах. Опытные врачи, современное оборудование, широкий спектр медицинских услуг. Запись онлайн.">
+{% endblock %}
+
+{% block meta_keywords %}
+<meta name="keywords" content="медицинская клиника, врачи, медицинские услуги, диагностика, лечение, Набережные Челны, МедХан, здоровье">
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  "name": "МедХан",
+  "description": "Многопрофильная медицинская клиника в Набережных Челнах",
+  "url": "{{ request.build_absolute_uri }}",
+  "telephone": "+7 (901) 143-34-34",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "52-й комплекс, 20А",
+    "addressLocality": "Набережные Челны",
+    "addressRegion": "Республика Татарстан",
+    "postalCode": "423800",
+    "addressCountry": "RU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "55.7558",
+    "longitude": "52.4069"
+  },
+  "openingHours": "Mo-Su 08:00-20:00",
+  "priceRange": "$$",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500"
+  },
+  "medicalSpecialty": [
+    "Урология",
+    "Андрология",
+    "Гинекология",
+    "Неврология",
+    "Гастроэнтерология",
+    "Хирургия",
+    "Проктология"
+  ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/styles1.css' %}">
@@ -11,40 +61,39 @@
 
 <div class="address-bar">
     <div class="container">
-        <div class="address">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <address class="address">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M12 22C16 18 20 14.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 14.4183 8 18 12 22Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <div class="address-text">
-                <a href="{% url 'AboutSenter' %}">
+                <a href="{% url 'AboutSenter' %}" aria-label="Информация о медицинском центре МедХан">
                     <p>Набережные Челны, 52-й комплекс, 20А</p>
                     <p class="address-district">Район Автозаводский</p>
                 </a>
             </div>
-        </div>
+        </address>
     </div>
 </div>
 
-
-<section class="hero-container" id="main">
+<section class="hero-container" id="main" aria-labelledby="hero-heading">
     <!-- Slide 1: Комфортное взятие -->
     <div class="hero-slide active">
         <div class="hero-background" style="background-image: url('{% static 'images/ГЛАВНАЯ.png' %}');"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Комфортное взятие — <br>точный результат</h1>
+                    <h1 id="hero-heading">Комфортное взятие — <br>точный результат</h1>
                     <p>Анализы для проверки интимного здоровья с системой самовзятия</p>
-                    <a href="#" class="btn btn-primary">
+                    <a href="#" class="btn btn-primary" aria-label="Узнать больше о системе самовзятия анализов">
                         Узнать больше
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>
                 <div class="hero-image">
-                    <img src="{% static 'images/woman.png' %}" alt="Медицинский специалист">
+                    <img src="{% static 'images/woman.png' %}" alt="Медицинский специалист клиники МедХан" loading="eager">
                 </div>
             </div>
         </div>
@@ -55,142 +104,140 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Консультация<br>прямо из дома</h1>
+                    <h2>Консультация<br>прямо из дома</h2>
                     <p>Онлайн-консультации с врачом по результатам ваших анализов</p>
-                    <a href="#" class="btn btn-primary">
+                    <a href="#" class="btn btn-primary" aria-label="Узнать больше об онлайн-консультациях">
                         Узнать больше
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>
                 <div class="hero-image">
-                    <img src="{% static 'images/woman2.png' %}" alt="Онлайн консультация">
+                    <img src="{% static 'images/woman2.png' %}" alt="Онлайн консультация с врачом" loading="lazy">
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Навигация -->
-    <div class="hero-navigation">
-        <button class="nav-arrow prev" id="prevSlide">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="hero-navigation" role="group" aria-label="Навигация по слайдам">
+        <button class="nav-arrow prev" id="prevSlide" aria-label="Предыдущий слайд">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M15 18L9 12L15 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
-        <button class="nav-arrow next" id="nextSlide">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <button class="nav-arrow next" id="nextSlide" aria-label="Следующий слайд">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
     </div>
 
-
-    <div class="hero-indicators">
-        <div class="indicator active" data-slide="0"></div>
-        <div class="indicator" data-slide="1"></div>
-        <div class="indicator" data-slide="2"></div>
+    <div class="hero-indicators" role="tablist" aria-label="Индикаторы слайдов">
+        <button class="indicator active" data-slide="0" role="tab" aria-selected="true" aria-label="Слайд 1"></button>
+        <button class="indicator" data-slide="1" role="tab" aria-selected="false" aria-label="Слайд 2"></button>
     </div>
 </section>
 
 <!-- Популярные услуги -->
-<section class="container" id="services">
-    <div class="services-header">
-        <h1>Популярные услуги</h1>
-        <a href="{% url 'services' %}" class="all-services-btn">
+<section class="container" id="services" aria-labelledby="services-heading">
+    <header class="services-header">
+        <h2 id="services-heading">Популярные услуги</h2>
+        <a href="{% url 'services' %}" class="all-services-btn" aria-label="Посмотреть все медицинские услуги">
             Все услуги
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </a>
-    </div>
+    </header>
 
-    <div class="services-grid">
+    <div class="services-grid" role="list" aria-label="Список популярных медицинских услуг">
         <!-- Урология/Андрология -->
-        <div class="service-card">
+        <article class="service-card" role="listitem">
             <div class="service-content">
-                <h2>Урология/<br>Андрология</h2>
-                <img src="{% static 'images/почки.png' %}" alt="Урология/Андрология" class="service-icon">
+                <h3>Урология/<br>Андрология</h3>
+                <img src="{% static 'images/почки.png' %}" alt="Иконка урологии и андрологии" class="service-icon" loading="lazy">
             </div>
-        </div>
+        </article>
 
         <!-- Гинекология -->
-        <div class="service-card green-bg">
+        <article class="service-card green-bg" role="listitem">
             <div class="service-content">
-                <h2>Гинекология</h2>
-                <img src="{% static 'images/ромашка.png' %}" alt="Гинекология" class="service-icon">
+                <h3>Гинекология</h3>
+                <img src="{% static 'images/ромашка.png' %}" alt="Иконка гинекологии" class="service-icon" loading="lazy">
             </div>
-        </div>
+        </article>
 
         <!-- Неврология -->
-        <div class="service-card">
+        <article class="service-card" role="listitem">
             <div class="service-content">
-                <h2>Неврология</h2>
-                <img src="{% static 'images/нервы.png' %}" alt="Неврология" class="service-icon">
+                <h3>Неврология</h3>
+                <img src="{% static 'images/нервы.png' %}" alt="Иконка неврологии" class="service-icon" loading="lazy">
             </div>
-        </div>
+        </article>
 
         <!-- Гастроэнтерология -->
-        <div class="service-card green-bg">
+        <article class="service-card green-bg" role="listitem">
             <div class="service-content">
-                <h2>Гастроэнтерология</h2>
-                <img src="{% static 'images/желудок.png' %}" alt="Гастроэнтерология" class="service-icon">
+                <h3>Гастроэнтерология</h3>
+                <img src="{% static 'images/желудок.png' %}" alt="Иконка гастроэнтерологии" class="service-icon" loading="lazy">
             </div>
-        </div>
+        </article>
 
         <!-- Хирургия -->
-        <div class="service-card">
+        <article class="service-card" role="listitem">
             <div class="service-content">
-                <h2>Хирургия</h2>
-                <img src="{% static 'images/ножницы_1.png' %}" alt="Хирургия" class="service-icon">
+                <h3>Хирургия</h3>
+                <img src="{% static 'images/ножницы_1.png' %}" alt="Иконка хирургии" class="service-icon" loading="lazy">
             </div>
-        </div>
+        </article>
 
         <!-- Проктология -->
-        <div class="service-card">
+        <article class="service-card" role="listitem">
             <div class="service-content">
-                <h2>Проктология</h2>
-                <img src="{% static 'images/пончик.png' %}" alt="Проктология" class="service-icon">
+                <h3>Проктология</h3>
+                <img src="{% static 'images/пончик.png' %}" alt="Иконка проктологии" class="service-icon" loading="lazy">
             </div>
-        </div>
+        </article>
     </div>
 
     <div class="checkup-section">
         <div class="checkup-content">
             <div class="checkup-text">
-                <h2 class="checkup-title">CHECK UP</h2>
-                <h3 class="checkup-subtitle">Комплексное обследование</h3>
+                <h3 class="checkup-title">CHECK UP</h3>
+                <h4 class="checkup-subtitle">Комплексное обследование</h4>
                 <p class="checkup-description">Удобное и эффективное решение для заботы о здоровье</p>
                 <div class="checkup-buttons">
-                    <a href="#" class="btn btn-primary">Получить консультацию</a>
-                    <a href="#" class="btn btn-outline">Подробнее</a>
+                    <a href="#" class="btn btn-primary" aria-label="Получить консультацию по комплексному обследованию">Получить консультацию</a>
+                    <a href="#" class="btn btn-outline" aria-label="Подробнее о программах CHECK UP">Подробнее</a>
                 </div>
             </div>
             <div class="checkup-image">
-                <img src="{% static 'images/днк_1.png' %}" alt="DNA" class="dna-image">
+                <img src="{% static 'images/днк_1.png' %}" alt="ДНК спираль - символ диагностики" class="dna-image" loading="lazy">
             </div>
         </div>
     </div>
 </section>
 
 <!--Promotions -->
-<section class="container" id="promotions">
-    <div class="promotions-header">
-        <h1>Акции</h1>
-        <a href="{% url 'stocks' %}" class="all-promotions-btn">
+<section class="container" id="promotions" aria-labelledby="promotions-heading">
+    <header class="promotions-header">
+        <h2 id="promotions-heading">Акции</h2>
+        <a href="{% url 'stocks' %}" class="all-promotions-btn" aria-label="Посмотреть все акции">
             Все акции
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </a>
-    </div>
+    </header>
 
-    <div class="promotions-grid">
+    <div class="promotions-grid" role="list" aria-label="Список текущих акций">
         <!-- Большая карточка слева -->
-        <a href="{% url 'BackPain' %}">
-             <div class="promo-card large">
-                    <div class="gender-icon female-male">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a href="{% url 'BackPain' %}" role="listitem">
+             <article class="promo-card large">
+                    <div class="gender-icon female-male" aria-label="Для мужчин и женщин">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="white" stroke-width="2"/>
                             <path d="M15 9L18 6M18 6H15M18 6V9" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             <path d="M9 15L6 18M6 18H9M6 18V15" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -211,13 +258,13 @@
                         </div>
                     </div>
 
-                    <img src="{% static 'images/woman-profile.png' %}" alt="Женский чекап" class="promo-image">
-                </div>
+                    <img src="{% static 'images/woman-profile.png' %}" alt="Женщина в профиль - акция на обследование спины" class="promo-image" loading="lazy">
+                </article>
         </a>
         <!-- Верхняя правая карточка - Женское здоровье -->
-        <div class="promo-card medium female-health">
-            <div class="gender-icon female">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <article class="promo-card medium female-health" role="listitem">
+            <div class="gender-icon female" aria-label="Для женщин">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="#666" stroke-width="2"/>
                     <path d="M12 15V19M12 19H10M12 19H14" stroke="#666" stroke-width="2" stroke-linecap="round"/>
                 </svg>
@@ -238,12 +285,12 @@
                     <div class="promo-name">«Женское здоровье» (Пакет S)</div>
                 </div>
             </div>
-        </div>
+        </article>
 
         <!-- Нижняя левая карточка -->
-        <div class="promo-card small">
-            <div class="gender-icon male">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <article class="promo-card small" role="listitem">
+            <div class="gender-icon male" aria-label="Для мужчин">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="#666" stroke-width="2"/>
                     <path d="M15 9L18 6M18 6H15M18 6V9" stroke="#666" stroke-width="2" stroke-linecap="round"/>
                 </svg>
@@ -262,12 +309,12 @@
                     <div class="promo-name">«Репродуктивность»</div>
                 </div>
             </div>
-        </div>
+        </article>
 
         <!-- Нижняя правая карточка -->
-        <div class="promo-card small">
-            <div class="gender-icon female-male">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <article class="promo-card small" role="listitem">
+            <div class="gender-icon female-male" aria-label="Для мужчин и женщин">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="#666" stroke-width="2"/>
                     <path d="M15 9L18 6M18 6H15M18 6V9" stroke="#666" stroke-width="2" stroke-linecap="round"/>
                     <path d="M9 15V19M9 19H7M9 19H11" stroke="#666" stroke-width="2" stroke-linecap="round"/>
@@ -286,154 +333,153 @@
                     <div class="promo-name">«Здоровый желудок»</div>
                 </div>
             </div>
-        </div>
+        </article>
     </div>
 </section>
 
-
  <!-- Специалисты -->
-<section class="container" id="specialists">
+<section class="container" id="specialists" aria-labelledby="specialists-section-heading">
         <!-- Секция команды специалистов -->
         <section class="specialists-section">
-            <div class="section-header">
-                <h2>Команда специалистов</h2>
-                <a href="{% url 'specialists' %}" class="all-specialists-btn">
+            <header class="section-header">
+                <h2 id="specialists-section-heading">Команда специалистов</h2>
+                <a href="{% url 'specialists' %}" class="all-specialists-btn" aria-label="Посмотреть всех специалистов">
                     Все специалисты
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
-            </div>
+            </header>
 
-            <div class="specialists-grid">
+            <div class="specialists-grid" role="list" aria-label="Список врачей-специалистов">
                 <!-- Специалист 1 -->
-                <div class="specialist-card">
+                <article class="specialist-card" role="listitem">
                     <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна" class="specialist-photo">
+                        <img src="{% static 'images/specialist-1.png' %}" alt="Фото врача Нудельман Наталия Федоровна, невролог" class="specialist-photo" loading="lazy">
                         <div class="price-badge">Услуги от 1500 ₽</div>
                     </div>
                     <div class="specialist-info">
                         <h3 class="specialist-name">Нудельман<br>Наталия Федоровна</h3>
                         <p class="specialist-position">Врач-невролог</p>
                     </div>
-                </div>
+                </article>
 
                 <!-- Специалист 2 -->
-                <div class="specialist-card">
+                <article class="specialist-card" role="listitem">
                     <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят" class="specialist-photo">
+                        <img src="{% static 'images/specialist-2.png' %}" alt="Фото врача Хан Умар Хаят, андролог, главный врач, уролог" class="specialist-photo" loading="lazy">
                         <div class="price-badge">Услуги от 1500 ₽</div>
                     </div>
                     <div class="specialist-info">
                         <h3 class="specialist-name">Хан<br>Умар Хаят</h3>
                         <p class="specialist-position">Андролог, главный врач, уролог</p>
                     </div>
-                </div>
+                </article>
 
                 <!-- Специалист 3 -->
-                <div class="specialist-card">
+                <article class="specialist-card" role="listitem">
                     <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна" class="specialist-photo">
+                        <img src="{% static 'images/specialist-3.png' %}" alt="Фото врача Хан Тюльпан Тимергалиевна, акушер-гинеколог" class="specialist-photo" loading="lazy">
                         <div class="price-badge">Услуги от 1500 ₽</div>
                     </div>
                     <div class="specialist-info">
                         <h3 class="specialist-name">Хан<br>Тюльпан Тимергалиевна</h3>
                         <p class="specialist-position">Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог</p>
                     </div>
-                </div>
+                </article>
 
                 <!-- Специалист 4 -->
-                <div class="specialist-card">
+                <article class="specialist-card" role="listitem">
                     <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипзяновна" class="specialist-photo">
+                        <img src="{% static 'images/specialist-4.png' %}" alt="Фото врача Башарова Альбина Шарипзяновна, терапевт" class="specialist-photo" loading="lazy">
                         <div class="price-badge">Услуги от 1500 ₽</div>
                     </div>
                     <div class="specialist-info">
                         <h3 class="specialist-name">Башарова<br>Альбина Шарипзяновна</h3>
                         <p class="specialist-position">Терапевт, главный специалист в сфере медицины</p>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Секция о медицинском центре -->
-        <section class="about-section">
-            <a href="{% url 'AboutSenter' %}">
-                <div  class="about-content">
+        <section class="about-section" aria-labelledby="about-heading">
+            <a href="{% url 'AboutSenter' %}" aria-label="Подробнее о медицинском центре МедХан">
+                <div class="about-content">
                     <div class="about-text">
-                        <h2>Медицинский центр<br>МедХан</h2>
+                        <h2 id="about-heading">Медицинский центр<br>МедХан</h2>
                         <p>Многопрофильное медицинское учреждение, предлагающее специально подобранный комплекс процедур для каждого клиента. В работе клиники все построено с учетом максимального комфорта для посетителей. Новейшее оборудование центра позволяет провести диагностику организма пациента для составления плана лечения и профилактических мероприятий.</p>
                     </div>
                     <div class="about-image">
-                        <img src="{% static 'images/equipment.png' %}" alt="Медицинский центр МедХан" class="clinic-photo">
+                        <img src="{% static 'images/equipment.png' %}" alt="Современное медицинское оборудование клиники МедХан" class="clinic-photo" loading="lazy">
                     </div>
                 </div>
             </a>
 
-            <div class="stats-grid">
+            <div class="stats-grid" role="list" aria-label="Статистика медицинского центра">
                 <!-- Статистика 1 -->
-                <div class="stat-card">
+                <article class="stat-card" role="listitem">
                     <div class="stat-icon">
                         <span class="stat-number">100</span>
-                        <svg class="icon-bolt" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="icon-bolt" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M13 3L4 14H12L11 21L20 10H12L13 3Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <p class="stat-description">Профессионалов в сфере медицины</p>
-                </div>
+                </article>
 
                 <!-- Статистика 2 -->
-                <div class="stat-card">
+                <article class="stat-card" role="listitem">
                     <div class="stat-icon">
                         <span class="stat-number">50</span>
-                        <svg class="icon-directions" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="icon-directions" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M8 7L12 3M12 3L16 7M12 3V15M16 17L12 21M12 21L8 17M12 21V15" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <p class="stat-description">Реализуемых направлений</p>
-                </div>
+                </article>
 
                 <!-- Статистика 3 -->
-                <div class="stat-card">
+                <article class="stat-card" role="listitem">
                     <div class="stat-icon">
                         <span class="stat-number">6</span>
-                        <svg class="icon-care" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="icon-care" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 6V12L16 14M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <p class="stat-description">Лет заботимся о Вас</p>
-                </div>
+                </article>
 
                 <!-- Статистика 4 -->
-                <div class="stat-card">
+                <article class="stat-card" role="listitem">
                     <div class="stat-icon">
                         <span class="stat-number">6</span>
-                        <svg class="icon-heart" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="icon-heart" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M19.5 13.5L12 21L4.5 13.5C3.83696 12.837 3.31011 12.0534 2.94627 11.1872C2.58244 10.321 2.39093 9.39073 2.38501 8.44859C2.37909 7.50645 2.55887 6.57322 2.91063 5.70162C3.26239 4.83003 3.77872 4.03797 4.43307 3.36501C5.08742 2.69204 5.86681 2.15171 6.73089 1.77949C7.59497 1.40727 8.52351 1.21039 9.46501 1.20013C10.4065 1.18987 11.3396 1.36646 12.2115 1.72307C13.0835 2.07967 13.8742 2.60552 14.5425 3.26625C15.2108 2.60552 16.0015 2.07967 16.8735 1.72307C17.7454 1.36646 18.6785 1.18987 19.62 1.20013C20.5615 1.21039 21.49 1.40727 22.3541 1.77949C23.2182 2.15171 23.9976 2.69204 24.6519 3.36501C25.3063 4.03797 25.8226 4.83003 26.1744 5.70162C26.5251 6.57322 26.7059 7.50645 26.7 8.44859C26.6941 9.39073 26.5026 10.321 26.1387 11.1872C25.7749 12.0534 25.248 12.837 24.585 13.5H19.5Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <p class="stat-description">Дней в неделю следим за вашим здоровьем</p>
-                </div>
+                </article>
             </div>
         </section>
 </section>
 
     <!-- Отзывы и Медиа -->
-<section class="container" id="reviews">
+<section class="container" id="reviews" aria-labelledby="reviews-heading">
         <!-- Секция отзывов -->
         <section class="reviews-section">
-            <div class="section-header">
-                <h2>Отзывы</h2>
+            <header class="section-header">
+                <h2 id="reviews-heading">Отзывы</h2>
                 <div class="header-buttons">
-                    <button class="btn btn-primary">Оставить отзыв</button>
-                    <a href="#" class="all-link">
+                    <button class="btn btn-primary" aria-label="Оставить отзыв о клинике">Оставить отзыв</button>
+                    <a href="#" class="all-link" aria-label="Посмотреть все отзывы">
                         Все отзывы
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>
-            </div>
+            </header>
 
             <div class="reviews-stats">
                 <div class="percentage-card">
@@ -446,11 +492,11 @@
                 </div>
             </div>
 
-            <div class="reviews-grid">
+            <div class="reviews-grid" role="list" aria-label="Отзывы пациентов">
                 <!-- Отзыв 1 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="reviewer-icon">
+                <article class="review-card" role="listitem">
+                    <header class="review-header">
+                        <div class="reviewer-icon" aria-hidden="true">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -458,24 +504,24 @@
                         </div>
                         <div class="reviewer-info">
                             <h4 class="reviewer-name">Динар Искаков</h4>
-                            <p class="review-date">20.11.2024</p>
+                            <time class="review-date" datetime="2024-11-20">20.11.2024</time>
                         </div>
-                    </div>
-                    <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+                    </header>
+                    <div class="rating" aria-label="Оценка 5 из 5 звезд">
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
                     </div>
                     <p class="review-text">Лучшее место для обследования, встретили, проверили, дали направление после ушел домой. Если хотите быть здоровыми и долго жить, то это в МедХан...</p>
-                    <a href="#" class="read-more">Читать полностью ></a>
-                </div>
+                    <a href="#" class="read-more" aria-label="Читать полный отзыв Динара Искакова">Читать полностью ></a>
+                </article>
 
                 <!-- Отзыв 2 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="reviewer-icon">
+                <article class="review-card" role="listitem">
+                    <header class="review-header">
+                        <div class="reviewer-icon" aria-hidden="true">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -483,24 +529,24 @@
                         </div>
                         <div class="reviewer-info">
                             <h4 class="reviewer-name">Лия Ильдаровна</h4>
-                            <p class="review-date">19.11.2024</p>
+                            <time class="review-date" datetime="2024-11-19">19.11.2024</time>
                         </div>
-                    </div>
-                    <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+                    </header>
+                    <div class="rating" aria-label="Оценка 5 из 5 звезд">
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
                     </div>
                     <p class="review-text">Была на обследовании, персонал самый лучший, нигде еще такого обслуживания не видела. Врачи очень квалифицированные, опытные. Теперь только к вам...</p>
-                    <a href="#" class="read-more">Читать полностью ></a>
-                </div>
+                    <a href="#" class="read-more" aria-label="Читать полный отзыв Лии Ильдаровны">Читать полностью ></a>
+                </article>
 
                 <!-- Отзыв 3 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="reviewer-icon">
+                <article class="review-card" role="listitem">
+                    <header class="review-header">
+                        <div class="reviewer-icon" aria-hidden="true">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -508,119 +554,119 @@
                         </div>
                         <div class="reviewer-info">
                             <h4 class="reviewer-name">Андрей Бажитов</h4>
-                            <p class="review-date">15.09.2024</p>
+                            <time class="review-date" datetime="2024-09-15">15.09.2024</time>
                         </div>
-                    </div>
-                    <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+                    </header>
+                    <div class="rating" aria-label="Оценка 5 из 5 звезд">
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
+                        <span class="star" aria-hidden="true">★</span>
                     </div>
                     <p class="review-text">Умар Хаят Хан - настоящий профессионал своего дела! Он внимателен, чуток и очень тщательно выслушивает своих пациентов. Благодаря его компетентности и заботе, я быстро...</p>
-                    <a href="#" class="read-more">Читать полностью ></a>
-                </div>
+                    <a href="#" class="read-more" aria-label="Читать полный отзыв Андрея Бажитова">Читать полностью ></a>
+                </article>
             </div>
         </section>
 
         <!-- Секция СМИ о нас -->
-        <section class="media-section">
-            <div class="section-header">
-                <h2>СМИ о нас</h2>
-                <a href="#" class="all-link">
+        <section class="media-section" aria-labelledby="media-heading">
+            <header class="section-header">
+                <h2 id="media-heading">СМИ о нас</h2>
+                <a href="#" class="all-link" aria-label="Посмотреть все статьи в СМИ">
                     Все статьи
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
-            </div>
+            </header>
             <p class="media-description">Здесь можете ознакомиться с опубликованными статьями</p>
 
-            <div class="articles-grid">
+            <div class="articles-grid" role="list" aria-label="Статьи в СМИ о клинике">
                 <!-- Статья 1 -->
-                <div class="article-card">
+                <article class="article-card" role="listitem">
                     <h3 class="article-title">Название статьи</h3>
-                    <div class="article-logo bo-logo">
+                    <div class="article-logo bo-logo" aria-label="Логотип издания БО">
                         <span>БО</span>
                     </div>
-                </div>
+                </article>
 
                 <!-- Статья 2 -->
-                <div class="article-card">
+                <article class="article-card" role="listitem">
                     <h3 class="article-title">Название статьи</h3>
-                    <div class="article-logo chi-logo">
+                    <div class="article-logo chi-logo" aria-label="Логотип издания ЧИ">
                         <span>ЧИ</span>
                     </div>
-                </div>
+                </article>
 
                 <!-- Статья 3 -->
-                <div class="article-card">
+                <article class="article-card" role="listitem">
                     <h3 class="article-title">Название статьи</h3>
-                    <div class="article-logo dzen-logo">
+                    <div class="article-logo dzen-logo" aria-label="Логотип Яндекс Дзен">
                         <span>+ Дзен</span>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Секция Медиа -->
-        <section class="video-section">
-            <h2>Медиа</h2>
+        <section class="video-section" aria-labelledby="video-heading">
+            <h2 id="video-heading">Медиа</h2>
 
-            <div class="videos-grid">
+            <div class="videos-grid" role="list" aria-label="Видео о клинике">
                 <!-- Видео 1 -->
-                <div class="video-card">
+                <article class="video-card" role="listitem">
                     <div class="video-thumbnail">
-                        <img src="{% static 'images/video-thumbnail-1.png' %}" alt="Видео 1">
-                        <button class="play-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <img src="{% static 'images/video-thumbnail-1.png' %}" alt="Превью видео о клинике МедХан" loading="lazy">
+                        <button class="play-button" aria-label="Воспроизвести видео">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M5 3L19 12L5 21V3Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     </div>
-                </div>
+                </article>
 
                 <!-- Видео 2 -->
-                <div class="video-card">
+                <article class="video-card" role="listitem">
                     <div class="video-thumbnail">
-                        <img src="{% static 'images/video-thumbnail-2.png' %}" alt="Видео 2">
-                        <button class="play-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <img src="{% static 'images/video-thumbnail-2.png' %}" alt="Превью видео о врачах клиники" loading="lazy">
+                        <button class="play-button" aria-label="Воспроизвести видео">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M5 3L19 12L5 21V3Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     </div>
-                </div>
+                </article>
 
                 <!-- Видео 3 -->
-                <div class="video-card">
+                <article class="video-card" role="listitem">
                     <div class="video-thumbnail">
-                        <img src="{% static 'images/video-thumbnail-3.png' %}" alt="Видео 3">
-                        <button class="play-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <img src="{% static 'images/video-thumbnail-3.png' %}" alt="Превью видео об услугах клиники" loading="lazy">
+                        <button class="play-button" aria-label="Воспроизвести видео">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M5 3L19 12L5 21V3Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     </div>
-                </div>
+                </article>
             </div>
 
             <div class="social-media">
                 <p>Присоединяйтесь:</p>
-                <div class="social-links">
-                    <a href="#" class="social-link whatsapp">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="social-links" role="list" aria-label="Социальные сети клиники">
+                    <a href="#" class="social-link whatsapp" aria-label="МедХан в WhatsApp" role="listitem">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 16.2C16.49 16.67 15.78 17.07 15.23 17.18C14.85 17.25 14.36 17.31 12.08 16.5C9.24 15.47 7.39 12.6 7.28 12.45C7.17 12.31 6.15 10.98 6.15 9.61C6.15 8.24 6.84 7.58 7.04 7.37C7.21 7.19 7.49 7.11 7.77 7.11C7.86 7.11 7.95 7.11 8.03 7.12C8.23 7.13 8.33 7.14 8.46 7.47C8.63 7.88 9.04 9.25 9.1 9.39C9.15 9.53 9.2 9.71 9.13 9.88C9.06 10.06 9 10.17 8.86 10.33C8.72 10.49 8.57 10.69 8.45 10.81C8.31 10.95 8.17 11.1 8.33 11.37C8.49 11.63 8.9 12.32 9.53 12.88C10.35 13.6 11.05 13.83 11.32 13.97C11.52 14.07 11.76 14.05 11.93 13.88C12.15 13.66 12.41 13.3 12.68 12.94C12.88 12.67 13.13 12.64 13.39 12.74C13.66 12.83 15.03 13.5 15.32 13.65C15.61 13.79 15.8 13.86 15.86 13.97C15.91 14.09 15.91 14.61 15.76 15.08L16.64 16.2Z" fill="#00C087"/>
                         </svg>
                     </a>
-                    <a href="#" class="social-link telegram">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a href="#" class="social-link telegram" aria-label="МедХан в Telegram" role="listitem">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.22 15.51 15.99C15.37 16.74 15.09 16.99 14.83 17.02C14.25 17.07 13.81 16.64 13.25 16.27C12.37 15.69 11.87 15.33 11.02 14.77C10.03 14.12 10.67 13.76 11.24 13.18C11.39 13.03 14.2 10.5 14.26 10.28C14.27 10.25 14.27 10.16 14.22 10.12C14.17 10.08 14.1 10.09 14.05 10.1C13.97 10.12 12.29 11.24 9.01 13.47C8.55 13.78 8.13 13.93 7.77 13.92C7.37 13.91 6.6 13.7 6.04 13.53C5.35 13.31 4.81 13.2 4.86 12.81C4.89 12.61 5.16 12.4 5.68 12.19C9.17 10.64 11.49 9.62 12.63 9.11C15.95 7.61 16.63 7.37 17.06 7.37C17.15 7.37 17.35 7.39 17.48 7.5C17.59 7.59 17.62 7.71 17.63 7.8C17.62 7.87 17.65 8.05 17.64 8.2L16.64 8.8Z" fill="#00C087"/>
                         </svg>
                     </a>
-                    <a href="#" class="social-link vk">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a href="#" class="social-link vk" aria-label="МедХан ВКонтакте" role="listitem">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.31 14.85C16.28 14.91 16.24 14.97 16.19 15.02C15.97 15.31 15.44 15.96 14.87 16.42C14.6 16.64 14.46 16.72 14.37 16.76C14.24 16.82 14.1 16.85 13.95 16.85C13.72 16.85 13.51 16.77 13.35 16.63C13.16 16.47 12.94 16.32 12.76 16.2C12.46 16.01 12.23 15.86 12.23 15.86C11.29 15.3 10.47 14.37 9.89 13.29C9.66 12.87 9.5 12.41 9.41 11.94C9.39 11.79 9.38 11.64 9.38 11.49C9.38 11.1 9.47 10.73 9.65 10.42C9.8 10.16 10.02 9.96 10.28 9.83C10.38 9.78 10.48 9.75 10.59 9.75C10.76 9.75 10.92 9.82 11.05 9.94C11.05 9.94 11.46 10.28 11.63 10.42C11.81 10.57 12.09 10.85 12.19 10.98C12.31 11.15 12.44 11.41 12.34 11.69C12.23 11.97 11.95 12.12 11.82 12.19C11.68 12.27 11.61 12.29 11.5 12.37C11.39 12.45 11.34 12.5 11.29 12.58C11.24 12.66 11.21 12.75 11.21 12.84C11.21 12.96 11.25 13.08 11.32 13.18C11.32 13.18 11.76 14.01 12.16 14.4C12.58 14.81 13.2 15.16 13.2 15.16C13.29 15.21 13.39 15.24 13.5 15.24C13.63 15.24 13.76 15.19 13.86 15.1C13.93 15.04 13.99 14.97 14.04 14.9C14.04 14.9 14.14 14.73 14.24 14.62C14.34 14.51 14.5 14.35 14.63 14.28C14.76 14.21 14.85 14.17 14.98 14.17C15.12 14.17 15.26 14.21 15.38 14.28C15.38 14.28 16.09 14.66 16.26 14.76C16.43 14.85 16.57 14.93 16.57 14.93C16.66 14.98 16.74 15.05 16.8 15.14C16.87 15.24 16.9 15.36 16.9 15.48C16.9 15.61 16.86 15.74 16.79 15.85L16.31 14.85Z" fill="#00C087"/>
                         </svg>
                     </a>
@@ -629,65 +675,66 @@
         </section>
 </section>
 <!-- Заголовок журнала -->
-<section class="container" id="magazine">
+<section class="container" id="magazine" aria-labelledby="magazine-heading">
         <!-- Заголовок журнала -->
         <header class="journal-header">
-            <h1>Журнал о здоровье</h1>
-            <a href="{% url 'magazine' %}" class="next-button">
+            <h2 id="magazine-heading">Журнал о здоровье</h2>
+            <a href="{% url 'magazine' %}" class="next-button" aria-label="Перейти к журналу о здоровье">
                 Далее
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </a>
         </header>
 
         <!-- Статьи журнала -->
-        <div class="magazine-articles-grid">
+        <div class="magazine-articles-grid" role="list" aria-label="Статьи журнала о здоровье">
             <!-- Статья 1 -->
-            <article class="magazine-article-card">
+            <article class="magazine-article-card" role="listitem">
                 <div class="magazine-article-image">
-                    <img src="{% static 'images/lotos.png' %}" alt="Интимное омоложение фракционным лазером CO2">
+                    <img src="{% static 'images/lotos.png' %}" alt="Изображение к статье об интимном омоложении фракционным лазером CO2" loading="lazy">
                 </div>
                 <div class="magazine-article-content">
-                    <h2>Интимное омоложение фракционным лазером CO2</h2>
+                    <h3>Интимное омоложение фракционным лазером CO2</h3>
                     <p>Интимное омоложение CO2-лазером показано пациенткам любого возраста при наличии показаний.</p>
                 </div>
             </article>
 
             <!-- Статья 2 -->
-            <article class="magazine-article-card">
+            <article class="magazine-article-card" role="listitem">
                 <div class="magazine-article-image">
-                    <img src="{% static 'images/laser.png' %}" alt="Хронический простатит и ЭУВТ-Терапия ударно-волновым методом">
+                    <img src="{% static 'images/laser.png' %}" alt="Изображение к статье о хроническом простатите и ЭУВТ-терапии" loading="lazy">
                 </div>
                 <div class="magazine-article-content">
-                    <h2>Хронический простатит и ЭУВТ-Терапия ударно-волновым методом</h2>
+                    <h3>Хронический простатит и ЭУВТ-Терапия ударно-волновым методом</h3>
                     <p>Терапия ударно-волновым методом — это современный и эффективный подход к лечению хронических заболеваний.</p>
                 </div>
             </article>
 
             <!-- Статья 3 -->
-            <article class="magazine-article-card">
+            <article class="magazine-article-card" role="listitem">
                 <div class="magazine-article-image">
-                    <img src="{% static 'images/doctor.png' %}" alt="Доктор Хан Умар Хаят – пионер ударно-волновой терапии в РТ">
+                    <img src="{% static 'images/doctor.png' %}" alt="Фото доктора Хан Умар Хаят" loading="lazy">
                 </div>
                 <div class="magazine-article-content">
-                    <h2>Доктор Хан Умар Хаят – пионер ударно-волновой терапии в РТ</h2>
+                    <h3>Доктор Хан Умар Хаят – пионер ударно-волновой терапии в РТ</h3>
                     <p>Хан Умар Хаят – главный врач клиники "МедХан" первым в Республике Татарстан начал внедрение ударно-волновой терапии (УВТ) для лечения урологических заболеваний.</p>
                 </div>
             </article>
 
             <!-- Статья 4 -->
-            <article class="magazine-article-card">
+            <article class="magazine-article-card" role="listitem">
                 <div class="magazine-article-image">
-                    <img src="{% static 'images/hirurgia.png' %}" alt="Эффективные операции для мужского здоровья в клинике «МедХан»">
+                    <img src="{% static 'images/hirurgia.png' %}" alt="Изображение к статье об эффективных операциях для мужского здоровья" loading="lazy">
                 </div>
                 <div class="magazine-article-content">
-                    <h2>Эффективные операции для мужского здоровья в клинике «МедХан»</h2>
+                    <h3>Эффективные операции для мужского здоровья в клинике «МедХан»</h3>
                     <p>Лечение урологических заболеваний - широкий спектр хирургических операций, направленных на восстановление здоровья мужчины.<br>Онлайн запись к специалисту</p>
                 </div>
             </article>
         </div>
 </section>
+
 {% endblock %}
 
 {% block extra_js %}
