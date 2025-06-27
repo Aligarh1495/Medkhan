@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 
 from products.views import main, services, stocks, specialists, AboutSenter, magazine, HanYmar, BackPain, \
-    RestorativeMedicene, cosmetic, patients
+    RestorativeMedicene, cosmetic, patients,HanTulpan,NudelmanNatalia,BasharovaAlena, Uldashev
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,5 +17,9 @@ urlpatterns = [
     path('BackPain/', BackPain, name='BackPain'),
     path('RestorativeMedicene/',RestorativeMedicene,name='RestorativeMedicene'),
     path('cosmetic/', cosmetic, name='cosmetic'),
-    path('patients/', patients, name='patients')
+    path('patients/', patients, name='patients'),
+    path('HanTulpan/',HanTulpan,name='HanTulpan'),
+    path('NudelmanNatalia/',NudelmanNatalia,name='NudelmanNatalia'),
+    path('BasharovaAlenf/',BasharovaAlena,name='BasharovaAlena'),
+    path('Uldashev/',Uldashev,name='Uldashev')
 ]

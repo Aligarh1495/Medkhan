@@ -86,8 +86,11 @@
         <div class="specialists-grid">
             <div class="specialist-card" data-gender="female" data-specialization="neurologist">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна">
-                    <div class="experience-badge">Стаж 31 год</div>
+                    <a href="{% url 'NudelmanNatalia' %}">
+                        <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна">
+                        <div class="experience-badge">Стаж 31 год</div>
+                    </a>
+
                 </div>
                 <div class="specialist-info">
                     <h3>Нудельман<br>Наталия Федоровна</h3>
@@ -114,8 +117,11 @@
 
             <div class="specialist-card" data-gender="female" data-specialization="gynecologist">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна">
-                    <div class="experience-badge">Стаж 27 лет</div>
+                    <a href="{% url 'HanTulpan' %}">
+                        <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна">
+                        <div class="experience-badge">Стаж 27 лет</div>
+                    </a>
+
                 </div>
                 <div class="specialist-info">
                     <h3>Хан<br>Тюльпан Тимергалиевна</h3>
@@ -126,6 +132,10 @@
 
             <div class="specialist-card" data-gender="female" data-specialization="therapist">
                 <div class="specialist-image">
+                    <a href="{% url 'BasharovaAlena' %}">
+                        <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна">
+                        <div class="experience-badge">Стаж 15 лет</div>
+                    </a>
                     <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна">
                     <div class="experience-badge">Стаж 15 лет</div>
                 </div>
@@ -150,8 +160,11 @@
 
             <div class="specialist-card" data-gender="male" data-specialization="proctologist">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-6.png' %}" alt="Юлдашев Фарход Талибович">
-                    <div class="experience-badge">Стаж 14 лет</div>
+                    <a href="{% url 'Uldashev' %}">
+                        <img src="{% static 'images/specialist-6.png' %}" alt="Юлдашев Фарход Талибович">
+                        <div class="experience-badge">Стаж 14 лет</div>
+                    </a>
+
                 </div>
                 <div class="specialist-info">
                     <h3>Юлдашев<br>Фарход Талибович</h3>

@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="breadcrumbs">
-        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'specialists' %}">Специалисты</a> / <span>Хан Умар Хаят</span>
+        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'specialists' %}">Специалисты</a> / <span>Хан Тюльпан Тимергалиевна</span>
     </div>
 </div>
 
@@ -21,22 +21,22 @@
         <div class="profile-grid">
             <!-- Фото врача -->
             <div class="doctor-photo">
-                <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят">
+                <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна">
                 <button class="btn btn-primary appointment-btn">Записаться на приём</button>
             </div>
 
             <!-- Информация о враче -->
             <div class="doctor-info">
-                <h1>Хан<br>Умар Хаят</h1>
-                <p class="doctor-position">Главный врач, уролог-андролог</p>
+                <h1>Хан<br>Тюльпан Тимергалиевна</h1>
+                <p class="doctor-position">Гинеколог, врач УЗИ</p>
                 <div class="doctor-experience">
                     <div class="experience-item">
-                        <span class="experience-number">25</span>
+                        <span class="experience-number">26</span>
                         <span class="experience-text">лет опыта</span>
                     </div>
                     <div class="experience-item">
-                        <span class="experience-number">5000+</span>
-                        <span class="experience-text">пациентов</span>
+                        <span class="experience-number">от 600 ₽</span>
+                        <span class="experience-text">стоимость приёма</span>
                     </div>
                 </div>
             </div>
@@ -58,16 +58,25 @@
 
         <!-- Специализация -->
         <div class="specialization-card">
-            <h2>Специализация</h2>
+            <h2>Профиль лечения</h2>
             <div class="specialization-content">
-                <p>Хан Умар Хаят постоянно посещает семинары в области хирургии и урологии в Пакистане, ОАЭ, Саудовской Аравии. Участвует в конференциях европейских и американских обществ урологов в режиме он-лайн.</p>
-                <p>Хан Умар Хаят является членом Российской Ассоциации Урологов и Европейской Ассоциации Урологов.</p>
-                <p><strong>Опыт работы в области высоких технологий по урологии-андрологии — 16 лет.</strong></p>
+                <ul class="treatment-profile">
+                    <li>Миома матки</li>
+                    <li>Инфекции, передаваемые половым путем</li>
+                    <li>Эрозия (эктопия) шейки матки</li>
+                    <li>Кольпит</li>
+                    <li>Аднексит</li>
+                    <li>Эндометриоз</li>
+                    <li>Киста яичника</li>
+                    <li>Сальпингит</li>
+                    <li>Воспаление яичников</li>
+                    <li>Недержание мочи</li>
+                </ul>
             </div>
             <div class="specialization-badges">
-                <span class="badge">Российская Ассоциация Урологов</span>
-                <span class="badge">Европейская Ассоциация Урологов</span>
-                <span class="badge">Высокие технологии</span>
+                <span class="badge">Гинеколог</span>
+                <span class="badge">Врач УЗИ</span>
+                <span class="badge">Акушерство</span>
             </div>
         </div>
     </div>
@@ -105,7 +114,7 @@
                         <span class="new-price">6 000 ₽</span>
                         <span class="old-price">7 200 ₽</span>
                     </div>
-                    <h3 class="promotion-title">CHECK UP<br>«Репродуктивность»</h3>
+                    <h3 class="promotion-title">CHECK UP<br>«Женское здоровье»</h3>
                 </div>
             </div>
             {% endfor %}
@@ -130,57 +139,63 @@
                 <div class="accordion-content">
                     <div class="education-timeline">
                         <div class="timeline-item">
-                            <div class="timeline-year">1994 - 2000 г.</div>
+                            <div class="timeline-year">1998 г.</div>
                             <div class="timeline-content">
-                                <p>Учился в Ижевской Медицинской Академии по специальности «Лечебное дело».</p>
+                                <p>Ижевская государственная медицинская академия, специальность "Лечебное дело" (базовое образование)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2000 - 2003 г.</div>
+                            <div class="timeline-year">1999 г.</div>
                             <div class="timeline-content">
-                                <p>Прошел клиническую ординатуру Международного уровня (Residency in Surgery) в г. Ижевске. Работал врачом-хирургом на базе Медсанчасти №1 в г. Ижевск.</p>
+                                <p>Ижевская государственная медицинская академия, специальность "Акушерство и гинекология" (интернатура)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2003 г.</div>
+                            <div class="timeline-year">2007 г.</div>
                             <div class="timeline-content">
-                                <p>После окончании ординатуры приехал в г. Набережные Челны, где был назначен заведующим хирургического отделения поликлиники №7.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2004 г.</div>
-                            <div class="timeline-content">
-                                <p>Получил сертификат по Урологии. Работал врачом урологом в Госпитале МСЧ МВД по Республике Татарстан г. Набережные Челны.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2010 г.</div>
-                            <div class="timeline-content">
-                                <p>Работал в КДЦ «Авицена» заведующим урологическим отделением.</p>
+                                <p>Ижевская государственная медицинская академия, "Ультразвуковая диагностика" (повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-year">2013 г.</div>
                             <div class="timeline-content">
-                                <p>Прошел обучение по малоинвазивным технологиям в урологии в г. Тель-Авив (Израиль).</p>
+                                <p>Казанский государственный медицинский университет, "Акушерство и гинекология" (повышение квалификации)</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2013 г.</div>
+                            <div class="timeline-content">
+                                <p>Башкирский государственный медицинский университет, "Ультразвуковая диагностика" (повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-year">2014 г.</div>
                             <div class="timeline-content">
-                                <p>Получил Сертификат участника мастер-класса «Малоинвазивные урологические технологии» г.Новосибирск. Участвовал в Международной конференции по Урологии в г. Стамбул (Турция).</p>
+                                <p>Казанская государственная медицинская академия, "Патология вульвы, влагалища и шейки матки. Кольпоскопия" (повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2015 г.</div>
+                            <div class="timeline-year">2014 г.</div>
                             <div class="timeline-content">
-                                <p>Получил Диплом «Организация здравоохранения и общественное здоровье».</p>
+                                <p>Российский университет дружбы народов им. П. Лумумбы (РУДН), "Интимная контурная пластика" (повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-year">2016 г.</div>
                             <div class="timeline-content">
-                                <p>Прошел первичную специализацию и получил диплом по Урологии.</p>
+                                <p>Московский областной НИИ акушерства и гинекологии (МОНИИАГ), "Репродуктивная эндокринология и ожирение" (повышение квалификации)</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2018 г.</div>
+                            <div class="timeline-content">
+                                <p>Казанский государственный медицинский университет, "Ультразвуковая диагностика" (повышение квалификации)</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2018 г.</div>
+                            <div class="timeline-content">
+                                <p>Казанская государственная медицинская академия, "Акушерство и гинекология" (повышение квалификации)</p>
                             </div>
                         </div>
                     </div>
@@ -190,24 +205,32 @@
             <!-- Профессиональная деятельность -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3>Профессиональная деятельность</h3>
+                    <h3>Опыт работы</h3>
                     <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 15L12 9L6 15" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <div class="accordion-content">
-                    <ul class="activity-list">
-                        <li>Опыт работы в области высоких технологий по урологии-андрологии-16 лет.</li>
-                        <li>Получил образование в Высшей Английской Школе в Пакистане.</li>
-                        <li>Является членом Российской Ассоциции Урологов и Европейской Ассоциации Урологов.</li>
-                        <li>Учился в Ижевской Медицинской Академии по специальности « Лечебное дело».</li>
-                        <li>Награжден Орденом « За верность Родине и преданность народу»</li>
-                        <li>Имеет Почетную Грамоту в области здравоохранения.</li>
-                        <li>Прошел обучение по малоинвазивным технологиям в урологии в г. Тель-Авив (Израиль).</li>
-                        <li>Получил Сертификат участника мастер-класса «Малоинвазивные урологические технологии» г. Новосибирск.</li>
-                        <li>Участвовал в Международной конференции по Урологии в г. Стамбул (Турция). Постоянно посещаю семинары в области хирургии и урологии в Пакистане, ОАЭ, Саудовской Аравии.</li>
-                        <li>Участвует в конференциях европейских и америк��нских обществ урологов в режиме он-лайн.</li>
-                    </ul>
+                    <div class="education-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2017 — н.в.</div>
+                            <div class="timeline-content">
+                                <p>ООО "МедХан", врач акушер-гинеколог</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2014 — 2017</div>
+                            <div class="timeline-content">
+                                <p>КДЦ "Авицена", врач акушер-гинеколог</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1999 — 2014</div>
+                            <div class="timeline-content">
+                                <p>Городская поликлиника №7, врач акушер-гинеколог</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -221,18 +244,18 @@
                 </div>
                 <div class="accordion-content">
                     <div class="achievements-section">
-                        <h4>Награды:</h4>
-                        <ul>
-                            <li>Хан Умар Хаят в 2015 году награжден Орденом «За верность Родине и преданность народу» имеет Почетные Грамоты в области здравоохранения.</li>
-                        </ul>
-
                         <h4>Сертификаты:</h4>
                         <ul>
-                            <li>Сертификат специалиста 031604 0006021 Рег.№4462 г.Казань 2015.г</li>
-                            <li>Удостоверение о повышении квалификации 040000008530 Рег.№5681 г.Казань 2015.г</li>
-                            <li>Диплом о пофессиональной переподготовке 180000111125 Рег.№16-70 г.Казань 2016.г</li>
-                            <li>Сертификат специалиста 0116180476350 Регистрационнай №16-70 г.Казань 2016.г</li>
-                            <li>В 2020 году Хан Умар Хаят избран Член-Корреспондентом Академии информатизации Республики Татарстан</li>
+                            <li>Сертификат специалиста по акушерству и гинекологии</li>
+                            <li>Сертификат по ультразвуковой диагностике</li>
+                            <li>Сертификат по кольпоскопии</li>
+                            <li>Сертификат по интимной контурной пластике</li>
+                        </ul>
+
+                        <h4>Награды:</h4>
+                        <ul>
+                            <li>Почетная грамота Министерства здравоохранения</li>
+                            <li>Лучший врач года в номинации "Акушерство и гинекология" (2015)</li>
                         </ul>
                     </div>
                 </div>
@@ -247,23 +270,23 @@
         <h2>Основные направления деятельности</h2>
         <div class="directions-grid">
             <div class="direction-card">
-                <h3>Урологические операции</h3>
-                <p>Малоинвазивные хирургические вмешательства</p>
+                <h3>Гинекология</h3>
+                <p>Диагностика и лечение женских заболеваний</p>
                 <div class="direction-number">1</div>
             </div>
             <div class="direction-card">
-                <h3>Андрологическое лечение</h3>
-                <p>Диагностика и лечение мужских заболеваний</p>
+                <h3>УЗИ-диагностика</h3>
+                <p>Ультразвуковые исследования органов малого таза</p>
                 <div class="direction-number">2</div>
             </div>
             <div class="direction-card">
-                <h3>Ударно-волновая терапия</h3>
-                <p>Современные методы лечения</p>
+                <h3>Кольпоскопия</h3>
+                <p>Исследование шейки матки под микроскопом</p>
                 <div class="direction-number">3</div>
             </div>
             <div class="direction-card">
-                <h3>Консультативная помощь</h3>
-                <p>Экспертные консультации и диагностика</p>
+                <h3>Контрацепция</h3>
+                <p>Подбор методов предохранения от беременности</p>
                 <div class="direction-number">4</div>
             </div>
         </div>
@@ -286,25 +309,17 @@
         <div class="specialists-grid">
             <div class="specialist-card">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-7.png' %}" alt="Галимов Ильсур Ильсиярович">
+                    <img src="{% static 'images/specialist-10.png' %}" alt="Погребникова Алёна Сергеевна">
                     <button class="btn btn-primary small-btn">Записаться</button>
                 </div>
                 <div class="specialist-info">
-                    <h3>Галимов<br>Ильсур Ильсиярович</h3>
-                    <p class="specialist-position">Уролог, андролог</p>
+                    <h3>Погребникова<br>Алёна Сергеевна</h3>
+                    <p class="specialist-position">Гинеколог</p>
                 </div>
             </div>
 
-            <div class="specialist-card">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-8.png' %}" alt="Мусаев Магомед Садрудинович">
-                    <button class="btn btn-primary small-btn">Записаться</button>
-                </div>
-                <div class="specialist-info">
-                    <h3>Мусаев<br>Магомед Садрудинович</h3>
-                    <p class="specialist-position">Уролог, хирург</p>
-                </div>
-            </div>
+
+
         </div>
     </div>
 </section>

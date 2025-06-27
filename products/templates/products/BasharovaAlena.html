@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="breadcrumbs">
-        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'specialists' %}">Специалисты</a> / <span>Хан Умар Хаят</span>
+        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'specialists' %}">Специалисты</a> / <span>Башарова Альбина Шарипзяновна</span>
     </div>
 </div>
 
@@ -21,22 +21,22 @@
         <div class="profile-grid">
             <!-- Фото врача -->
             <div class="doctor-photo">
-                <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят">
+                <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипзяновна">
                 <button class="btn btn-primary appointment-btn">Записаться на приём</button>
             </div>
 
             <!-- Информация о враче -->
             <div class="doctor-info">
-                <h1>Хан<br>Умар Хаят</h1>
-                <p class="doctor-position">Главный врач, уролог-андролог</p>
+                <h1>Башарова<br>Альбина Шарипзяновна</h1>
+                <p class="doctor-position">от 450 ₽ Кардиолог врач УЗИ терапевт</p>
                 <div class="doctor-experience">
                     <div class="experience-item">
-                        <span class="experience-number">25</span>
+                        <span class="experience-number">14</span>
                         <span class="experience-text">лет опыта</span>
                     </div>
                     <div class="experience-item">
-                        <span class="experience-number">5000+</span>
-                        <span class="experience-text">пациентов</span>
+                        <span class="experience-number">высшая</span>
+                        <span class="experience-text">категория</span>
                     </div>
                 </div>
             </div>
@@ -60,15 +60,30 @@
         <div class="specialization-card">
             <h2>Специализация</h2>
             <div class="specialization-content">
-                <p>Хан Умар Хаят постоянно посещает семинары в области хирургии и урологии в Пакистане, ОАЭ, Саудовской Аравии. Участвует в конференциях европейских и американских обществ урологов в режиме он-лайн.</p>
-                <p>Хан Умар Хаят является членом Российской Ассоциации Урологов и Европейской Ассоциации Урологов.</p>
-                <p><strong>Опыт работы в области высоких технологий по урологии-андрологии — 16 лет.</strong></p>
+                <p>Башарова Альбина Шарипзяновна — опытный врач-кардиолог, терапевт и специалист ультразвуковой диагностики с 14-летним стажем работы. Имеет высшую квалификационную категорию.</p>
+                <p>Специализируется на диагностике и лечении сердечно-сосудистых заболеваний, проведении ультразвуковых исследований и оказании терапевтической помощи пациентам различного возраста.</p>
+                <p><strong>Опыт работы в области кардиологии и функциональной диагностики — 14 лет.</strong></p>
             </div>
             <div class="specialization-badges">
-                <span class="badge">Российская Ассоциация Урологов</span>
-                <span class="badge">Европейская Ассоциация Урологов</span>
-                <span class="badge">Высокие технологии</span>
+                <span class="badge">Кардиология</span>
+                <span class="badge">Ультразвуковая диагностика</span>
+                <span class="badge">Функциональная диагностика</span>
+                <span class="badge">Терапия</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Профиль лечения -->
+<section class="treatment-profile">
+    <div class="container">
+        <h2>Профиль лечения</h2>
+        <div class="treatment-grid">
+            <div class="treatment-item">Синдром ДВС</div>
+            <div class="treatment-item">Артериальная гипертензия</div>
+            <div class="treatment-item">Стеноз позвоночной артерии</div>
+            <div class="treatment-item">Аритмия</div>
+            <div class="treatment-item">Ишемическая болезнь сердца</div>
         </div>
     </div>
 </section>
@@ -92,20 +107,18 @@
                 <div class="promotion-image">
                     <div class="gender-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 12V22" stroke="currentColor" stroke-width="2"/>
-                            <path d="M17 17H7" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <div class="promotion-date">до 5 марта</div>
-                    <div class="discount-badge">-15%</div>
+                    <div class="promotion-date">до 10 марта</div>
+                    <div class="discount-badge">-20%</div>
                 </div>
                 <div class="promotion-content">
                     <div class="promotion-price">
-                        <span class="new-price">6 000 ₽</span>
-                        <span class="old-price">7 200 ₽</span>
+                        <span class="new-price">2 400 ₽</span>
+                        <span class="old-price">3 000 ₽</span>
                     </div>
-                    <h3 class="promotion-title">CHECK UP<br>«Репродуктивность»</h3>
+                    <h3 class="promotion-title">CHECK UP<br>«Здоровое сердце»</h3>
                 </div>
             </div>
             {% endfor %}
@@ -130,57 +143,71 @@
                 <div class="accordion-content">
                     <div class="education-timeline">
                         <div class="timeline-item">
-                            <div class="timeline-year">1994 - 2000 г.</div>
-                            <div class="timeline-content">
-                                <p>Учился в Ижевской Медицинской Академии по специальности «Лечебное дело».</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2000 - 2003 г.</div>
-                            <div class="timeline-content">
-                                <p>Прошел клиническую ординатуру Международного уровня (Residency in Surgery) в г. Ижевске. Работал врачом-хирургом на базе Медсанчасти №1 в г. Ижевск.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2003 г.</div>
-                            <div class="timeline-content">
-                                <p>После окончании ординатуры приехал в г. Набережные Челны, где был назначен заведующим хирургического отделения поликлиники №7.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2004 г.</div>
-                            <div class="timeline-content">
-                                <p>Получил сертификат по Урологии. Работал врачом урологом в Госпитале МСЧ МВД по Республике Татарстан г. Набережные Челны.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
                             <div class="timeline-year">2010 г.</div>
                             <div class="timeline-content">
-                                <p>Работал в КДЦ «Авицена» заведующим урологическим отделением.</p>
+                                <p>Ижевская государственная медицинская академия - Лечебное дело (Базовое образование)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2013 г.</div>
+                            <div class="timeline-year">2011 г.</div>
                             <div class="timeline-content">
-                                <p>Прошел обучение по малоинвазивным технологиям в урологии в г. Тель-Авив (Израиль).</p>
+                                <p>Ижевская государственная медицинская академия - Терапия (Интернатура)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2014 г.</div>
+                            <div class="timeline-year">2012 г.</div>
                             <div class="timeline-content">
-                                <p>Получил Сертификат участника мастер-класса «Малоинвазивные урологические технологии» г.Новосибирск. Участвовал в Международной конференции по Урологии в г. Стамбул (Турция).</p>
+                                <p>Казанский государственный медицинский университет - Кардиология (Циклы переподготовки)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-year">2015 г.</div>
                             <div class="timeline-content">
-                                <p>Получил Диплом «Организация здравоохранения и общественное здоровье».</p>
+                                <p>Казанский государственный медицинский университет - Терапия (Повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2016 г.</div>
+                            <div class="timeline-year">2017 г.</div>
                             <div class="timeline-content">
-                                <p>Прошел первичную специализацию и получил диплом по Урологии.</p>
+                                <p>Казанский государственный медицинский университет - Функциональная диагностика (Циклы переподготовки)</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2017 г.</div>
+                            <div class="timeline-content">
+                                <p>Казанский государственный медицинский университет - Кардиология (Повышение квалификации)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Опыт работы -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3>Опыт работы</h3>
+                    <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 15L12 9L6 15" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="education-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2015 — н. в.</div>
+                            <div class="timeline-content">
+                                <p>«Медикал Форте» - Врач кардиолог, терапевт</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2012 — 2023</div>
+                            <div class="timeline-content">
+                                <p>БСМП - Кардиолог</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2011 — 2012</div>
+                            <div class="timeline-content">
+                                <p>ЦРБ, г. Нижнекамск - Терапевт</p>
                             </div>
                         </div>
                     </div>
@@ -197,16 +224,16 @@
                 </div>
                 <div class="accordion-content">
                     <ul class="activity-list">
-                        <li>Опыт работы в области высоких технологий по урологии-андрологии-16 лет.</li>
-                        <li>Получил образование в Высшей Английской Школе в Пакистане.</li>
-                        <li>Является членом Российской Ассоциции Урологов и Европейской Ассоциации Урологов.</li>
-                        <li>Учился в Ижевской Медицинской Академии по специальности « Лечебное дело».</li>
-                        <li>Награжден Орденом « За верность Родине и преданность народу»</li>
-                        <li>Имеет Почетную Грамоту в области здравоохранения.</li>
-                        <li>Прошел обучение по малоинвазивным технологиям в урологии в г. Тель-Авив (Израиль).</li>
-                        <li>Получил Сертификат участника мастер-класса «Малоинвазивные урологические технологии» г. Новосибирск.</li>
-                        <li>Участвовал в Международной конференции по Урологии в г. Стамбул (Турция). Постоянно посещаю семинары в области хирургии и урологии в Пакистане, ОАЭ, Саудовской Аравии.</li>
-                        <li>Участвует в конференциях европейских и америк��нских обществ урологов в режиме он-лайн.</li>
+                        <li>14 лет опыта работы в области кардиологии и терапии</li>
+                        <li>Высшая квалификационная категория по специальности</li>
+                        <li>Специализация на диагностике и лечении сердечно-сосудистых заболеваний</li>
+                        <li>Экспертиза в области ультразвуковой диагностики</li>
+                        <li>Владение методами функциональной диагностики</li>
+                        <li>Опыт работы с пациентами с артериальной гипертензией</li>
+                        <li>Диагностика и лечение ишемической болезни сердца</li>
+                        <li>Ведение пациентов с нарушениями ритма сердца</li>
+                        <li>Постоянное повышение квалификации в ведущих медицинских учреждениях</li>
+                        <li>Комплексный подход к диагностике и лечению кардиологических заболеваний</li>
                     </ul>
                 </div>
             </div>
@@ -221,18 +248,18 @@
                 </div>
                 <div class="accordion-content">
                     <div class="achievements-section">
-                        <h4>Награды:</h4>
+                        <h4>Квалификация:</h4>
                         <ul>
-                            <li>Хан Умар Хаят в 2015 году награжден Орденом «За верность Родине и преданность народу» имеет Почетные Грамоты в области здравоохранения.</li>
+                            <li>Башарова Альбина Шарипзяновна имеет высшую квалификационную категорию по специальности кардиология</li>
                         </ul>
 
                         <h4>Сертификаты:</h4>
                         <ul>
-                            <li>Сертификат специалиста 031604 0006021 Рег.№4462 г.Казань 2015.г</li>
-                            <li>Удостоверение о повышении квалификации 040000008530 Рег.№5681 г.Казань 2015.г</li>
-                            <li>Диплом о пофессиональной переподготовке 180000111125 Рег.№16-70 г.Казань 2016.г</li>
-                            <li>Сертификат специалиста 0116180476350 Регистрационнай №16-70 г.Казань 2016.г</li>
-                            <li>В 2020 году Хан Умар Хаят избран Член-Корреспондентом Академии информатизации Республики Татарстан</li>
+                            <li>Сертификат специалиста по кардиологии</li>
+                            <li>Сертификат специалиста по терапии</li>
+                            <li>Сертификат по функциональной диагностике</li>
+                            <li>Удостоверения о повышении квалификации по кардиологии и терапии</li>
+                            <li>Диплом о профессиональной переподготовке по функциональной диагностике</li>
                         </ul>
                     </div>
                 </div>
@@ -247,23 +274,23 @@
         <h2>Основные направления деятельности</h2>
         <div class="directions-grid">
             <div class="direction-card">
-                <h3>Урологические операции</h3>
-                <p>Малоинвазивные хирургические вмешательства</p>
+                <h3>Кардиологические консультации</h3>
+                <p>Диагностика и лечение заболеваний сердечно-сосудистой системы</p>
                 <div class="direction-number">1</div>
             </div>
             <div class="direction-card">
-                <h3>Андрологическое лечение</h3>
-                <p>Диагностика и лечение мужских заболеваний</p>
+                <h3>Ультразвуковая диагностика</h3>
+                <p>УЗИ сердца и сосудов, эхокардиография</p>
                 <div class="direction-number">2</div>
             </div>
             <div class="direction-card">
-                <h3>Ударно-волновая терапия</h3>
-                <p>Современные методы лечения</p>
+                <h3>Функциональная диагностика</h3>
+                <p>ЭКГ, холтеровское мониторирование, нагрузочные тесты</p>
                 <div class="direction-number">3</div>
             </div>
             <div class="direction-card">
-                <h3>Консультативная помощь</h3>
-                <p>Экспертные консультации и диагностика</p>
+                <h3>Терапевтическая помощь</h3>
+                <p>Комплексное лечение и профилактика заболеваний</p>
                 <div class="direction-number">4</div>
             </div>
         </div>
@@ -281,30 +308,6 @@
                     <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </a>
-        </div>
-
-        <div class="specialists-grid">
-            <div class="specialist-card">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-7.png' %}" alt="Галимов Ильсур Ильсиярович">
-                    <button class="btn btn-primary small-btn">Записаться</button>
-                </div>
-                <div class="specialist-info">
-                    <h3>Галимов<br>Ильсур Ильсиярович</h3>
-                    <p class="specialist-position">Уролог, андролог</p>
-                </div>
-            </div>
-
-            <div class="specialist-card">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-8.png' %}" alt="Мусаев Магомед Садрудинович">
-                    <button class="btn btn-primary small-btn">Записаться</button>
-                </div>
-                <div class="specialist-info">
-                    <h3>Мусаев<br>Магомед Садрудинович</h3>
-                    <p class="specialist-position">Уролог, хирург</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>

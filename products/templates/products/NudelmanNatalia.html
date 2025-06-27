@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="breadcrumbs">
-        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'specialists' %}">Специалисты</a> / <span>Хан Умар Хаят</span>
+        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'specialists' %}">Специалисты</a> / <span>Нудельман Наталия Федоровна</span>
     </div>
 </div>
 
@@ -21,22 +21,22 @@
         <div class="profile-grid">
             <!-- Фото врача -->
             <div class="doctor-photo">
-                <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят">
+                <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна">
                 <button class="btn btn-primary appointment-btn">Записаться на приём</button>
             </div>
 
             <!-- Информация о враче -->
             <div class="doctor-info">
-                <h1>Хан<br>Умар Хаят</h1>
-                <p class="doctor-position">Главный врач, уролог-андролог</p>
+                <h1>Нудельман<br>Наталия Федоровна</h1>
+                <p class="doctor-position">Невролог</p>
                 <div class="doctor-experience">
                     <div class="experience-item">
-                        <span class="experience-number">25</span>
+                        <span class="experience-number">30</span>
                         <span class="experience-text">лет опыта</span>
                     </div>
                     <div class="experience-item">
-                        <span class="experience-number">5000+</span>
-                        <span class="experience-text">пациентов</span>
+                        <span class="experience-number">от 2500 ₽</span>
+                        <span class="experience-text">стоимость приёма</span>
                     </div>
                 </div>
             </div>
@@ -58,16 +58,20 @@
 
         <!-- Специализация -->
         <div class="specialization-card">
-            <h2>Специализация</h2>
+            <h2>Профиль лечения</h2>
             <div class="specialization-content">
-                <p>Хан Умар Хаят постоянно посещает семинары в области хирургии и урологии в Пакистане, ОАЭ, Саудовской Аравии. Участвует в конференциях европейских и американских обществ урологов в режиме он-лайн.</p>
-                <p>Хан Умар Хаят является членом Российской Ассоциации Урологов и Европейской Ассоциации Урологов.</p>
-                <p><strong>Опыт работы в области высоких технологий по урологии-андрологии — 16 лет.</strong></p>
+                <ul class="treatment-profile">
+                    <li>Остеохондроз</li>
+                    <li>Шейный спондилоартроз</li>
+                    <li>Межпозвонковая грыжа</li>
+                    <li>Радикулит (радикулопатия)</li>
+                    <li>Остеопороз</li>
+                </ul>
             </div>
             <div class="specialization-badges">
-                <span class="badge">Российская Ассоциация Урологов</span>
-                <span class="badge">Европейская Ассоциация Урологов</span>
-                <span class="badge">Высокие технологии</span>
+                <span class="badge">Невролог</span>
+                <span class="badge">Мануальный терапевт</span>
+                <span class="badge">Физиотерапевт</span>
             </div>
         </div>
     </div>
@@ -105,7 +109,7 @@
                         <span class="new-price">6 000 ₽</span>
                         <span class="old-price">7 200 ₽</span>
                     </div>
-                    <h3 class="promotion-title">CHECK UP<br>«Репродуктивность»</h3>
+                    <h3 class="promotion-title">CHECK UP<br>«Неврологический»</h3>
                 </div>
             </div>
             {% endfor %}
@@ -130,57 +134,45 @@
                 <div class="accordion-content">
                     <div class="education-timeline">
                         <div class="timeline-item">
-                            <div class="timeline-year">1994 - 2000 г.</div>
+                            <div class="timeline-year">1994 г.</div>
                             <div class="timeline-content">
-                                <p>Учился в Ижевской Медицинской Академии по специальности «Лечебное дело».</p>
+                                <p>Чувашский государственный университет им. И.Н. Ульянова, специальность "Лечебное дело" (базовое образование)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2000 - 2003 г.</div>
+                            <div class="timeline-year">1995 г.</div>
                             <div class="timeline-content">
-                                <p>Прошел клиническую ординатуру Международного уровня (Residency in Surgery) в г. Ижевске. Работал врачом-хирургом на базе Медсанчасти №1 в г. Ижевск.</p>
+                                <p>Республиканская больница, г. Чебоксары, специальность "Неврология" (интернатура)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2003 г.</div>
+                            <div class="timeline-year">2002 г.</div>
                             <div class="timeline-content">
-                                <p>После окончании ординатуры приехал в г. Набережные Челны, где был назначен заведующим хирургического отделения поликлиники №7.</p>
+                                <p>Приволжский исследовательский медицинский университет, "Неврология" (повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2004 г.</div>
+                            <div class="timeline-year">2007 г.</div>
                             <div class="timeline-content">
-                                <p>Получил сертификат по Урологии. Работал врачом урологом в Госпитале МСЧ МВД по Республике Татарстан г. Набережные Челны.</p>
+                                <p>Российская медицинская академия последипломного образования (РМАПО), "Неврология" (повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2010 г.</div>
+                            <div class="timeline-year">2008 г.</div>
                             <div class="timeline-content">
-                                <p>Работал в КДЦ «Авицена» заведующим урологическим отделением.</p>
+                                <p>Приволжский исследовательский медицинский университет, "Физиотерапия" (циклы переподготовки)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2013 г.</div>
+                            <div class="timeline-year">2012 г.</div>
                             <div class="timeline-content">
-                                <p>Прошел обучение по малоинвазивным технологиям в урологии в г. Тель-Авив (Израиль).</p>
+                                <p>Российская медицинская академия последипломного образования (РМАПО), "Неврология" (повышение квалификации)</p>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-year">2014 г.</div>
+                            <div class="timeline-year">2017 г.</div>
                             <div class="timeline-content">
-                                <p>Получил Сертификат участника мастер-класса «Малоинвазивные урологические технологии» г.Новосибирск. Участвовал в Международной конференции по Урологии в г. Стамбул (Турция).</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2015 г.</div>
-                            <div class="timeline-content">
-                                <p>Получил Диплом «Организация здравоохранения и общественное здоровье».</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2016 г.</div>
-                            <div class="timeline-content">
-                                <p>Прошел первичную специализацию и получил диплом по Урологии.</p>
+                                <p>Академия медицинской кинезиологии и мануальной терапии, "Мануальная терапия" (циклы переподготовки)</p>
                             </div>
                         </div>
                     </div>
@@ -190,24 +182,38 @@
             <!-- Профессиональная деятельность -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3>Профессиональная деятельность</h3>
+                    <h3>Опыт работы</h3>
                     <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 15L12 9L6 15" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <div class="accordion-content">
-                    <ul class="activity-list">
-                        <li>Опыт работы в области высоких технологий по урологии-андрологии-16 лет.</li>
-                        <li>Получил образование в Высшей Английской Школе в Пакистане.</li>
-                        <li>Является членом Российской Ассоциции Урологов и Европейской Ассоциации Урологов.</li>
-                        <li>Учился в Ижевской Медицинской Академии по специальности « Лечебное дело».</li>
-                        <li>Награжден Орденом « За верность Родине и преданность народу»</li>
-                        <li>Имеет Почетную Грамоту в области здравоохранения.</li>
-                        <li>Прошел обучение по малоинвазивным технологиям в урологии в г. Тель-Авив (Израиль).</li>
-                        <li>Получил Сертификат участника мастер-класса «Малоинвазивные урологические технологии» г. Новосибирск.</li>
-                        <li>Участвовал в Международной конференции по Урологии в г. Стамбул (Турция). Постоянно посещаю семинары в области хирургии и урологии в Пакистане, ОАЭ, Саудовской Аравии.</li>
-                        <li>Участвует в конференциях европейских и америк��нских обществ урологов в режиме он-лайн.</li>
-                    </ul>
+                    <div class="education-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2019 — 2020</div>
+                            <div class="timeline-content">
+                                <p>«Клиника Сахбиевых», врач-невролог</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2013 — 2022</div>
+                            <div class="timeline-content">
+                                <p>ГАУЗ МЗ РТ «Городская больница №5», врач-невролог</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2013 г.</div>
+                            <div class="timeline-content">
+                                <p>ГАУЗ РТ БСМП, г.Набережные Челны, врач-невролог</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1995 — 2013</div>
+                            <div class="timeline-content">
+                                <p>«Республиканская клиническая больница», г.Чебоксары, врач-невролог</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -221,18 +227,17 @@
                 </div>
                 <div class="accordion-content">
                     <div class="achievements-section">
-                        <h4>Награды:</h4>
-                        <ul>
-                            <li>Хан Умар Хаят в 2015 году награжден Орденом «За верность Родине и преданность народу» имеет Почетные Грамоты в области здравоохранения.</li>
-                        </ul>
-
                         <h4>Сертификаты:</h4>
                         <ul>
-                            <li>Сертификат специалиста 031604 0006021 Рег.№4462 г.Казань 2015.г</li>
-                            <li>Удостоверение о повышении квалификации 040000008530 Рег.№5681 г.Казань 2015.г</li>
-                            <li>Диплом о пофессиональной переподготовке 180000111125 Рег.№16-70 г.Казань 2016.г</li>
-                            <li>Сертификат специалиста 0116180476350 Регистрационнай №16-70 г.Казань 2016.г</li>
-                            <li>В 2020 году Хан Умар Хаят избран Член-Корреспондентом Академии информатизации Республики Татарстан</li>
+                            <li>Сертификат специалиста по неврологии</li>
+                            <li>Сертификат по мануальной терапии</li>
+                            <li>Сертификат по физиотерапии</li>
+                        </ul>
+
+                        <h4>Награды:</h4>
+                        <ul>
+                            <li>Почетная грамота Министерства здравоохранения Чувашской Республики</li>
+                            <li>Лучший невролог года (2015)</li>
                         </ul>
                     </div>
                 </div>
@@ -247,23 +252,23 @@
         <h2>Основные направления деятельности</h2>
         <div class="directions-grid">
             <div class="direction-card">
-                <h3>Урологические операции</h3>
-                <p>Малоинвазивные хирургические вмешательства</p>
+                <h3>Диагностика</h3>
+                <p>Комплексное обследование неврологических заболеваний</p>
                 <div class="direction-number">1</div>
             </div>
             <div class="direction-card">
-                <h3>Андрологическое лечение</h3>
-                <p>Диагностика и лечение мужских заболеваний</p>
+                <h3>Лечение остеохондроза</h3>
+                <p>Современные методы терапии заболеваний позвоночника</p>
                 <div class="direction-number">2</div>
             </div>
             <div class="direction-card">
-                <h3>Ударно-волновая терапия</h3>
-                <p>Современные методы лечения</p>
+                <h3>Мануальная терапия</h3>
+                <p>Безоперационное лечение позвоночника и суставов</p>
                 <div class="direction-number">3</div>
             </div>
             <div class="direction-card">
-                <h3>Консультативная помощь</h3>
-                <p>Экспертные консультации и диагностика</p>
+                <h3>Физиотерапия</h3>
+                <p>Восстановительное лечение после неврологических заболеваний</p>
                 <div class="direction-number">4</div>
             </div>
         </div>
@@ -284,25 +289,16 @@
         </div>
 
         <div class="specialists-grid">
-            <div class="specialist-card">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-7.png' %}" alt="Галимов Ильсур Ильсиярович">
-                    <button class="btn btn-primary small-btn">Записаться</button>
-                </div>
-                <div class="specialist-info">
-                    <h3>Галимов<br>Ильсур Ильсиярович</h3>
-                    <p class="specialist-position">Уролог, андролог</p>
-                </div>
-            </div>
+
 
             <div class="specialist-card">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-8.png' %}" alt="Мусаев Магомед Садрудинович">
+                    <img src="{% static 'images/specialist-9.png' %}" alt="Тякин Валерий Петрович">
                     <button class="btn btn-primary small-btn">Записаться</button>
                 </div>
                 <div class="specialist-info">
-                    <h3>Мусаев<br>Магомед Садрудинович</h3>
-                    <p class="specialist-position">Уролог, хирург</p>
+                    <h3>Тякин<br>Валерий Петрович</h3>
+                    <p class="specialist-position">Невролог</p>
                 </div>
             </div>
         </div>
