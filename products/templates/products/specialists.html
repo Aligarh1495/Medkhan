@@ -1,7 +1,7 @@
 {% extends 'products/base.html' %}
 {% load static %}
 
-{% block title %}Врачи-специалисты клиники МедХан в Набережных Челнах{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block meta_description %}
 <meta name="description" content="Опытные врачи-специалисты клиники МедХан: урологи, гинекологи, неврологи, терапевты. Запись на прием онлайн. Набережные Челны, 52-й комплекс, 20А">
@@ -145,7 +145,11 @@
         </div>
 
         <div class="specialists-grid" role="list" aria-label="Список врачей-специалистов">
-            <article class="specialist-card" data-gender="female" data-specialization="neurologist" role="listitem">
+            <article class="specialist-card" data-gender="female" data-specialization="neurologist"
+         data-doctor-name="Нудельман<br>Наталия Федоровна"
+         data-doctor-position="Врач-невролог"
+         data-doctor-image="{% static 'images/specialist-1.png' %}"
+         data-services='[{"name":"Врач-невролог","price":"от 1500 ₽"}]' role="listitem">
                 <div class="specialist-image">
                     <a href="{% url 'NudelmanNatalia' %}" aria-label="Профиль врача Нудельман Наталия Федоровна">
                         <img src="{% static 'images/specialist-1.png' %}" alt="Фото врача Нудельман Наталия Федоровна, невролог" loading="lazy">
@@ -159,7 +163,11 @@
                 </div>
             </article>
 
-            <article class="specialist-card" data-gender="male" data-specialization="urologist" role="listitem">
+            <article class="specialist-card" data-gender="male" data-specialization="urologist"
+         data-doctor-name="Хан<br>Умар Хаят"
+         data-doctor-position="Андролог, главный врач, уролог"
+         data-doctor-image="{% static 'images/specialist-2.png' %}"
+         data-services='[{"name":"Андролог","price":"от 1500 ₽"},{"name":"Уролог","price":"от 1500 ₽"}]' role="listitem">
                 <div class="specialist-image">
                     <a href="{% url 'HanYmar' %}" aria-label="Профиль врача Хан Умар Хаят">
                         <img src="{% static 'images/specialist-2.png' %}" alt="Фото врача Хан Умар Хаят, андролог, главный врач, уролог" loading="lazy">
@@ -173,7 +181,11 @@
                 </div>
             </article>
 
-            <article class="specialist-card" data-gender="female" data-specialization="gynecologist" role="listitem">
+            <article class="specialist-card" data-gender="female" data-specialization="gynecologist"
+         data-doctor-name="Хан<br>Тюльпан Тимергалиевна"
+         data-doctor-position="Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог"
+         data-doctor-image="{% static 'images/specialist-3.png' %}"
+         data-services='[{"name":"Акушер-гинеколог","price":"от 1500 ₽"},{"name":"Врач УЗИ","price":"от 1500 ₽"}]' role="listitem">
                 <div class="specialist-image">
                     <a href="{% url 'HanTulpan' %}" aria-label="Профиль врача Хан Тюльпан Тимергалиевна">
                         <img src="{% static 'images/specialist-3.png' %}" alt="Фото врача Хан Тюльпан Тимергалиевна, акушер-гинеколог, врач УЗИ" loading="lazy">
@@ -187,7 +199,11 @@
                 </div>
             </article>
 
-            <article class="specialist-card" data-gender="female" data-specialization="therapist" role="listitem">
+            <article class="specialist-card" data-gender="female" data-specialization="therapist"
+         data-doctor-name="Башарова<br>Альбина Шарипяновна"
+         data-doctor-position="Врач УЗИ, врач функциональной диагностики, кардиолог, терапевт"
+         data-doctor-image="{% static 'images/specialist-4.png' %}"
+         data-services='[{"name":"Врач УЗИ","price":"от 2500 ₽"},{"name":"Врач функциональной диагностики","price":"от 2500 ₽"},{"name":"Кардиолог","price":"от 2500 ₽"},{"name":"Терапевт","price":"от 2500 ₽"}]' role="listitem">
                 <div class="specialist-image">
                     <a href="{% url 'BasharovaAlena' %}" aria-label="Профиль врача Башарова Альбина Шарипяновна">
                         <img src="{% static 'images/specialist-4.png' %}" alt="Фото врача Башарова Альбина Шарипяновна, врач УЗИ, кардиолог, терапевт" loading="lazy">
@@ -201,7 +217,11 @@
                 </div>
             </article>
 
-            <article class="specialist-card" data-gender="male" data-specialization="surgeon" role="listitem">
+            <article class="specialist-card" data-gender="male" data-specialization="surgeon"
+         data-doctor-name="Мартьянов<br>Иван Сергеевич"
+         data-doctor-position="Хирург"
+         data-doctor-image="{% static 'images/specialist-5.png' %}"
+         data-services='[{"name":"Хирург","price":"от 1500 ₽"}]' role="listitem">
                 <div class="specialist-image">
                     <img src="{% static 'images/specialist-5.png' %}" alt="Фото врача Мартьянов Иван Сергеевич, хирург" loading="lazy">
                     <div class="experience-badge">Стаж 6 лет</div>
@@ -213,7 +233,11 @@
                 </div>
             </article>
 
-            <article class="specialist-card" data-gender="male" data-specialization="proctologist" role="listitem">
+            <article class="specialist-card" data-gender="male" data-specialization="proctologist"
+         data-doctor-name="Юлдашев<br>Фарход Талибович"
+         data-doctor-position="Проктолог, эндоскопист"
+         data-doctor-image="{% static 'images/specialist-6.png' %}"
+         data-services='[{"name":"Проктолог","price":"от 1500 ₽"},{"name":"Эндоскопист","price":"от 1500 ₽"}]' role="listitem">
                 <div class="specialist-image">
                     <a href="{% url 'Uldashev' %}" aria-label="Профиль врача Юлдашев Фарход Талибович">
                         <img src="{% static 'images/specialist-6.png' %}" alt="Фото врача Юлдашев Фарход Талибович, проктолог, эндоскопист" loading="lazy">
@@ -353,6 +377,34 @@
 <script>
 function openAppointmentModal(button) {
     const modal = document.getElementById('appointmentModal');
+    const card = button.closest('.specialist-card');
+
+    // Получаем данные врача
+    const doctorName = card.dataset.doctorName;
+    const doctorPosition = card.dataset.doctorPosition;
+    const doctorImage = card.dataset.doctorImage;
+    const services = JSON.parse(card.dataset.services || '[]');
+
+    // Обновляем информацию в модальном окне
+    const doctorAvatar = modal.querySelector('.doctor-avatar');
+    const doctorNameElement = modal.querySelector('.doctor-details h4');
+    const doctorPositionElement = modal.querySelector('.doctor-details p');
+    const servicesContainer = modal.querySelector('.services-prices');
+
+    if (doctorAvatar) doctorAvatar.src = doctorImage;
+    if (doctorNameElement) doctorNameElement.innerHTML = doctorName;
+    if (doctorPositionElement) doctorPositionElement.textContent = doctorPosition;
+
+    // Обновляем список услуг
+    if (servicesContainer && services.length > 0) {
+        servicesContainer.innerHTML = services.map(service =>
+            `<div class="service-item" role="listitem">
+                <span>${service.name}</span>
+                <span>${service.price}</span>
+            </div>`
+        ).join('');
+    }
+
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
 
