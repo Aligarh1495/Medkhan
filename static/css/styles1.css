@@ -247,7 +247,7 @@
             right: 0;
             width: 100%;
             height: 100%;
-            background-image: url('{% static 'images/ГЛАВНАЯ.png' %}');
+            background-image: url('images/ГЛАВНАЯ.png');
             background-size: cover;
             background-position: right center;
             z-index: 1;
@@ -704,7 +704,7 @@
             right: 0;
             width: 70%;
             height: 100%;
-            background-image: url('{% static 'images/stocks2.png' %}');
+            background-image: url('images/stocks2.png');
             background-size: contain;
             background-position: right center;
             background-repeat: no-repeat;
@@ -767,7 +767,7 @@
 
         .specialist-photo-container {
             position: relative;
-            height: 200px;
+            height: 250px;
             background-color: var(--background-green);
             overflow: hidden;
         }
@@ -775,7 +775,8 @@
         .specialist-photo {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
         }
 
         .price-badge {
@@ -916,6 +917,7 @@
             text-decoration: none;
             color: var(--dark-text);
             font-size: 14px;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
 
@@ -1237,49 +1239,54 @@
         }
 
         /* Articles Grid */
-        .magazine-articles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
+         .magazine-articles-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 30px;
+          margin-bottom: 60px;
         }
 
         .magazine-article-card {
-            background-color: var(--light-green);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: transform 0.3s ease;
+          background: var(--light-green);
+          border-radius: var(--border-radius);
+          padding: 30px;
+          transition: transform 0.3s ease;
+          cursor: pointer;
+          height: fit-content;
         }
 
         .magazine-article-card:hover {
-            transform: translateY(-5px);
+          transform: translateY(-5px);
         }
 
         .magazine-article-image {
-            height: 200px;
-            overflow: hidden;
+          height: 200px;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
         }
 
         .magazine-article-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .magazine-article-content {
-            padding: 20px;
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
         }
 
         .magazine-article-content h2 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 15px;
+          color: var(--dark-text);
+          line-height: 1.4;
         }
 
         .magazine-article-content p {
-            font-size: 14px;
-            color: var(--light-text);
-            line-height: 1.6;
+          color: var(--dark-text);
+          font-size: 14px;
+          line-height: 1.6;
+          opacity: 0.8;
         }
 
         /* Info Section */
@@ -1742,7 +1749,7 @@
             }
 
             .specialist-photo-container {
-                height: 150px;
+                height: 180px;
             }
 
             .specialist-info {
@@ -1881,9 +1888,19 @@
             }
 
             .magazine-article-image {
-                height: 150px;
+              height: 200px;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
             }
 
+            .magazine-article-image img {
+              max-width: 100%;
+              max-height: 100%;
+              object-fit: contain;
+            }
             .magazine-article-content {
                 padding: 15px;
             }
@@ -1993,7 +2010,7 @@
             }
 
             .specialist-photo-container {
-                height: 120px;
+                height: 150px;
             }
 
             .promo-content {

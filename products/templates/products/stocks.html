@@ -36,28 +36,31 @@
         <div class="promotions-grid">
             <!-- Главная акция с фото -->
             <div class="promotion-card featured">
-                <div class="promotion-background">
-                    <img src="{% static 'images/woman-profile.png' %}" alt="Женщина в профиль" class="featured-image">
-                </div>
-                <div class="promotion-content">
-                    <div class="promotion-header">
-                        <div class="gender-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
-                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="top-badges">
-                            <div class="validity">до 5 марта</div>
-                            <div class="discount">-15%</div>
-                        </div>
+                <a href="{% url 'BackPain' %}">
+                    <div class="promotion-background">
+                        <img src="{% static 'images/woman-profile.png' %}" alt="Женщина в профиль" class="featured-image">
                     </div>
-                    <div class="price">
-                        <span class="current-price">14 730 ₽</span>
-                        <span class="old-price">16 375 ₽</span>
+                    <div class="promotion-content">
+                        <div class="promotion-header">
+                            <div class="gender-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                    <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="top-badges">
+                                <div class="validity">до 5 марта</div>
+                                <div class="discount">-15%</div>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span class="current-price">14 730 ₽</span>
+                            <span class="old-price">16 375 ₽</span>
+                        </div>
+                        <h3>CHECK UP<br>«Боль в спине<br>Расширенный»</h3>
                     </div>
-                    <h3>CHECK UP<br>«Боль в спине<br>Расширенный»</h3>
-                </div>
+                </a>
+
             </div>
 
             <!-- Акция 2 -->

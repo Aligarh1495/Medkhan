@@ -12,15 +12,15 @@ def services(request):
         'products': [
             {
                 'image': '/static/images/telik.png',
-                'name': 'Диагностика',
+                'name': 'Консультации и амбулаторный приём',
             },
             {
                 'image': '/static/images/tabls.png',
-                'name': 'Общая медицина',
+                'name': 'Эстетическая гинекология и лазерное лечение',
             },
             {
                 'image': '/static/images/plus.png',
-                'name': 'Восстановительная медицина',
+                'name': 'Диагностика',
             },
             {
                 'image': '/static/images/smile.png',
@@ -28,7 +28,7 @@ def services(request):
             },
             {
                 'image': '/static/images/baby.png',
-                'name': 'Медицина для детей',
+                'name': 'Оперативная гинекология',
             },
             {
                 'image': '/static/images/ножницы_1.png',
