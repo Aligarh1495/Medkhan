@@ -27,11 +27,11 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="{% url 'services' %}">Услуги</a></li>
-                    <li><a href="{% url 'stocks' %}" >Акции</a></li>
-                    <li><a href="{% url 'specialists' %}">Специалисты</a></li>
-                    <li><a href="#reviews">Отзывы</a></li>
-                    <li><a href="{% url 'magazine' %}">Журнал</a></li>
+                    <li><a href="{% url 'services' %}" {% if request.path == '/services/' %}class="active"{% endif %}>Услуги</a></li>
+                    <li><a href="{% url 'stocks' %}" {% if request.path == '/stocks/' %}class="active"{% endif %}>Акции</a></li>
+                    <li><a href="{% url 'specialists' %}" {% if request.path == '/specialists/' %}class="active"{% endif %}>Специалисты</a></li>
+                    <li><a href="#reviews" {% if request.path == '/reviews/' %}class="active"{% endif %}>Отзывы</a></li>
+                    <li><a href="{% url 'magazine' %}" {% if request.path == '/magazine/' %}class="active"{% endif %}>Журнал</a></li>
                 </ul>
             </nav>
             <a href="#appointment" class="btn btn-primary">Записаться</a>
