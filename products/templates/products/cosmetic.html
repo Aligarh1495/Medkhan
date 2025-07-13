@@ -11,17 +11,17 @@
 
 <div class="container">
     <div class="breadcrumbs">
-        <a href="/">Главная</a> / <a href="/services">Услуги</a> / <a href="/rehabilitation">Восстановительная медицина</a> / <span>Косметология</span>
+        <a href="/">Главная</a> / <a href="/services">Услуги</a> / <a href="{% url 'dynamic_department' department.id %}">{{ department.name }}</a> / <span>{{ service.name }}</span>
     </div>
 </div>
 
-<!-- Секция косметологии -->
+<!-- Секция услуги -->
 <section class="cosmetology-hero">
     <div class="container">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Косметология</h1>
-                <p>Все процедуры проводим в клинике:<br>быстро, качественно, надежно</p>
+                <h1>{{ service.name }}</h1>
+                <p>{{ service.description|truncatewords:20 }}</p>
                 <div class="hero-buttons">
                     <a href="#services-prices" class="btn btn-primary">Услуги и цены</a>
                     <a href="#specialists" class="btn btn-outline">Специалисты</a>
@@ -43,8 +43,15 @@
 <!-- Преимущества -->
 <section class="advantages">
     <div class="container">
-        <h2>Преимущество современных методов косметологии</h2>
+        <h2>Преимущество современных методов {{ service.name|lower }}</h2>
         <div class="advantages-grid">
+            {% for advantage in advantages_list %}
+            <div class="advantage-card">
+                <div class="advantage-number">{{ forloop.counter }}</div>
+                <h3>{{ advantage }}</h3>
+            </div>
+            {% empty %}
+            <!-- Если нет преимуществ в БД, показываем заглушки -->
             <div class="advantage-card">
                 <div class="advantage-number">1</div>
                 <h3>Преимущество</h3>
@@ -61,6 +68,7 @@
                 <div class="advantage-number">4</div>
                 <h3>Преимущество</h3>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -71,15 +79,18 @@
         <div class="about-service-grid">
             <div class="about-text">
                 <h2>Об услуге</h2>
-                <p>Косметология - это область медицины, которая изучает природу возникновения эстетических проблем и методы коррекции. Она делится на терапевтическую, в которой используются разнообразные косметические препараты, инъекционные и физиотерапевтические процедуры, и хирургическую, при которой решаются вопросы путем операций.</p>
-                <p>В большинстве случаев запись к врачу - добровольное желание человека, но важно посетить специалиста, когда появились бородавки угревая сыпь или трещины на подошвах ног.</p>
+                <p>{{ service.description }}</p>
             </div>
             <div class="indications-card">
                 <h3>Показания к проведению процедуры:</h3>
                 <ul class="indications-list">
-                    <li> Показание</li>
-                    <li> Показание</li>
-                    <li> Показание</li>
+                    {% for indication in indications_list %}
+                    <li>{{ indication }}</li>
+                    {% empty %}
+                    <li>Показание</li>
+                    <li>Показание</li>
+                    <li>Показание</li>
+                    {% endfor %}
                 </ul>
                 <a href="#" class="all-link">
                     Все показания
@@ -90,8 +101,12 @@
 
                 <h3>Противопоказания к проведению процедуры:</h3>
                 <ul class="contraindications-list">
-                    <li> Противопоказание</li>
-                    <li> Противопоказание</li>
+                    {% for contraindication in contraindications_list %}
+                    <li>{{ contraindication }}</li>
+                    {% empty %}
+                    <li>Противопоказание</li>
+                    <li>Противопоказание</li>
+                    {% endfor %}
                 </ul>
                 <a href="#" class="all-link">
                     Все противопоказания
@@ -113,18 +128,18 @@
                 <div class="price-table-service">Услуга</div>
                 <div class="price-table-cost">Стоимость</div>
             </div>
+            {% if service.cost %}
             <div class="price-table-row">
-                <div class="price-table-service">Консультация косметолога первичная</div>
-                <div class="price-table-cost">5 000 ₽</div>
+                <div class="price-table-service">{{ service.name }}</div>
+                <div class="price-table-cost">{{ service.cost }} ₽</div>
             </div>
+            {% else %}
+            <!-- Заглушка если нет цены -->
             <div class="price-table-row">
-                <div class="price-table-service">Консультация косметолога вторичная</div>
-                <div class="price-table-cost">7 000 ₽</div>
+                <div class="price-table-service">Консультация специалиста</div>
+                <div class="price-table-cost">По запросу</div>
             </div>
-            <div class="price-table-row">
-                <div class="price-table-service">Контурная пластика аутоплазмой (1 пробирка)</div>
-                <div class="price-table-cost">8 000 ₽</div>
-            </div>
+            {% endif %}
         </div>
         <div class="appointment-btn-container">
             <a href="#appointment" class="btn btn-primary">Записаться</a>
@@ -132,7 +147,7 @@
     </div>
 </section>
 
-<!-- Фотогалерея -->
+<!-- Фотогалерея - остается без изменений -->
 <section class="photo-gallery">
     <div class="container">
         <h2>Фотогалерея</h2>
@@ -156,16 +171,31 @@
     <div class="container">
         <h2>Специалисты</h2>
         <div class="specialists-grid">
+            {% for doctor in doctors %}
             <div class="specialist-card">
                 <div class="specialist-image">
-                    <img src="{% static 'images/gallery4.png' %}" alt="Шайхутдинов Рафик Габдулхаевич">
+                    <img src="{% static 'images/gallery4.png' %}" alt="{{ doctor.full_name }}">
+                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                </div>
+                <div class="specialist-info">
+                    <h3>{{ doctor.full_name }}</h3>
+                    <p class="specialist-position">{{ doctor.category|default:"Специалист" }}</p>
+                    <p class="specialist-experience">Опыт: {{ doctor.experience_years }} лет</p>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Заглушка если нет врачей -->
+            <div class="specialist-card">
+                <div class="specialist-image">
+                    <img src="{% static 'images/gallery4.png' %}" alt="Специалист">
                     <div class="price-badge">Услуги от 1500 ₽</div>
                 </div>
                 <div class="specialist-info">
-                    <h3>Шайхутдинов<br>Рафик Габдулхаевич</h3>
-                    <p class="specialist-position">Дерматовенеролог,<br>дерматолог, косметолог</p>
+                    <h3>Специалист</h3>
+                    <p class="specialist-position">{{ department.name }}</p>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>

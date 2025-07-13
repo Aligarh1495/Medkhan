@@ -151,7 +151,7 @@
                     <article class="service-card" role="listitem">
                         <div class="service-content">
                             <h3>{{ product.name }}</h3>
-                            <a href="{% url 'RestorativeMedicene' %}" class="circle-btn" aria-label="Подробнее о {{ product.name }}">
+                            <a href="{% url 'dynamic_department' product.department_id %}" class="circle-btn" aria-label="Подробнее о {{ product.name }}">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>

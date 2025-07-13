@@ -3,6 +3,7 @@ from django.db import models
 # Информацию об отделениях клиники (эндоскопия, гинекология, хирургия и т.д.)
 class Department(models.Model):
     name = models.CharField(max_length=128)
+    # slug = models.SlugField(unique=True, blank=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -11,6 +12,7 @@ class Department(models.Model):
 class Service(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='services')
     name = models.CharField(max_length=256)
+    # slug = models.SlugField(blank=True)
     description = models.TextField()
     advantages = models.TextField()
     indications = models.TextField()

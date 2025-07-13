@@ -155,53 +155,89 @@
     <div class="services-grid" role="list" aria-label="Список популярных медицинских услуг">
         <!-- Урология/Андрология -->
         <article class="service-card" role="listitem">
-            <div class="service-content">
-                <h3>Урология/<br>Андрология</h3>
-                <img src="{% static 'images/почки_1.png' %}" alt="Иконка урологии и андрологии" class="service-icon" loading="lazy">
-            </div>
+            {% if departments_dict.Урология %}
+            <a href="{% url 'dynamic_department' departments_dict.Урология.id %}">
+            {% endif %}
+                <div class="service-content">
+                    <h3>Урология/<br>Андрология</h3>
+                    <img src="{% static 'images/почки_1.png' %}" alt="Иконка урологии и андрологии" class="service-icon" loading="lazy">
+                </div>
+            {% if departments_dict.Урология %}
+            </a>
+            {% endif %}
         </article>
 
         <!-- Гинекология -->
         <article class="service-card green-bg" role="listitem">
-            <div class="service-content">
-                <h3>Гинекология</h3>
-                <img src="{% static 'images/ромашка.png' %}" alt="Иконка гинекологии" class="service-icon" loading="lazy">
-            </div>
+            {% if departments_dict.Гинекология %}
+            <a href="{% url 'dynamic_department' departments_dict.Гинекология.id %}">
+            {% endif %}
+                <div class="service-content">
+                    <h3>Гинекология</h3>
+                    <img src="{% static 'images/ромашка.png' %}" alt="Иконка гинекологии" class="service-icon" loading="lazy">
+                </div>
+            {% if departments_dict.Гинекология %}
+            </a>
+            {% endif %}
         </article>
 
         <!-- Неврология -->
         <article class="service-card" role="listitem">
-            <div class="service-content">
-                <h3>Неврология</h3>
-                <img src="{% static 'images/нервы_1.png' %}" alt="Иконка неврологии" class="service-icon" loading="lazy">
-            </div>
+            {% if departments_dict.Неврология %}
+            <a href="{% url 'dynamic_department' departments_dict.Неврология.id %}">
+            {% endif %}
+                <div class="service-content">
+                    <h3>Неврология</h3>
+                    <img src="{% static 'images/нервы_1.png' %}" alt="Иконка неврологии" class="service-icon" loading="lazy">
+                </div>
+            {% if departments_dict.Неврология %}
+            </a>
+            {% endif %}
         </article>
 
         <!-- Гастроэнтерология -->
         <article class="service-card green-bg" role="listitem">
-            <div class="service-content">
-                <h3>Гастроэнтерология</h3>
-                <img src="{% static 'images/желудок.png' %}" alt="Иконка гастроэнтерологии" class="service-icon" loading="lazy">
-            </div>
+            {% if departments_dict.Гастроэнтерология %}
+            <a href="{% url 'dynamic_department' departments_dict.Гастроэнтерология.id %}">
+            {% endif %}
+                <div class="service-content">
+                    <h3>Гастроэнтерология</h3>
+                    <img src="{% static 'images/желудок.png' %}" alt="Иконка гастроэнтерологии" class="service-icon" loading="lazy">
+                </div>
+            {% if departments_dict.Гастроэнтерология %}
+            </a>
+            {% endif %}
         </article>
 
         <!-- Хирургия -->
         <article class="service-card" role="listitem">
-            <div class="service-content">
-                <h3>Хирургия</h3>
-                <img src="{% static 'images/ножницы_1.png' %}" alt="Иконка хирургии" class="service-icon" loading="lazy">
-            </div>
+            {% if departments_dict.Хирургия %}
+            <a href="{% url 'dynamic_department' departments_dict.Хирургия.id %}">
+            {% endif %}
+                <div class="service-content">
+                    <h3>Хирургия</h3>
+                    <img src="{% static 'images/ножницы_1.png' %}" alt="Иконка хирургии" class="service-icon" loading="lazy">
+                </div>
+            {% if departments_dict.Хирургия %}
+            </a>
+            {% endif %}
         </article>
 
         <!-- Проктология -->
         <article class="service-card" role="listitem">
-            <div class="service-content">
-                <h3>Проктология</h3>
-                <img src="{% static 'images/пончик_1.png' %}" alt="Иконка проктологии" class="service-icon" loading="lazy">
-            </div>
+            {% if departments_dict.Проктология %}
+            <a href="{% url 'dynamic_department' departments_dict.Проктология.id %}">
+            {% endif %}
+                <div class="service-content">
+                    <h3>Проктология</h3>
+                    <img src="{% static 'images/пончик_1.png' %}" alt="Иконка проктологии" class="service-icon" loading="lazy">
+                </div>
+            {% if departments_dict.Проктология %}
+            </a>
+            {% endif %}
         </article>
     </div>
-
+    <!-- Остальная часть секции остается без изменений -->
     <div class="checkup-section">
         <div class="checkup-content">
             <div class="checkup-text">

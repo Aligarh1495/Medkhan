@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="breadcrumbs">
-        <a href="/">Главная</a> / <a href="/services">Услуги</a> / <span>Восстановительная медицина</span>
+        <a href="/">Главная</a> / <a href="/services">Услуги</a> / <span>{{ department.name }}</span>
     </div>
 </div>
 
@@ -19,7 +19,7 @@
 <section class="rehabilitation-section" id="services">
     <div class="container">
         <div class="section-header">
-            <h1>Восстановительная медицина</h1>
+            <h1>{{ department.name }}</h1>
             <div class="search-bar">
                 <input type="text" placeholder="Поиск по названию услуги">
                 <button type="submit" class="search-icon">
@@ -32,93 +32,18 @@
         </div>
 
         <div class="services-grid">
+            {% for service in services %}
             <div class="service-card">
                 <div class="service-content">
-                    <h3>Косметология</h3>
-                    <a href="{% url 'cosmetic' %}" class="circle-btn">
+                    <h3>{{ service.name }}</h3>
+                    <a href="{% url 'dynamic_service' service.id %}" class="circle-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>
             </div>
-
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>Физиотерапия</h3>
-                    <a href="#" class="circle-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>Лучевая терапия</h3>
-                    <a href="#" class="circle-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>Процедурный кабинет</h3>
-                    <a href="#" class="circle-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>Ударно-волновая терапия</h3>
-                    <a href="#" class="circle-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>Лечебный массаж</h3>
-                    <a href="#" class="circle-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>Подготовка к беременности</h3>
-                    <a href="#" class="circle-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>Лечение ЗППП</h3>
-                    <a href="#" class="circle-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -183,6 +108,7 @@
     </div>
 </section>
 
+<!-- В секции специалистов замените на: -->
 <section class="specialists-section" id="specialists">
     <div class="container">
         <div class="section-header">
@@ -196,6 +122,20 @@
         </div>
 
         <div class="specialists-grid">
+            {% for doctor in doctors %}
+            <div class="specialist-card">
+                <div class="specialist-image">
+                    <img src="{% static 'images/specialist-1.png' %}" alt="{{ doctor.full_name }}">
+                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                </div>
+                <div class="specialist-info">
+                    <h3>{{ doctor.full_name }}</h3>
+                    <p class="specialist-position">{{ doctor.category|default:"Специалист" }}</p>
+                    <p class="specialist-experience">Опыт: {{ doctor.experience_years }} лет</p>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Статические карточки если нет врачей в БД -->
             <div class="specialist-card">
                 <div class="specialist-image">
                     <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна">
@@ -206,39 +146,7 @@
                     <p class="specialist-position">Врач-невролог</p>
                 </div>
             </div>
-
-            <div class="specialist-card">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят">
-                    <div class="price-badge">Услуги от 1500 ₽</div>
-                </div>
-                <div class="specialist-info">
-                    <h3>Хан<br>Умар Хаят</h3>
-                    <p class="specialist-position">Андролог, главный врач, уролог</p>
-                </div>
-            </div>
-
-            <div class="specialist-card">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна">
-                    <div class="price-badge">Услуги от 1500 ₽</div>
-                </div>
-                <div class="specialist-info">
-                    <h3>Хан<br>Тюльпан Тимергалиевна</h3>
-                    <p class="specialist-position">Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог</p>
-                </div>
-            </div>
-
-            <div class="specialist-card">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна">
-                    <div class="price-badge">Услуги от 1500 ₽</div>
-                </div>
-                <div class="specialist-info">
-                    <h3>Башарова<br>Альбина Шарипяновна</h3>
-                    <p class="specialist-position">Терапевт, главный специалист в сфере медицины</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

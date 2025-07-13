@@ -1,42 +1,102 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse
+from .models import Department, Service, Doctor, Specialty, DoctorSpecialty, DoctorService, Checkup, CheckupComponent
 
 
 def main(request):
+    # Получаем популярные отделения для главной страницы
+    popular_departments = Department.objects.filter(
+        name__in=[
+            'Урология', 'Гинекология', 'Неврология',
+            'Гастроэнтерология', 'Хирургия', 'Проктология'
+        ]
+    )
+
+    # Создаем словарь для быстрого поиска отделений по названию
+    departments_dict = {dept.name: dept for dept in popular_departments}
+
     context = {
         'title': 'MedKhan® - Главная',
+        'departments_dict': departments_dict,
     }
-    return render(request,'products/main.html',context)
+    return render(request, 'products/main.html', context)
+
+
 def services(request):
+    departments = Department.objects.prefetch_related('services').all()
+
+    products = []
+    for department in departments:
+        department_services = department.services.all()
+        if department_services.exists():
+            products.append({
+                'image': f'/static/images/{department.name.lower()}.png',
+                'name': department.name,
+                'description': department.description,
+                'services_count': department_services.count(),
+                'department_id': department.id  # Добавляем ID отделения
+            })
+
     context = {
         'title': 'Услуги - MedKhan®',
-        'products': [
-            {
-                'image': '/static/images/telik.png',
-                'name': 'Консультации и амбулаторный приём',
-            },
-            {
-                'image': '/static/images/tabls.png',
-                'name': 'Эстетическая гинекология и лазерное лечение',
-            },
-            {
-                'image': '/static/images/plus.png',
-                'name': 'Диагностика',
-            },
-            {
-                'image': '/static/images/smile.png',
-                'name': 'Лицо и тело',
-            },
-            {
-                'image': '/static/images/baby.png',
-                'name': 'Оперативная гинекология',
-            },
-            {
-                'image': '/static/images/ножницы_1.png',
-                'name': 'Хирургия',
-            },
-        ]
+        'products': products,
+        'departments': departments,
     }
-    return render(request,'products/services.html',context)
+    return render(request, 'products/services.html', context)
+
+
+from django.shortcuts import render, get_object_or_404
+from .models import Department, Service, Doctor, Specialty, DoctorSpecialty, DoctorService, Checkup, CheckupComponent
+
+
+# Все ваши существующие функции остаются без изменений...
+
+def dynamic_department(request, department_id):
+    """Динамическая страница отделения - использует шаблон RestorativeMedicene.html"""
+    department = get_object_or_404(Department, id=department_id)
+    services_list = Service.objects.filter(department=department)
+
+    # Получаем врачей этого отделения через DoctorService
+    doctors = Doctor.objects.filter(doctorservice__service__department=department).distinct()
+
+    context = {
+        'title': f'{department.name} - MedKhan®',
+        'department': department,
+        'services': services_list,
+        'doctors': doctors,
+    }
+    return render(request, 'products/RestorativeMedicene.html', context)
+
+
+def dynamic_service(request, service_id):
+    """Динамическая страница услуги - использует шаблон cosmetic.html"""
+    service = get_object_or_404(Service, id=service_id)
+
+    # Получаем врачей, которые предоставляют эту услугу через DoctorService
+    doctors = Doctor.objects.filter(doctorservice__service=service).distinct()
+
+    # Парсим преимущества, показания и противопоказания
+    advantages_list = []
+    if service.advantages:
+        advantages_list = [adv.strip() for adv in service.advantages.split('\n') if adv.strip()]
+
+    indications_list = []
+    if service.indications:
+        indications_list = [ind.strip() for ind in service.indications.split('\n') if ind.strip()]
+
+    contraindications_list = []
+    if service.contraindications:
+        contraindications_list = [contra.strip() for contra in service.contraindications.split('\n') if contra.strip()]
+
+    context = {
+        'title': f'{service.name} - MedKhan®',
+        'service': service,
+        'department': service.department,
+        'doctors': doctors,
+        'advantages_list': advantages_list,
+        'indications_list': indications_list,
+        'contraindications_list': contraindications_list,
+    }
+    return render(request, 'products/cosmetic.html', context)
 def stocks(request):
     context = {
         'title': 'Акции - MedKhan®'
