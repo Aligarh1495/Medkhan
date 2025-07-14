@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="breadcrumbs">
-        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'stocks' %}">Акции</a> / <span>CHECK UP «Боль в спине Расширенный»</span>
+        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'stocks' %}">Акции</a> / <span>{{ checkup.name }}</span>
     </div>
 </div>
 
@@ -20,10 +20,10 @@
     <div class="container">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>CHECK UP<br>«Боль в спине<br>Расширенный»</h1>
+                <h1>{{ checkup.name }}</h1>
                 <div class="price-block">
-                    <span class="current-price">14 730 ₽</span>
-                    <span class="old-price">16 375 ₽</span>
+                    <span class="current-price">{{ checkup.discounted_price }} ₽</span>
+                    <span class="old-price">{{ checkup.original_price }} ₽</span>
                 </div>
                 <a href="#appointment" class="btn btn-primary">
                     Записаться на приём
@@ -51,43 +51,25 @@
 <section class="about-promotion">
     <div class="container">
         <h2>Об акции</h2>
+        <p>{{ checkup.description }}</p>
+
         <div class="services-grid">
+            {% for category, components in components_by_category.items %}
             <div class="service-card">
-                <div class="service-number">01</div>
-                <h3>Консультация</h3>
+                <div class="service-number">{{ forloop.counter|stringformat:"02d" }}</div>
+                <h3>{{ category }}</h3>
                 <ul>
-                    <li>Консультация врача невролога-вертебролога</li>
-                    <li>Консультация врача невролога-остеопата</li>
+                    {% for component in components %}
+                    <li>{{ component.name }}</li>
+                    {% endfor %}
                 </ul>
             </div>
-            <div class="service-card">
-                <div class="service-number">02</div>
-                <h3>Лабораторная диагностика</h3>
-                <ul>
-                    <li>Клинический анализ крови с лейкоцитарной формулой</li>
-                    <li>Общий анализ мочи</li>
-                    <li>Глюкоза</li>
-                    <li>Биохимия крови</li>
-                    <li>Забор венозной крови</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <div class="service-number">03</div>
-                <h3>Ультразвуковая диагностика</h3>
-                <ul>
-                    <li>УЗИ органов брюшной полости</li>
-                    <li>УЗИ почек</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <div class="service-number">04</div>
-                <h3>Ударно-волновая терапия (3 сеанса)</h3>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Секция как получить скидку -->
+<!-- Секция как получить скидку (остается без изменений) -->
 <section class="discount-info">
     <div class="container">
         <h2>Как получить скидку?</h2>
@@ -147,6 +129,19 @@
     <div class="container">
         <h2>Врачи, участвующие в акции</h2>
         <div class="doctors-grid">
+            {% for doctor in doctors %}
+            <div class="doctor-card">
+                <div class="doctor-image">
+                    <img src="{% static 'images/specialist-1.png' %}" alt="{{ doctor.full_name }}">
+                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                </div>
+                <div class="doctor-info">
+                    <h3>{{ doctor.full_name }}</h3>
+                    <p>{{ doctor.category|default:"Специалист" }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Статические врачи если нет в БД -->
             <div class="doctor-card">
                 <div class="doctor-image">
                     <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна">
@@ -177,11 +172,12 @@
                     <p>Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог</p>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Секция контактной информации -->
+<!-- Секция контактной информации (остается без изменений) -->
 <section class="contact-form-section">
     <div class="container">
         <div class="contact-form-grid">

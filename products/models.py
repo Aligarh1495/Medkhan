@@ -53,11 +53,24 @@ class DoctorService(models.Model):
 
 # О комплексных чекапах
 class Checkup(models.Model):
+    GENDER_CHOICES = [
+        ('male', 'Мужской'),
+        ('female', 'Женский'),
+        ('child', 'Ребёнок'),
+    ]
+
     name = models.CharField(max_length=256)
     description = models.TextField()
     original_price = models.DecimalField(max_digits=10, decimal_places=2)
     discounted_price = models.DecimalField(max_digits=10, decimal_places=2)
     girls_discount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    gender = models.CharField(
+        max_length=10,
+        choices=GENDER_CHOICES,
+        null=True,  # Разрешает NULL значения в базе данных
+        blank=True, # Разрешает пустое значение в формах Django
+        help_text="Пол, для которого предназначен чекап (мужской, женский, ребёнок)"
+    )
 
     def __str__(self):
         return self.name

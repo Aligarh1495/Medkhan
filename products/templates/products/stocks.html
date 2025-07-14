@@ -9,6 +9,10 @@
     .phone-number {
         color: var(--dark-text) !important;
     }
+    .loading {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 </style>
 {% endblock %}
 
@@ -26,11 +30,11 @@
         <div class="section-header">
             <h1>АКЦИИ</h1>
             <div class="filter-dropdown">
-                <select>
-                    <option value="">Все</option>
-                    <option value="male">Мужской</option>
-                    <option value="female">Женский</option>
-                    <option value="all">Ребёнок</option>
+                <select id="genderFilter">
+                    <option value="" {% if current_filter == '' %}selected{% endif %}>Все</option>
+                    <option value="male" {% if current_filter == 'male' %}selected{% endif %}>Мужской</option>
+                    <option value="female" {% if current_filter == 'female' %}selected{% endif %}>Женский</option>
+                    <option value="child" {% if current_filter == 'child' %}selected{% endif %}>Ребёнок</option>
                 </select>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5 7.5L10 12.5L15 7.5" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -38,188 +42,123 @@
             </div>
         </div>
 
-        <div class="promotions-grid">
-            <!-- Главная акция с фото -->
-            <div class="promotion-card featured">
-                <a href="{% url 'BackPain' %}">
-                    <div class="promotion-background">
-                        <img src="{% static 'images/woman-profile.png' %}" alt="Женщина в профиль" class="featured-image">
-                    </div>
-                    <div class="promotion-content">
-                        <div class="promotion-header">
-                            <div class="gender-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
-                                    <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
+        <div class="promotions-grid" id="promotionsGrid">
+            {# Вручную рендерим первые 5 акций с уникальным дизайном #}
+            {% for checkup in initial_checkups_display %}
+                {% if forloop.counter == 1 %}
+                    {# Первая большая карточка с женщиной #}
+                    <div class="promotion-card featured">
+                        <a href="{% url 'dynamic_checkup' checkup.id %}">
+                            <div class="promotion-background">
+                                <img src="{% static 'images/woman-profile.png' %}" alt="{{ checkup.name }}" class="featured-image">
                             </div>
-                            <div class="top-badges">
-                                <div class="validity">до 5 марта</div>
-                                <div class="discount">-15%</div>
+                            <div class="promotion-content">
+                                <div class="promotion-header">
+                                    <div class="gender-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                            <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="top-badges">
+                                        <div class="validity">до 5 марта</div>
+                                        <div class="discount">-{{ checkup.discount_percent }}%</div>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <span class="current-price">{{ checkup.discounted_price }} ₽</span>
+                                    <span class="old-price">{{ checkup.original_price }} ₽</span>
+                                </div>
+                                <h3>CHECK UP<br>{{ checkup.name }}</h3>
                             </div>
-                        </div>
-                        <div class="price">
-                            <span class="current-price">14 730 ₽</span>
-                            <span class="old-price">16 375 ₽</span>
-                        </div>
-                        <h3>CHECK UP<br>«Боль в спине<br>Расширенный»</h3>
+                        </a>
                     </div>
-                </a>
+                {% elif forloop.counter == 2 %}
+                    {# Вторая карточка с зеленым абстрактным фоном #}
+                    <div class="promotion-card">
+                        <a href="{% url 'dynamic_checkup' checkup.id %}">
+                            <div class="promotion-background2"></div>
+                            <div class="promotion-content">
+                                <div class="promotion-header">
+                                    <div class="gender-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            {% if checkup.gender == 'female' %}
+                                            <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                            <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                                            {% elif checkup.gender == 'male' %}
+                                            <circle cx="12" cy="8" r="5" stroke="blue" stroke-width="2"/>
+                                            <path d="M15 9L18 6M18 6H15M18 6V9" stroke="blue" stroke-width="2" stroke-linecap="round"/>
+                                            {% else %}
+                                            <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                            <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                                            {% endif %}
+                                        </svg>
+                                    </div>
+                                    <div class="top-badges">
+                                        <div class="validity">до 5 марта</div>
+                                        <div class="discount">-{{ checkup.discount_percent }}%</div>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <span class="current-price">{{ checkup.discounted_price }} ₽</span>
+                                    <span class="old-price">{{ checkup.original_price }} ₽</span>
+                                </div>
+                                <h3>CHECK UP<br>{{ checkup.name }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                {% else %}
+                    {# Остальные карточки из первых 5 - белые окошки #}
+                    <div class="promotion-card">
+                        <a href="{% url 'dynamic_checkup' checkup.id %}">
+                            <div class="promotion-content">
+                                <div class="promotion-header">
+                                    <div class="gender-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            {% if checkup.gender == 'female' %}
+                                            <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                            <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                                            {% elif checkup.gender == 'male' %}
+                                            <circle cx="12" cy="8" r="5" stroke="blue" stroke-width="2"/>
+                                            <path d="M15 9L18 6M18 6H15M18 6V9" stroke="blue" stroke-width="2" stroke-linecap="round"/>
+                                            {% else %}
+                                            <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                            <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                                            {% endif %}
+                                        </svg>
+                                    </div>
+                                    <div class="top-badges">
+                                        <div class="validity">до 5 марта</div>
+                                        <div class="discount">-{{ checkup.discount_percent }}%</div>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <span class="current-price">{{ checkup.discounted_price }} ₽</span>
+                                    <span class="old-price">{{ checkup.original_price }} ₽</span>
+                                </div>
+                                <h3>CHECK UP<br>{{ checkup.name }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
 
-            </div>
-
-            <!-- Акция 2 -->
-            <div class="promotion-card">
-                <div class="promotion-background2"></div>
-                <div class="promotion-content">
-                    <div class="promotion-header">
-                        <div class="gender-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
-                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="top-badges">
-                            <div class="validity">до 5 марта</div>
-                            <div class="discount">-15%</div>
-                        </div>
-                    </div>
-                    <div class="price">
-                        <span class="current-price">6 000 ₽</span>
-                        <span class="old-price">7 200 ₽</span>
-                    </div>
-                    <h3>CHECK UP<br>«Женское здоровье» (Пакет S)</h3>
-                </div>
-            </div>
-
-            <!-- Акция 3 -->
-            <div class="promotion-card">
-                <div class="promotion-background"></div>
-                <div class="promotion-content">
-                    <div class="promotion-header">
-                        <div class="gender-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
-                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="top-badges">
-                            <div class="validity">до 5 марта</div>
-                            <div class="discount">-12%</div>
-                        </div>
-                    </div>
-                    <div class="price">
-                        <span class="current-price">8 160 ₽</span>
-                        <span class="old-price">9 070 ₽</span>
-                    </div>
-                    <h3>CHECK UP<br>«Репродуктивность»</h3>
-                </div>
-            </div>
-
-            <!-- Акция 4 -->
-            <div class="promotion-card">
-                <div class="promotion-background"></div>
-                <div class="promotion-content">
-                    <div class="promotion-header">
-                        <div class="gender-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
-                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="top-badges">
-                            <div class="validity">до 5 марта</div>
-                            <div class="discount">-12%</div>
-                        </div>
-                    </div>
-                    <div class="price">
-                        <span class="current-price">6 000 ₽</span>
-                        <span class="old-price">7 045 ₽</span>
-                    </div>
-                    <h3>CHECK UP<br>«Здоровый желудок»</h3>
-                </div>
-            </div>
-
-            <!-- Акция 5 -->
-            <div class="promotion-card">
-                <div class="promotion-background"></div>
-                <div class="promotion-content">
-                    <div class="promotion-header">
-                        <div class="gender-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
-                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="top-badges">
-                            <div class="validity">до 5 марта</div>
-                            <div class="discount">-15%</div>
-                        </div>
-                    </div>
-                    <div class="price">
-                        <span class="current-price">10 300 ₽</span>
-                        <span class="old-price">11 545 ₽</span>
-                    </div>
-                    <h3>CHECK UP<br>Гастрологический «Расширенный»</h3>
-                </div>
-            </div>
-
-            <!-- Акция 6 -->
-            <div class="promotion-card">
-                <div class="promotion-background"></div>
-                <div class="promotion-content">
-                    <div class="promotion-header">
-                        <div class="gender-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
-                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="top-badges">
-                            <div class="validity">до 5 марта</div>
-                            <div class="discount">-10%</div>
-                        </div>
-                    </div>
-                    <div class="price">
-                        <span class="current-price">18 900 ₽</span>
-                        <span class="old-price">20 735 ₽</span>
-                    </div>
-                    <h3>CHECK UP<br>Гастрологический «Комплекс»</h3>
-                </div>
-            </div>
-
-            <!-- Акция 7 -->
-            <div class="promotion-card">
-                <div class="promotion-background"></div>
-                <div class="promotion-content">
-                    <div class="promotion-header">
-                        <div class="gender-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="5" stroke="white" stroke-width="2"/>
-                                <path d="M12 13v8M8 17h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="top-badges">
-                            <div class="validity">до 5 марта</div>
-                            <div class="discount">-12%</div>
-                        </div>
-                    </div>
-                    <div class="price">
-                        <span class="current-price">6 500 ₽</span>
-                        <span class="old-price">7 375 ₽</span>
-                    </div>
-                    <h3>CHECK UP<br>«Боль в спине»</h3>
-                </div>
-            </div>
+            {# Здесь будут добавляться остальные акции через AJAX #}
+            {% include 'products/partials/checkup_cards.html' with checkups=paginated_remaining_checkups.object_list %}
         </div>
 
+        {% if has_next %}
         <div class="show-more">
-            <button class="btn btn-outline">Показать ещё</button>
+            <button class="btn btn-outline" id="showMoreBtn" data-next-page="{{ next_page }}">
+                <span class="btn-text">Показать ещё</span>
+                <span class="btn-loading" style="display: none;">Загрузка...</span>
+            </button>
         </div>
+        {% endif %}
     </div>
 </section>
 
-<!-- Секция контактной информации -->
+<!-- Секция контактной информации остается без изменений -->
 <section class="contact-info-section">
     <div class="container">
         <div class="contact-info-grid">
@@ -258,4 +197,77 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const genderFilter = document.getElementById('genderFilter');
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    const promotionsGrid = document.getElementById('promotionsGrid');
+
+    // Обработка фильтрации по полу
+    genderFilter.addEventListener('change', function() {
+        const selectedGender = this.value;
+        const url = new URL(window.location);
+
+        if (selectedGender) {
+            url.searchParams.set('gender', selectedGender);
+        } else {
+            url.searchParams.delete('gender');
+        }
+        url.searchParams.delete('page'); // Сбрасываем страницу при фильтрации
+
+        window.location.href = url.toString();
+    });
+
+    // Обработка кнопки "Показать ещё"
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', function() {
+            const nextPage = this.dataset.nextPage;
+            const currentGender = genderFilter.value;
+
+            // Показываем индикатор загрузки
+            this.classList.add('loading');
+            this.querySelector('.btn-text').style.display = 'none';
+            this.querySelector('.btn-loading').style.display = 'inline';
+
+            // Формируем URL для AJAX запроса
+            const url = new URL(window.location.origin + window.location.pathname);
+            url.searchParams.set('page', nextPage);
+            if (currentGender) {
+                url.searchParams.set('gender', currentGender);
+            }
+
+            // AJAX запрос
+            fetch(url.toString(), {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Добавляем новые карточки
+                promotionsGrid.insertAdjacentHTML('beforeend', data.html);
+
+                // Обновляем кнопку или скрываем её
+                if (data.has_next) {
+                    this.dataset.nextPage = data.next_page;
+                    this.classList.remove('loading');
+                    this.querySelector('.btn-text').style.display = 'inline';
+                    this.querySelector('.btn-loading').style.display = 'none';
+                } else {
+                    this.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки:', error);
+                this.classList.remove('loading');
+                this.querySelector('.btn-text').style.display = 'inline';
+                this.querySelector('.btn-loading').style.display = 'none';
+            });
+        });
+    }
+});
+</script>
 {% endblock %}

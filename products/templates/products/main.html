@@ -256,7 +256,7 @@
     </div>
 </section>
 
-<!--Promotions -->
+<!-- Обновленная секция акций в main.html -->
 <section class="container" id="promotions" aria-labelledby="promotions-heading">
     <header class="promotions-header">
         <h2 id="promotions-heading">Акции</h2>
@@ -269,109 +269,76 @@
     </header>
 
     <div class="promotions-grid" role="list" aria-label="Список текущих акций">
-        <!-- Большая карточка слева -->
-        <a href="{% url 'BackPain' %}" role="listitem">
-             <article class="promo-card large">
-                    <div class="gender-icon female-male" aria-label="Для мужчин и женщин">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="white" stroke-width="2"/>
-                            <path d="M15 9L18 6M18 6H15M18 6V9" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M9 15L6 18M6 18H9M6 18V15" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="date-badge">до 5 марта</div>
-                    <div class="discount-badge">-15%</div>
+        {% for checkup in popular_checkups %}
+        {% if forloop.first %}
+        <!-- Большая карточка для первой акции -->
+        <a href="{% url 'dynamic_checkup' checkup.id %}" role="listitem">
+            <article class="promo-card large">
+                <div class="gender-icon female-male" aria-label="Для мужчин и женщин">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="white" stroke-width="2"/>
+                        <path d="M15 9L18 6M18 6H15M18 6V9" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M9 15L6 18M6 18H9M6 18V15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="date-badge">до 5 марта</div>
+                <div class="discount-badge">-{{ checkup.discount_percent }}%</div>
 
-                    <div class="promo-content">
-                        <div class="price-block">
-                            <div class="current-price">6 000 ₽</div>
-                            <div class="old-price">7 200 ₽</div>
-                        </div>
-
-                        <div class="promo-title">
-                            <div class="check-up">CHECK UP</div>
-                            <div class="promo-name">«Боль в спине<br>Расширенный»</div>
-                        </div>
+                <div class="promo-content">
+                    <div class="price-block">
+                        <div class="current-price">{{ checkup.discounted_price }} ₽</div>
+                        <div class="old-price">{{ checkup.original_price }} ₽</div>
                     </div>
 
-                    <img src="{% static 'images/woman-profile.png' %}" alt="Женщина в профиль - акция на обследование спины" class="promo-image" loading="lazy">
-                </article>
+                    <div class="promo-title">
+                        <div class="check-up">CHECK UP</div>
+                        <div class="promo-name">{{ checkup.name }}</div>
+                    </div>
+                </div>
+
+                <img src="{% static 'images/woman-profile.png' %}" alt="{{ checkup.name }}" class="promo-image" loading="lazy">
+            </article>
         </a>
-        <!-- Верхняя правая карточка - Женское здоровье -->
-        <article class="promo-card medium female-health" role="listitem">
-            <div class="gender-icon female" aria-label="Для женщин">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="#666" stroke-width="2"/>
-                    <path d="M12 15V19M12 19H10M12 19H14" stroke="#666" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="date-badge">до 5 марта</div>
-            <div class="discount-badge">-15%</div>
-
-            <div class="stocks-background"></div>
-
-            <div class="promo-content">
-                <div class="price-block">
-                    <div class="current-price">6 000 ₽</div>
-                    <div class="old-price">7 200 ₽</div>
+        {% else %}
+        <!-- Остальные карточки -->
+        <a href="{% url 'dynamic_checkup' checkup.id %}" role="listitem">
+            <article class="promo-card {% if forloop.counter == 2 %}medium female-health{% else %}small{% endif %}">
+                <div class="gender-icon {% if forloop.counter == 2 %}female{% else %}male{% endif %}" aria-label="Для {% if forloop.counter == 2 %}женщин{% else %}мужчин{% endif %}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        {% if forloop.counter == 2 %}
+                        <circle cx="12" cy="8" r="5" stroke="#666" stroke-width="2"/>
+                        <path d="M12 13v8M8 17h8" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        {% else %}
+                        <circle cx="12" cy="8" r="5" stroke="#666" stroke-width="2"/>
+                        <path d="M15 9L18 6M18 6H15M18 6V9" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        {% endif %}
+                    </svg>
                 </div>
+                <div class="date-badge">до 5 марта</div>
+                <div class="discount-badge">-{{ checkup.discount_percent }}%</div>
 
-                <div class="promo-title">
-                    <div class="check-up">CHECK UP</div>
-                    <div class="promo-name">«Женское здоровье» (Пакет S)</div>
+                {% if forloop.counter == 2 %}
+                <div class="stocks-background"></div>
+                {% endif %}
+
+                <div class="promo-content">
+                    <div class="price-block">
+                        <div class="current-price">{{ checkup.discounted_price }} ₽</div>
+                        <div class="old-price">{{ checkup.original_price }} ₽</div>
+                    </div>
+
+                    <div class="promo-title">
+                        <div class="check-up">CHECK UP</div>
+                        <div class="promo-name">{{ checkup.name }}</div>
+                    </div>
                 </div>
-            </div>
-        </article>
-
-        <!-- Нижняя левая карточка -->
-        <article class="promo-card small" role="listitem">
-            <div class="gender-icon male" aria-label="Для мужчин">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="#666" stroke-width="2"/>
-                    <path d="M15 9L18 6M18 6H15M18 6V9" stroke="#666" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="date-badge">до 5 марта</div>
-            <div class="discount-badge">-15%</div>
-
-            <div class="promo-content">
-                <div class="price-block">
-                    <div class="current-price">6 000 ₽</div>
-                    <div class="old-price">7 200 ₽</div>
-                </div>
-
-                <div class="promo-title">
-                    <div class="check-up">CHECK UP</div>
-                    <div class="promo-name">«Репродуктивность»</div>
-                </div>
-            </div>
-        </article>
-
-        <!-- Нижняя правая карточка -->
-        <article class="promo-card small" role="listitem">
-            <div class="gender-icon female-male" aria-label="Для мужчин и женщин">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" stroke="#666" stroke-width="2"/>
-                    <path d="M15 9L18 6M18 6H15M18 6V9" stroke="#666" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M9 15V19M9 19H7M9 19H11" stroke="#666" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="date-badge">до 5 марта</div>
-
-            <div class="promo-content">
-                <div class="price-block">
-                    <div class="current-price">6 000 ₽</div>
-                    <div class="old-price">7 200 ₽</div>
-                </div>
-
-                <div class="promo-title">
-                    <div class="check-up">CHECK UP</div>
-                    <div class="promo-name">«Здоровый желудок»</div>
-                </div>
-            </div>
-        </article>
+            </article>
+        </a>
+        {% endif %}
+        {% endfor %}
     </div>
 </section>
+
 
  <!-- Специалисты -->
 <section class="container" id="specialists" aria-labelledby="specialists-section-heading">

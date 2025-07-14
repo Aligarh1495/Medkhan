@@ -1,25 +1,62 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
-from .models import Department, Service, Doctor, Specialty, DoctorSpecialty, DoctorService, Checkup, CheckupComponent
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+from django.template.loader import render_to_string
+from .models import Checkup, CheckupComponent, Department, Doctor,Service, Specialty, DoctorService, DoctorSpecialty
 
 
 def main(request):
-    # Получаем популярные отделения для главной страницы
+    """Главная страница с конкретными акциями"""
+    # Получаем конкретные 5 акций для главной страницы
+    featured_checkup_names = [
+        'Боль в спине Расширенный',
+        'Женское здоровье',
+        'Репродуктивность',
+        'Здоровый желудок',
+        'Гастрологический'
+    ]
+
+    popular_checkups = []
+    for name in featured_checkup_names:
+        try:
+            checkup = Checkup.objects.filter(name__icontains=name).first()
+            if checkup:
+                # Добавляем процент скидки
+                if checkup.original_price > 0:
+                    checkup.discount_percent = round(
+                        ((checkup.original_price - checkup.discounted_price) / checkup.original_price) * 100)
+                else:
+                    checkup.discount_percent = 0
+                popular_checkups.append(checkup)
+        except:
+            continue
+
+    # Если не нашли нужные акции, берем первые 5
+    if len(popular_checkups) < 5:
+        all_checkups = Checkup.objects.all()[:5]
+        for checkup in all_checkups:
+            if checkup.original_price > 0:
+                checkup.discount_percent = round(
+                    ((checkup.original_price - checkup.discounted_price) / checkup.original_price) * 100)
+            else:
+                checkup.discount_percent = 0
+        popular_checkups = list(all_checkups)
+
+    # Получаем популярные отделения
     popular_departments = Department.objects.filter(
         name__in=[
             'Урология', 'Гинекология', 'Неврология',
             'Гастроэнтерология', 'Хирургия', 'Проктология'
         ]
     )
-
-    # Создаем словарь для быстрого поиска отделений по названию
     departments_dict = {dept.name: dept for dept in popular_departments}
 
     context = {
         'title': 'MedKhan® - Главная',
         'departments_dict': departments_dict,
+        'popular_checkups': popular_checkups,
     }
     return render(request, 'products/main.html', context)
-
 
 def services(request):
     departments = Department.objects.prefetch_related('services').all()
@@ -44,11 +81,39 @@ def services(request):
     return render(request, 'products/services.html', context)
 
 
-from django.shortcuts import render, get_object_or_404
-from .models import Department, Service, Doctor, Specialty, DoctorSpecialty, DoctorService, Checkup, CheckupComponent
+def dynamic_checkup(request, checkup_id):
+    """Динамическая страница акции"""
+    checkup = get_object_or_404(Checkup, id=checkup_id)
 
+    # Получаем компоненты чекапа
+    components = CheckupComponent.objects.filter(checkup=checkup)
 
-# Все ваши существующие функции остаются без изменений...
+    # Группируем компоненты по категориям
+    components_by_category = {}
+    for component in components:
+        category = component.category
+        if category not in components_by_category:
+            components_by_category[category] = []
+        components_by_category[category].append(component)
+
+    # Получаем врачей
+    doctors = Doctor.objects.filter(
+        doctorservice__service__checkupcomponent__checkup=checkup
+    ).distinct()[:3]  # Ограничиваем до 3 врачей
+
+    # Вычисляем процент скидки
+    discount_percent = 0
+    if checkup.original_price > 0:
+        discount_percent = round(((checkup.original_price - checkup.discounted_price) / checkup.original_price) * 100)
+
+    context = {
+        'title': f'{checkup.name} - MedKhan®',
+        'checkup': checkup,
+        'components_by_category': components_by_category,
+        'doctors': doctors,
+        'discount_percent': discount_percent,
+    }
+    return render(request, 'products/BackPain.html', context)
 
 def dynamic_department(request, department_id):
     """Динамическая страница отделения - использует шаблон RestorativeMedicene.html"""
@@ -75,17 +140,18 @@ def dynamic_service(request, service_id):
     doctors = Doctor.objects.filter(doctorservice__service=service).distinct()
 
     # Парсим преимущества, показания и противопоказания
+    # Изменено: теперь разделяем по запятой
     advantages_list = []
     if service.advantages:
-        advantages_list = [adv.strip() for adv in service.advantages.split('\n') if adv.strip()]
+        advantages_list = [adv.strip() for adv in service.advantages.split(',') if adv.strip()]
 
     indications_list = []
     if service.indications:
-        indications_list = [ind.strip() for ind in service.indications.split('\n') if ind.strip()]
+        indications_list = [ind.strip() for ind in service.indications.split(',') if ind.strip()]
 
     contraindications_list = []
     if service.contraindications:
-        contraindications_list = [contra.strip() for contra in service.contraindications.split('\n') if contra.strip()]
+        contraindications_list = [contra.strip() for contra in service.contraindications.split(',') if contra.strip()]
 
     context = {
         'title': f'{service.name} - MedKhan®',
@@ -97,11 +163,65 @@ def dynamic_service(request, service_id):
         'contraindications_list': contraindications_list,
     }
     return render(request, 'products/cosmetic.html', context)
+
+
 def stocks(request):
+    """Страница акций с фильтрацией и пагинацией"""
+    gender_filter = request.GET.get('gender', '')
+    page = int(request.GET.get('page', 1))
+
+    # Базовый queryset
+    all_checkups = Checkup.objects.all()
+
+    # Фильтрация по полу (предполагаем, что есть поле gender в модели Checkup)
+    if gender_filter == 'male':
+        all_checkups = all_checkups.filter(gender='male')
+    elif gender_filter == 'female':
+        all_checkups = all_checkups.filter(gender='female')
+    elif gender_filter == 'child':
+        all_checkups = all_checkups.filter(gender='child')
+
+    # Добавляем процент скидки ко всем акциям
+    for checkup in all_checkups:
+        if checkup.original_price > 0:
+            checkup.discount_percent = round(
+                ((checkup.original_price - checkup.discounted_price) / checkup.original_price) * 100)
+        else:
+            checkup.discount_percent = 0
+
+    # Определяем количество акций для начального отображения с уникальным дизайном
+    initial_display_count = 5  # 1 большая + 1 зеленая + 3 белых = 5
+
+    # Акции для начального отображения (с уникальным дизайном)
+    initial_checkups_display = all_checkups[:initial_display_count]
+
+    # Остальные акции для пагинации
+    remaining_checkups = all_checkups[initial_display_count:]
+
+    # Пагинация остальных акций (по 6 штук за раз)
+    paginator = Paginator(remaining_checkups, 6)
+    paginated_remaining_checkups = paginator.get_page(page)
+
+    # AJAX запрос для "Показать ещё"
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        html = render_to_string('products/partials/checkup_cards.html', {
+            'checkups': paginated_remaining_checkups.object_list,
+        })
+        return JsonResponse({
+            'html': html,
+            'has_next': paginated_remaining_checkups.has_next(),
+            'next_page': paginated_remaining_checkups.next_page_number() if paginated_remaining_checkups.has_next() else None
+        })
+
     context = {
-        'title': 'Акции - MedKhan®'
+        'title': 'Акции - MedKhan®',
+        'initial_checkups_display': initial_checkups_display,  # Передаем первые 5 акций
+        'paginated_remaining_checkups': paginated_remaining_checkups,  # Передаем пагинированные остальные акции
+        'has_next': paginated_remaining_checkups.has_next(),
+        'next_page': paginated_remaining_checkups.next_page_number() if paginated_remaining_checkups.has_next() else None,
+        'current_filter': gender_filter,
     }
-    return render(request,'products/stocks.html',context)
+    return render(request, 'products/stocks.html', context)
 def specialists(request):
     context = {
         'title': 'Специалисты - MedKhan®'

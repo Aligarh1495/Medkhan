@@ -12,7 +12,7 @@
 
 /* Promotion Hero */
 .promotion-hero {
-  background-image: url("{% static 'images/stocks2.png' %}");
+  background-image: url("/static/images/stocks2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

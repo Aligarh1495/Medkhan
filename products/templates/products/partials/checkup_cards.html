@@ -1,0 +1,38 @@
+{% load static %}
+
+{% for checkup in checkups %}
+    <div class="promotion-card"> {# Всегда белая карточка #}
+        <a href="{% url 'dynamic_checkup' checkup.id %}">
+            <div class="promotion-content">
+                <div class="promotion-header">
+                    <div class="gender-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {% if checkup.gender == 'female' %}
+                            <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                            <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                            {% elif checkup.gender == 'male' %}
+                            <circle cx="12" cy="8" r="5" stroke="blue" stroke-width="2"/>
+                            <path d="M15 9L18 6M18 6H15M18 6V9" stroke="blue" stroke-width="2" stroke-linecap="round"/>
+                            {% elif checkup.gender == 'child' %}
+                            <circle cx="12" cy="8" r="5" stroke="orange" stroke-width="2"/>
+                            <path d="M12 13v8M8 17h8" stroke="orange" stroke-width="2" stroke-linecap="round"/>
+                            {% else %}
+                            <circle cx="12" cy="8" r="5" stroke="gray" stroke-width="2"/>
+                            <path d="M12 13v8M8 17h8" stroke="gray" stroke-width="2" stroke-linecap="round"/>
+                            {% endif %}
+                        </svg>
+                    </div>
+                    <div class="top-badges">
+                        <div class="validity">до 5 марта</div>
+                        <div class="discount">-{{ checkup.discount_percent }}%</div>
+                    </div>
+                </div>
+                <div class="price">
+                    <span class="current-price">{{ checkup.discounted_price }} ₽</span>
+                    <span class="old-price">{{ checkup.original_price }} ₽</span>
+                </div>
+                <h3>CHECK UP<br>{{ checkup.name }}</h3>
+            </div>
+        </a>
+    </div>
+{% endfor %}

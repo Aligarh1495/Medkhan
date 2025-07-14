@@ -4,7 +4,7 @@ from django.urls import path
 
 from products.views import main, services, stocks, specialists, AboutSenter, magazine, HanYmar, BackPain, \
      patients, HanTulpan, NudelmanNatalia, BasharovaAlena, Uldashev,  \
-    dynamic_department, dynamic_service
+    dynamic_department, dynamic_service, dynamic_checkup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,7 +15,7 @@ urlpatterns = [
 # Динамические URL - используем существующие шаблоны
     path('department/<int:department_id>/', dynamic_department, name='dynamic_department'),
     path('service/<int:service_id>/', dynamic_service, name='dynamic_service'),
-
+    path('checkup/<int:checkup_id>/', dynamic_checkup, name='dynamic_checkup'),
 
     path('specialists/', specialists,name='specialists'),
     path('AboutSenter/', AboutSenter, name='AboutSenter'),

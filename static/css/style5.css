@@ -181,6 +181,8 @@ body {
   min-height: 280px;
   transition: transform 0.3s ease;
   cursor: pointer;
+  background-color: var(--white); /* Явно устанавливаем белый фон */
+  box-shadow: var(--shadow); /* Добавляем тень для выделения */
 }
 
 .promotion-card:hover {
@@ -199,7 +201,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/static/images/stock.png');
+  background-image: url("/static/images/stock.png");
   z-index: 1;
 }
 .promotion-background2 {
@@ -208,12 +210,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/static/images/stocks2.png');
+  background-image: url("/static/images/stocks2.png");
   z-index: 1;
 }
-.promotion-card:not(.featured) .promotion-background {
+/* Удаляем это правило, так как белые карточки не используют .promotion-background */
+/* .promotion-card:not(.featured) .promotion-background {
   background: #ffffff;
-}
+} */
 
 .featured-image {
   position: absolute;
@@ -233,7 +236,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: white;
+  color: white; /* По умолчанию белый текст для карточек с фоном */
+}
+
+/* Переопределяем цвет текста для обычных (не featured) карточек */
+.promotion-card:not(.featured) .promotion-content {
+  color: var(--dark-text); /* Делаем текст темным на белом фоне */
 }
 
 .promotion-card.featured .promotion-content {
