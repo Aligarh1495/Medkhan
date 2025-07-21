@@ -14,6 +14,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    {% block meta_description %}{% endblock %}
+    {% block meta_keywords %}{% endblock %}
+    {% block structured_data %}{% endblock %}
 </head>
 <body>
     <!-- Шапка сайта -->
@@ -25,16 +29,31 @@
             <div class="phone-number">
                 <a href="tel:+79011433434">+7 (901) 143-34-34</a>
             </div>
+
+            <!-- Мобильное меню -->
+            <button class="mobile-menu-toggle" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav class="main-nav">
                 <ul>
-                    <li><a href="{% url 'services' %}" {% if request.path == '/services/' %}class="active"{% endif %}>Услуги</a></li>
-                    <li><a href="{% url 'stocks' %}" {% if request.path == '/stocks/' %}class="active"{% endif %}>Акции</a></li>
-                    <li><a href="{% url 'specialists' %}" {% if request.path == '/specialists/' %}class="active"{% endif %}>Специалисты</a></li>
-                    <li><a href="#reviews" {% if request.path == '/reviews/' %}class="active"{% endif %}>Отзывы</a></li>
-                    <li><a href="{% url 'magazine' %}" {% if request.path == '/magazine/' %}class="active"{% endif %}>Журнал</a></li>
+                    <li><a href="{% url 'services' %}" {% if 'services' in request.path %}class="active"{% endif %}>Услуги</a></li>
+                    <li><a href="{% url 'stocks' %}" {% if 'stocks' in request.path %}class="active"{% endif %}>Акции</a></li>
+                    <li><a href="{% url 'specialists' %}" {% if 'specialists' in request.path %}class="active"{% endif %}>Специалисты</a></li>
+                    <li><a href="#reviews" {% if 'reviews' in request.path %}class="active"{% endif %}>Отзывы</a></li>
+                    <li><a href="{% url 'magazine' %}" {% if 'magazine' in request.path %}class="active"{% endif %}>Журнал</a></li>
                 </ul>
             </nav>
-            <a href="#appointment" class="btn btn-primary">Записаться</a>
+
+            <!-- Активная кнопка записи -->
+            <a href="https://booking.medflex.ru?user=33f85b2ad6c658bc5ed6f3e1afb512a6&source=3"
+               target="_blank"
+               class="btn btn-primary booking-btn"
+               rel="noopener noreferrer">
+                Записаться
+            </a>
         </div>
     </header>
 
@@ -56,25 +75,25 @@
                         </div>
                     </div>
                     <div class="contact-info">
-                        <p class="contact-address">Набережные Челны,<br>43-й комплекс, 25А</p>
+                        <p class="contact-address">Набережные Челны,<br>52-й комплекс, 20А</p>
                         <a href="tel:+79011433434" class="contact-phone">+7 (901) 143-34-34</a>
                     </div>
                     <div class="contact-message">
                         <p>Пишите<br>нам по любым<br>вопросам</p>
                         <div class="contact-icons">
-                            <a href="#" class="icon-email">
+                            <a href="mailto:info@medkhan.ru" class="icon-email" aria-label="Написать email">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
-                            <a href="#" class="icon-telegram">
+                            <a href="https://t.me/medkhan_nch" class="icon-telegram" aria-label="Написать в Telegram">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
-                            <a href="#" class="icon-whatsapp">
+                            <a href="https://wa.me/79011433434" class="icon-whatsapp" aria-label="Написать в WhatsApp">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 6V12L16 14M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M17.472 14.382C17.367 14.382 17.261 14.382 17.156 14.382C16.974 14.382 16.792 14.382 16.61 14.382C16.428 14.382 16.246 14.382 16.064 14.382C15.882 14.382 15.7 14.382 15.518 14.382C15.336 14.382 15.154 14.382 14.972 14.382C14.79 14.382 14.608 14.382 14.426 14.382C14.244 14.382 14.062 14.382 13.88 14.382C13.698 14.382 13.516 14.382 13.334 14.382C13.152 14.382 12.97 14.382 12.788 14.382C12.606 14.382 12.424 14.382 12.242 14.382C12.06 14.382 11.878 14.382 11.696 14.382C11.514 14.382 11.332 14.382 11.15 14.382C10.968 14.382 10.786 14.382 10.604 14.382C10.422 14.382 10.24 14.382 10.058 14.382C9.876 14.382 9.694 14.382 9.512 14.382C9.33 14.382 9.148 14.382 8.966 14.382C8.784 14.382 8.602 14.382 8.42 14.382C8.238 14.382 8.056 14.382 7.874 14.382C7.692 14.382 7.51 14.382 7.328 14.382C7.146 14.382 6.964 14.382 6.782 14.382C6.6 14.382 6.418 14.382 6.236 14.382C6.054 14.382 5.872 14.382 5.69 14.382C5.508 14.382 5.326 14.382 5.144 14.382C4.962 14.382 4.78 14.382 4.598 14.382C4.416 14.382 4.234 14.382 4.052 14.382C3.87 14.382 3.688 14.382 3.506 14.382C3.324 14.382 3.142 14.382 2.96 14.382C2.778 14.382 2.596 14.382 2.414 14.382C2.232 14.382 2.05 14.382 1.868 14.382C1.686 14.382 1.504 14.382 1.322 14.382C1.14 14.382 0.958 14.382 0.776 14.382C0.594 14.382 0.412 14.382 0.23 14.382C0.048 14.382 -0.134 14.382 -0.316 14.382" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
                         </div>
@@ -102,13 +121,13 @@
 
             <!-- Социальные сети -->
             <div class="magazine-social-links">
-                <a href="#" class="magazine-social-link telegram">
+                <a href="https://t.me/medkhan_nch" class="magazine-social-link telegram" target="_blank" rel="noopener noreferrer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     MedKhan в tг
                 </a>
-                <a href="#" class="magazine-social-link vk">
+                <a href="https://vk.com/medkhan_nch" class="magazine-social-link vk" target="_blank" rel="noopener noreferrer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13 10H11V15H13V10Z" fill="#00C087"/>
                         <path d="M15 10H17V15H15V10Z" fill="#00C087"/>
@@ -116,7 +135,7 @@
                     </svg>
                     MedKhan в вк
                 </a>
-                <a href="#" class="magazine-social-link youtube">
+                <a href="https://youtube.com/@medkhan" class="magazine-social-link youtube" target="_blank" rel="noopener noreferrer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22.5401 6.42C22.4237 5.94541 22.1929 5.51057 21.8703 5.15941C21.5477 4.80824 21.1446 4.55318 20.7001 4.42C18.9001 4 12.0001 4 12.0001 4C12.0001 4 5.10008 4 3.30008 4.46C2.85557 4.59318 2.45251 4.84824 2.12991 5.19941C1.80731 5.55057 1.57649 5.98541 1.46008 6.46C1.14577 8.20556 0.991404 9.97631 1.00008 11.75C0.988639 13.537 1.14276 15.3213 1.46008 17.08C1.58686 17.5398 1.82345 17.9581 2.14462 18.2945C2.46579 18.6308 2.86259 18.8738 3.30008 19C5.10008 19.46 12.0001 19.46 12.0001 19.46C12.0001 19.46 18.9001 19.46 20.7001 19C21.1446 18.8668 21.5477 18.6118 21.8703 18.2606C22.1929 17.9094 22.4237 17.4746 22.5401 17C22.8524 15.2676 23.0053 13.5103 23.0001 11.75C23.0115 9.96295 22.8574 8.1787 22.5401 6.42Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M9.75 15.02L15.5 11.75L9.75 8.47998V15.02Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -136,8 +155,14 @@
         </div>
     </section>
 
+    <!-- Круглый виджет онлайн-записи MedFlex -->
+    <div id="medflexRoundWidgetData" data-src="https://booking.medflex.ru?user=33f85b2ad6c658bc5ed6f3e1afb512a6&isRoundWidget=true"></div>
+
     <!-- Дополнительные скрипты -->
     {% block extra_js %}{% endblock %}
+
+    <!-- Скрипт виджета онлайн-записи -->
+    <script defer src="https://booking.medflex.ru/components/round/round_widget_button.js" charset="utf-8"></script>
 
     <!-- Базовые скрипты -->
     <script>
@@ -151,8 +176,74 @@
                     mainNav.classList.toggle('active');
                     this.classList.toggle('active');
                 });
+
+                // Закрытие меню при клике на ссылку
+                const navLinks = mainNav.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mainNav.classList.remove('active');
+                        mobileMenuToggle.classList.remove('active');
+                    });
+                });
+
+                // Закрытие меню при клике вне его
+                document.addEventListener('click', function(event) {
+                    if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                        mainNav.classList.remove('active');
+                        mobileMenuToggle.classList.remove('active');
+                    }
+                });
             }
+
+            // Плавная прокрутка для якорных ссылок
+            const anchorLinks = document.querySelectorAll('a[href^="#"]');
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.length > 1) {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Отслеживание активной страницы в навигации
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.main-nav a');
+
+            navLinks.forEach(link => {
+                const linkPath = new URL(link.href).pathname;
+                if (currentPath.includes(linkPath) && linkPath !== '/') {
+                    link.classList.add('active');
+                }
+            });
         });
+
+        // Функция для открытия виджета записи с параметрами
+        function openBookingWidget(doctorId = null, serviceId = null) {
+            let bookingUrl = 'https://booking.medflex.ru?user=33f85b2ad6c658bc5ed6f3e1afb512a6&source=3';
+
+            if (doctorId) {
+                bookingUrl += `&doctor=${doctorId}`;
+            }
+
+            if (serviceId) {
+                bookingUrl += `&service=${serviceId}`;
+            }
+
+            window.open(bookingUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Глобальная функци�� для записи к врачу
+        window.bookAppointment = function(doctorId, serviceId) {
+            openBookingWidget(doctorId, serviceId);
+        };
     </script>
 </body>
 </html>
