@@ -190,7 +190,7 @@
                 <form id="contactForm">
                     {% csrf_token %}
                     <input type="text" name="name" placeholder="Как вас зовут?" required>
-                    <input type="tel" name="phone" placeholder="Ваш номер телефона" required>
+                    <input type="tel" name="phone" id="phoneInput" placeholder="+7 (___) ___-__-__" required>
                     <p class="privacy-notice">Нажимая на кнопку, вы соглашаетесь с условиями обработки данных в соответствии с Политикой конфиденциальности</p>
                     <button type="submit" class="btn btn-primary">Оставить заявку</button>
                 </form>
@@ -209,8 +209,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const promotionsGrid = document.getElementById('promotionsGrid');
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
+    const phoneInput = document.getElementById('phoneInput');
 
-    // Обработка фильтрации по полу
+    // Добавляем поле для телефона с id, если его нет
+    if (!phoneInput) {
+        const phoneField = contactForm.querySelector('input[type="tel"]');
+        phoneField.id = 'phoneInput';
+    }
+
+    // Маска для телефона
+    document.getElementById('phoneInput').addEventListener('input', function(e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+        let mask = '+7';
+
+        if (x[1] === '8') {
+            mask = '8';
+        } else if (x[1] === '7') {
+            mask = '+7';
+        }
+
+        e.target.value = !x[2] ? mask : mask + ' (' + x[2] + (x[3] ? ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '') : '');
+    });
+
+    // Остальной ваш код обработки фильтрации и кнопки "Показать ещё"...
     genderFilter.addEventListener('change', function() {
         const selectedGender = this.value;
         const url = new URL(window.location);
@@ -225,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = url.toString();
     });
 
-    // Обработка кнопки "Показать ещё"
     if (showMoreBtn) {
         showMoreBtn.addEventListener('click', function() {
             const nextPage = this.dataset.nextPage;
@@ -268,14 +288,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Обработка отправки формы заявки
+    // Обновленный обработчик формы с валидацией телефона
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        const phoneValue = document.getElementById('phoneInput').value.replace(/\D/g, '');
+
+        // Проверка формата телефона
+        if (!/^(\+7|8)[0-9]{10}$/.test(phoneValue)) {
+            formMessage.style.display = 'block';
+            formMessage.style.backgroundColor = '#f8d7da';
+            formMessage.style.color = '#721c24';
+            formMessage.textContent = 'Пожалуйста, введите корректный номер телефона (начинается с +7 или 8, 11 цифр)';
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+            return;
+        }
 
         const formData = new FormData(this);
         const data = {
             name: formData.get('name'),
-            phone: formData.get('phone')
+            phone: phoneValue
         };
 
         // Отправляем данные на сервер
@@ -301,7 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 formMessage.textContent = result.message;
             }
 
-            // Скрываем сообщение через 5 секунд
             setTimeout(() => {
                 formMessage.style.display = 'none';
             }, 5000);

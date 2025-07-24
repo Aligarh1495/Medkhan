@@ -28,33 +28,17 @@
     "addressCountry": "RU"
   },
   "employee": [
+    {% for doctor in doctors %}
     {
       "@type": "Person",
-      "name": "Нудельман Наталия Федоровна",
-      "jobTitle": "Врач-невролог",
+      "name": "{{ doctor.full_name }}",
+      "jobTitle": "{{ doctor.category }}",
       "worksFor": {
         "@type": "MedicalOrganization",
         "name": "МедХан"
       }
-    },
-    {
-      "@type": "Person",
-      "name": "Хан Умар Хаят",
-      "jobTitle": "Андролог, главный врач, уролог",
-      "worksFor": {
-        "@type": "MedicalOrganization",
-        "name": "МедХан"
-      }
-    },
-    {
-      "@type": "Person",
-      "name": "Хан Тюльпан Тимергалиевна",
-      "jobTitle": "Акушер-гинеколог, врач УЗИ, генеральный директор",
-      "worksFor": {
-        "@type": "MedicalOrganization",
-        "name": "МедХан"
-      }
-    }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
   ]
 }
 </script>
@@ -87,12 +71,18 @@
                     <label for="specialization-filter" class="sr-only">Фильтр по специализации</label>
                     <select id="specialization-filter" aria-label="Выберите специализацию">
                         <option value="">Специализация</option>
-                        <option value="neurologist">Невролог</option>
-                        <option value="urologist">Уролог</option>
-                        <option value="gynecologist">Гинеколог</option>
-                        <option value="therapist">Терапевт</option>
-                        <option value="surgeon">Хирург</option>
-                        <option value="proctologist">Проктолог</option>
+                        {# Здесь можно динамически выводить специализации из БД, если они есть в отдельной модели #}
+                        <option value="Невролог">Невролог</option>
+                        <option value="Уролог">Уролог</option>
+                        <option value="Гинеколог">Гинеколог</option>
+                        <option value="Терапевт">Терапевт</option>
+                        <option value="Хирург">Хирург</option>
+                        <option value="Проктолог">Проктолог</option>
+                        <option value="Андролог">Андролог</option>
+                        <option value="Врач УЗИ">Врач УЗИ</option>
+                        <option value="Кардиолог">Кардиолог</option>
+                        <option value="Эндоскопист">Эндоскопист</option>
+                        <option value="Врач функциональной диагностики">Врач функциональной диагностики</option>
                     </select>
                 </div>
                 <div class="search-bar" role="search">
@@ -109,147 +99,41 @@
 
         <!-- Алфавитный фильтр -->
         <div class="alphabet-filter" role="group" aria-label="Алфавитный фильтр врачей">
-            <button class="alphabet-btn active" data-letter="" aria-pressed="true">Уролог</button>
-            <button class="alphabet-btn" data-letter="" aria-pressed="false">Все</button>
-            <button class="alphabet-btn" data-letter="А" aria-pressed="false">А</button>
-            <button class="alphabet-btn" data-letter="Б" aria-pressed="false">Б</button>
-            <button class="alphabet-btn" data-letter="В" aria-pressed="false">В</button>
-            <button class="alphabet-btn" data-letter="Г" aria-pressed="false">Г</button>
-            <button class="alphabet-btn" data-letter="Д" aria-pressed="false">Д</button>
-            <button class="alphabet-btn" data-letter="Е" aria-pressed="false">Е</button>
-            <button class="alphabet-btn" data-letter="Ж" aria-pressed="false">Ж</button>
-            <button class="alphabet-btn" data-letter="З" aria-pressed="false">З</button>
-            <button class="alphabet-btn" data-letter="И" aria-pressed="false">И</button>
-            <button class="alphabet-btn" data-letter="К" aria-pressed="false">К</button>
-            <button class="alphabet-btn" data-letter="Л" aria-pressed="false">Л</button>
-            <button class="alphabet-btn" data-letter="М" aria-pressed="false">М</button>
-            <button class="alphabet-btn" data-letter="Н" aria-pressed="false">Н</button>
-            <button class="alphabet-btn" data-letter="О" aria-pressed="false">О</button>
-            <button class="alphabet-btn" data-letter="П" aria-pressed="false">П</button>
-            <button class="alphabet-btn" data-letter="Р" aria-pressed="false">Р</button>
-            <button class="alphabet-btn" data-letter="С" aria-pressed="false">С</button>
-            <button class="alphabet-btn" data-letter="Т" aria-pressed="false">Т</button>
-            <button class="alphabet-btn" data-letter="У" aria-pressed="false">У</button>
-            <button class="alphabet-btn" data-letter="Ф" aria-pressed="false">Ф</button>
-            <button class="alphabet-btn" data-letter="Х" aria-pressed="false">Х</button>
-            <button class="alphabet-btn" data-letter="Ц" aria-pressed="false">Ц</button>
-            <button class="alphabet-btn" data-letter="Ч" aria-pressed="false">Ч</button>
-            <button class="alphabet-btn" data-letter="Ш" aria-pressed="false">Ш</button>
-            <button class="alphabet-btn" data-letter="Щ" aria-pressed="false">Щ</button>
-            <button class="alphabet-btn" data-letter="Ъ" aria-pressed="false">Ъ</button>
-            <button class="alphabet-btn" data-letter="Ы" aria-pressed="false">Ы</button>
-            <button class="alphabet-btn" data-letter="Ь" aria-pressed="false">Ь</button>
-            <button class="alphabet-btn" data-letter="Э" aria-pressed="false">Э</button>
-            <button class="alphabet-btn" data-letter="Ю" aria-pressed="false">Ю</button>
-            <button class="alphabet-btn" data-letter="Я" aria-pressed="false">Я</button>
+            <button class="alphabet-btn active" data-letter="" aria-pressed="true">Все</button>
+            {% for letter in "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ" %}
+            <button class="alphabet-btn" data-letter="{{ letter }}" aria-pressed="false">{{ letter }}</button>
+            {% endfor %}
         </div>
 
         <div class="specialists-grid" role="list" aria-label="Список врачей-специалистов">
-            <article class="specialist-card" data-gender="female" data-specialization="neurologist"
-         data-doctor-name="Нудельман<br>Наталия Федоровна"
-         data-doctor-position="Врач-невролог"
-         data-doctor-image="{% static 'images/specialist-1.png' %}"
-         data-services='[{"name":"Врач-невролог","price":"от 1500 ₽"}]' role="listitem">
+            {% for doctor in doctors %}
+            <article class="specialist-card"
+                     data-gender="{{ doctor.gender|default:'' }}" {# Предполагаем, что у врача может быть пол #}
+                     data-specialization="{{ doctor.category|default:'' }}"
+                     data-doctor-name="{{ doctor.full_name }}"
+                     role="listitem">
                 <div class="specialist-image">
-                    <a href="{% url 'NudelmanNatalia' %}" aria-label="Профиль врача Нудельман Наталия Федоровна">
-                        <img src="{% static 'images/specialist-1.png' %}" alt="Фото врача Нудельман Наталия Федоровна, невролог" loading="lazy">
-                        <div class="experience-badge">Стаж 31 год</div>
+                    {# Ссылка на динамическую страницу врача при клике на фото #}
+                    <a href="{% url 'dynamic_doctor_profile' doctor.id %}" aria-label="Профиль врача {{ doctor.full_name }}">
+                        <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}/placeholder.svg?height=250&width=250&query=doctor%20{{ doctor.full_name }}{% endif %}"
+                             alt="Фото врача {{ doctor.full_name }}, {{ doctor.category|default:'Специалист' }}" loading="lazy">
+                        <div class="experience-badge">Стаж {{ doctor.experience_years }} лет</div>
                     </a>
                 </div>
                 <div class="specialist-info">
-                    <h3>Нудельман<br>Наталия Федоровна</h3>
-                    <p class="specialist-position">Врач-невролог</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Нудельман Наталия Федоровна">Записаться</button>
+                    <h3>{{ doctor.full_name|linebreaksbr }}</h3> {# Используем linebreaksbr для переноса строк #}
+                    <p class="specialist-position">{{ doctor.category|default:"Специалист" }}</p>
+                    {% if doctor.online_booking_link %}
+                    <a href="{{ doctor.online_booking_link }}" target="_blank" class="btn btn-primary appointment-btn" aria-label="Записаться к врачу {{ doctor.full_name }}">Записаться</a>
+                    {% else %}
+                    {# Если ссылки нет, можно показать кнопку, которая открывает общую форму записи или модальное окно #}
+                    <button class="btn btn-primary appointment-btn" onclick="alert('Онлайн-запись для этого врача пока недоступна.')" aria-label="Записаться к врачу {{ doctor.full_name }}">Записаться</button>
+                    {% endif %}
                 </div>
             </article>
-
-            <article class="specialist-card" data-gender="male" data-specialization="urologist"
-         data-doctor-name="Хан<br>Умар Хаят"
-         data-doctor-position="Андролог, главный врач, уролог"
-         data-doctor-image="{% static 'images/specialist-2.png' %}"
-         data-services='[{"name":"Андролог","price":"от 1500 ₽"},{"name":"Уролог","price":"от 1500 ₽"}]' role="listitem">
-                <div class="specialist-image">
-                    <a href="{% url 'HanYmar' %}" aria-label="Профиль врача Хан Умар Хаят">
-                        <img src="{% static 'images/specialist-2.png' %}" alt="Фото врача Хан Умар Хаят, андролог, главный врач, уролог" loading="lazy">
-                        <div class="experience-badge">Стаж 25 лет</div>
-                    </a>
-                </div>
-                <div class="specialist-info">
-                    <h3>Хан<br>Умар Хаят</h3>
-                    <p class="specialist-position">Андролог, главный врач, уролог</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Хан Умар Хаят">Записаться</button>
-                </div>
-            </article>
-
-            <article class="specialist-card" data-gender="female" data-specialization="gynecologist"
-         data-doctor-name="Хан<br>Тюльпан Тимергалиевна"
-         data-doctor-position="Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог"
-         data-doctor-image="{% static 'images/specialist-3.png' %}"
-         data-services='[{"name":"Акушер-гинеколог","price":"от 1500 ₽"},{"name":"Врач УЗИ","price":"от 1500 ₽"}]' role="listitem">
-                <div class="specialist-image">
-                    <a href="{% url 'HanTulpan' %}" aria-label="Профиль врача Хан Тюльпан Тимергалиевна">
-                        <img src="{% static 'images/specialist-3.png' %}" alt="Фото врача Хан Тюльпан Тимергалиевна, акушер-гинеколог, врач УЗИ" loading="lazy">
-                        <div class="experience-badge">Стаж 27 лет</div>
-                    </a>
-                </div>
-                <div class="specialist-info">
-                    <h3>Хан<br>Тюльпан Тимергалиевна</h3>
-                    <p class="specialist-position">Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Хан Тюльпан Тимергалиевна">Записаться</button>
-                </div>
-            </article>
-
-            <article class="specialist-card" data-gender="female" data-specialization="therapist"
-         data-doctor-name="Башарова<br>Альбина Шарипяновна"
-         data-doctor-position="Врач УЗИ, врач функциональной диагностики, кардиолог, терапевт"
-         data-doctor-image="{% static 'images/specialist-4.png' %}"
-         data-services='[{"name":"Врач УЗИ","price":"от 2500 ₽"},{"name":"Врач функциональной диагностики","price":"от 2500 ₽"},{"name":"Кардиолог","price":"от 2500 ₽"},{"name":"Терапевт","price":"от 2500 ₽"}]' role="listitem">
-                <div class="specialist-image">
-                    <a href="{% url 'BasharovaAlena' %}" aria-label="Профиль врача Башарова Альбина Шарипяновна">
-                        <img src="{% static 'images/specialist-4.png' %}" alt="Фото врача Башарова Альбина Шарипяновна, врач УЗИ, кардиолог, терапевт" loading="lazy">
-                        <div class="experience-badge">Стаж 15 лет</div>
-                    </a>
-                </div>
-                <div class="specialist-info">
-                    <h3>Башарова<br>Альбина Шарипяновна</h3>
-                    <p class="specialist-position">Врач УЗИ, врач функциональной диагностики, кардиолог, терапевт</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Башарова Альбина Шарипяновна">Записаться</button>
-                </div>
-            </article>
-
-            <article class="specialist-card" data-gender="male" data-specialization="surgeon"
-         data-doctor-name="Мартьянов<br>Иван Сергеевич"
-         data-doctor-position="Хирург"
-         data-doctor-image="{% static 'images/specialist-5.png' %}"
-         data-services='[{"name":"Хирург","price":"от 1500 ₽"}]' role="listitem">
-                <div class="specialist-image">
-                    <img src="{% static 'images/specialist-5.png' %}" alt="Фото врача Мартьянов Иван Сергеевич, хирург" loading="lazy">
-                    <div class="experience-badge">Стаж 6 лет</div>
-                </div>
-                <div class="specialist-info">
-                    <h3>Мартьянов<br>Иван Сергеевич</h3>
-                    <p class="specialist-position">Хирург</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Мартьянов Иван Сергеевич">Записаться</button>
-                </div>
-            </article>
-
-            <article class="specialist-card" data-gender="male" data-specialization="proctologist"
-         data-doctor-name="Юлдашев<br>Фарход Талибович"
-         data-doctor-position="Проктолог, эндоскопист"
-         data-doctor-image="{% static 'images/specialist-6.png' %}"
-         data-services='[{"name":"Проктолог","price":"от 1500 ₽"},{"name":"Эндоскопист","price":"от 1500 ₽"}]' role="listitem">
-                <div class="specialist-image">
-                    <a href="{% url 'Uldashev' %}" aria-label="Профиль врача Юлдашев Фарход Талибович">
-                        <img src="{% static 'images/specialist-6.png' %}" alt="Фото врача Юлдашев Фарход Талибович, проктолог, эндоскопист" loading="lazy">
-                        <div class="experience-badge">Стаж 14 лет</div>
-                    </a>
-                </div>
-                <div class="specialist-info">
-                    <h3>Юлдашев<br>Фарход Талибович</h3>
-                    <p class="specialist-position">Проктолог, эндоскопист</p>
-                    <button class="btn btn-primary appointment-btn" onclick="openAppointmentModal(this)" aria-label="Записаться к врачу Юлдашев Фарход Талибович">Записаться</button>
-                </div>
-            </article>
+            {% empty %}
+            <p>Врачи не найдены.</p>
+            {% endfor %}
         </div>
 
         <div class="show-more">
@@ -258,7 +142,7 @@
     </div>
 </section>
 
-<!-- Модальное окно записи к врачу -->
+<!-- Модальное окно записи к врачу (оставлено, но кнопка "Записаться" теперь ведет на внешнюю ссылку) -->
 <div id="appointmentModal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-content">
         <header class="modal-header">
@@ -353,7 +237,6 @@
                     </div>
                     <div class="service-item" role="listitem">
                         <span>Терапевт</span>
-                        <span>от 2500 ₽</span>
                     </div>
                 </div>
 
@@ -375,35 +258,36 @@
 
 {% block extra_js %}
 <script>
+// Функции для модального окна (оставлены, но не используются кнопкой "Записаться" напрямую)
 function openAppointmentModal(button) {
     const modal = document.getElementById('appointmentModal');
     const card = button.closest('.specialist-card');
 
     // Получаем данные врача
     const doctorName = card.dataset.doctorName;
-    const doctorPosition = card.dataset.doctorPosition;
-    const doctorImage = card.dataset.doctorImage;
-    const services = JSON.parse(card.dataset.services || '[]');
+    const doctorPosition = card.dataset.specialization; // Используем specialization как позицию для примера
+    const doctorImage = card.querySelector('.specialist-image img').src; // Получаем текущий src изображения
+    // const services = JSON.parse(card.dataset.services || '[]'); // Если нужно передавать услуги в модальное окно
 
     // Обновляем информацию в модальном окне
     const doctorAvatar = modal.querySelector('.doctor-avatar');
     const doctorNameElement = modal.querySelector('.doctor-details h4');
     const doctorPositionElement = modal.querySelector('.doctor-details p');
-    const servicesContainer = modal.querySelector('.services-prices');
+    // const servicesContainer = modal.querySelector('.services-prices');
 
     if (doctorAvatar) doctorAvatar.src = doctorImage;
     if (doctorNameElement) doctorNameElement.innerHTML = doctorName;
     if (doctorPositionElement) doctorPositionElement.textContent = doctorPosition;
 
-    // Обновляем список услуг
-    if (servicesContainer && services.length > 0) {
-        servicesContainer.innerHTML = services.map(service =>
-            `<div class="service-item" role="listitem">
-                <span>${service.name}</span>
-                <span>${service.price}</span>
-            </div>`
-        ).join('');
-    }
+    // Обновляем список услуг (если используется)
+    // if (servicesContainer && services.length > 0) {
+    //     servicesContainer.innerHTML = services.map(service =>
+    //         `<div class="service-item" role="listitem">
+    //             <span>${service.name}</span>
+    //             <span>${service.price}</span>
+    //         </div>`
+    //     ).join('');
+    // }
 
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
@@ -461,13 +345,14 @@ function filterSpecialists() {
     cards.forEach(card => {
         const gender = card.dataset.gender;
         const specialization = card.dataset.specialization;
-        const name = card.querySelector('h3').textContent.toLowerCase();
+        const name = card.dataset.doctorName.toLowerCase(); // Используем data-doctor-name
         const position = card.querySelector('.specialist-position').textContent.toLowerCase();
 
         let show = true;
 
         if (genderFilter && gender !== genderFilter) show = false;
-        if (specializationFilter && specialization !== specializationFilter) show = false;
+        // Проверяем, содержит ли категория врача выбранную специализацию
+        if (specializationFilter && !specialization.includes(specializationFilter)) show = false;
         if (searchQuery && !name.includes(searchQuery) && !position.includes(searchQuery)) show = false;
 
         card.style.display = show ? 'block' : 'none';
@@ -497,7 +382,7 @@ document.querySelectorAll('.alphabet-btn').forEach(btn => {
         let visibleCount = 0;
 
         cards.forEach(card => {
-            const name = card.querySelector('h3').textContent;
+            const name = card.dataset.doctorName; // Используем data-doctor-name
             const show = letter === '' || name.startsWith(letter);
             card.style.display = show ? 'block' : 'none';
             if (show) visibleCount++;
@@ -525,6 +410,9 @@ document.addEventListener('DOMContentLoaded', function() {
     announcement.setAttribute('aria-atomic', 'true');
     announcement.className = 'sr-only';
     document.body.appendChild(announcement);
+
+    // Инициализация фильтров при загрузке страницы
+    filterSpecialists();
 });
 </script>
 {% endblock %}

@@ -302,10 +302,32 @@ def dynamic_service(request, service_id):
     return render(request, 'products/cosmetic.html', context)
 
 
-# Остальные представления
 def specialists(request):
-    context = {'title': 'Специалисты - MedKhan®'}
-    return render(request, 'products/specialists.html', context)
+    # Получаем всех врачей из базы данных
+    doctors = Doctor.objects.all().order_by('full_name') # Сортируем по имени для удобства
+    context = {
+        'title': 'Специалисты - MedKhan®',
+        'doctors': doctors, # Передаем список врачей в шаблон
+    }
+    return render(request,'products/specialists.html',context)
+
+# НОВОЕ ПРЕДСТАВЛЕНИЕ ДЛЯ ДИНАМИЧЕСКОЙ СТРАНИЦЫ ВРАЧА
+def dynamic_doctor_profile(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+
+    # Получаем несколько акций (для примера, можно настроить фильтрацию по специализации врача)
+    promotions = Checkup.objects.all().order_by('?')[:3] # Случайные 3 акции
+
+    # Получаем других специалистов (исключая текущего)
+    other_specialists = Doctor.objects.exclude(id=doctor_id).order_by('?')[:2] # Случайные 2 других врача
+
+    context = {
+        'title': f'{doctor.full_name} - MedKhan®',
+        'doctor': doctor,
+        'promotions': promotions,
+        'other_specialists': other_specialists,
+    }
+    return render(request, 'products/doctor_profile.html', context) # Изменено на doctor_profile.html
 
 
 def AboutSenter(request):
@@ -317,11 +339,10 @@ def magazine(request):
     context = {'title': 'Журнал О Здоровье - MedKhan®'}
     return render(request, 'products/magazine.html', context)
 
-
-def HanYmar(request):
-    context = {'title': 'Хан Умар Хаят - Главный врач, уролог-андролог - MedKhan®'}
-    return render(request, 'products/HanYmar.html', context)
-
+# Удалены статические представления для отдельных врачей
+# def HanYmar(request):
+#     context = {'title': 'Хан Умар Хаят - Главный врач, уролог-андролог - MedKhan®'}
+#     return render(request, 'products/HanYmar.html', context)
 
 def BackPain(request):
     context = {'title': 'CHECK UP «Боль в спине Расширенный» - MedKhan®'}
@@ -342,22 +363,19 @@ def patients(request):
     context = {'title': 'Пациентам - MedKhan®'}
     return render(request, 'products/patients.html', context)
 
+# Удалены статические представления для отдельных врачей
+# def HanTulpan(request):
+#     context = {'title': 'Хан Тюльпан Тимергалиевна - Гинеколог врач УЗИ - MedKhan®'}
+#     return render(request, 'products/HanTulpan.html', context)
 
-def HanTulpan(request):
-    context = {'title': 'Хан Тюльпан Тимергалиевна - Гинеколог врач УЗИ - MedKhan®'}
-    return render(request, 'products/HanTulpan.html', context)
+# def NudelmanNatalia(request):
+#     context = {'title': 'Нудельман Наталия Федоровна - Невролог - MedKhan®'}
+#     return render(request, 'products/NudelmanNatalia.html', context)
 
+# def BasharovaAlena(request):
+#     context = {'title': 'Башарова Альбина Шарипзяновна - Кардиолог врач УЗИ терапевт - MedKhan®'}
+#     return render(request, 'products/BasharovaAlena.html', context)
 
-def NudelmanNatalia(request):
-    context = {'title': 'Нудельман Наталия Федоровна - Невролог - MedKhan®'}
-    return render(request, 'products/NudelmanNatalia.html', context)
-
-
-def BasharovaAlena(request):
-    context = {'title': 'Башарова Альбина Шарипзяновна - Кардиолог врач УЗИ терапевт - MedKhan®'}
-    return render(request, 'products/BasharovaAlena.html', context)
-
-
-def Uldashev(request):
-    context = {'title': 'Юлдашев Фарход Талибович - Проктолог - MedKhan®'}
-    return render(request, 'products/Uldashev.html', context)
+# def Uldashev(request):
+#     context = {'title': 'Юлдашев Фарход Талибович - Проктолог - MedKhan®'}
+#     return render(request, 'products/Uldashev.html', context)
