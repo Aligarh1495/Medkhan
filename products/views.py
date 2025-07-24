@@ -165,20 +165,47 @@ def stocks(request):
 # НОВЫЕ ПРЕДСТАВЛЕНИЯ ДЛЯ ОБРАБОТКИ ЗАЯВОК
 
 @csrf_exempt
-def submit_contact_request(request):
+def submit_contact_form(request): # Имя функции изменено на submit_contact_form для единообразия
     if request.method == 'POST':
         try:
-            data = json.loads(request.body)
+            # Проверяем, является ли запрос AJAX и содержит ли JSON
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest' and request.content_type == 'application/json':
+                data = json.loads(request.body)
+            else:
+                # Если это не AJAX JSON, то это обычная форма POST
+                data = request.POST.dict()
+
             name = data.get('name', '').strip()
             phone = data.get('phone', '').strip()
+            message = data.get('message', '').strip() # Получаем поле 'message' для вопроса
+            doctor_id = data.get('doctor_id') # Получаем ID врача
+            source_page = data.get('source_page', 'other') # Получаем источник страницы
 
-            if name and phone:
-                ContactRequest.objects.create(name=name, phone=phone)
-                return JsonResponse({'success': True, 'message': 'Заявка отправлена!'})
-            else:
-                return JsonResponse({'success': False, 'message': 'Заполните все поля'})
-        except:
-            return JsonResponse({'success': False, 'message': 'Ошибка отправки'})
+            if not name or not phone:
+                return JsonResponse({'success': False, 'message': 'Пожалуйста, заполните обязательные поля: Имя и Номер телефона.'})
+
+            # Находим врача, если doctor_id предоставлен
+            doctor_instance = None
+            if doctor_id:
+                try:
+                    doctor_instance = Doctor.objects.get(id=doctor_id)
+                except Doctor.DoesNotExist:
+                    pass # Врач не найден, оставляем related_doctor = None
+
+            ContactRequest.objects.create(
+                name=name,
+                phone=phone,
+                message=message, # Сохраняем вопрос в поле message
+                related_doctor=doctor_instance, # Связываем с врачом
+                source_page=source_page, # Устанавливаем источник страницы
+                ip_address=get_client_ip(request),
+                user_agent=request.META.get('HTTP_USER_AGENT', '')
+            )
+            return JsonResponse({'success': True, 'message': 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.'})
+        except Exception as e:
+            # Логируем ошибку для отладки
+            print(f"Error submitting contact form: {e}")
+            return JsonResponse({'success': False, 'message': f'Произошла ошибка при отправке заявки: {str(e)}'})
 
     return JsonResponse({'success': False, 'message': 'Неверный запрос'})
 
@@ -331,37 +358,33 @@ def dynamic_doctor_profile(request, doctor_id):
 
 
 def AboutSenter(request):
-    context = {'title': 'О Центре - MedKhan®'}
-    return render(request, 'products/AboutSenter.html', context)
+  context = {'title': 'О Центре - MedKhan®'}
+  return render(request, 'products/AboutSenter.html', context)
 
 
 def magazine(request):
-    context = {'title': 'Журнал О Здоровье - MedKhan®'}
-    return render(request, 'products/magazine.html', context)
+  context = {'title': 'Журнал О Здоровье - MedKhan®'}
+  return render(request, 'products/magazine.html', context)
 
-# Удалены статические представления для отдельных врачей
-# def HanYmar(request):
-#     context = {'title': 'Хан Умар Хаят - Главный врач, уролог-андролог - MedKhan®'}
-#     return render(request, 'products/HanYmar.html', context)
 
 def BackPain(request):
-    context = {'title': 'CHECK UP «Боль в спине Расширенный» - MedKhan®'}
-    return render(request, 'products/BackPain.html', context)
+  context = {'title': 'CHECK UP «Боль в спине Расширенный» - MedKhan®'}
+  return render(request, 'products/BackPain.html', context)
 
 
 def RestorativeMedicene(request):
-    context = {'title': 'Восстановительная медицина - MedKhan®'}
-    return render(request, 'products/RestorativeMedicene.html', context)
+  context = {'title': 'Восстановительная медицина - MedKhan®'}
+  return render(request, 'products/RestorativeMedicene.html', context)
 
 
 def cosmetic(request):
-    context = {'title': 'Косметология - MedKhan®'}
-    return render(request, 'products/cosmetic.html', context)
+  context = {'title': 'Косметология - MedKhan®'}
+  return render(request, 'products/cosmetic.html', context)
 
 
 def patients(request):
-    context = {'title': 'Пациентам - MedKhan®'}
-    return render(request, 'products/patients.html', context)
+  context = {'title': 'Пациентам - MedKhan®'}
+  return render(request, 'products/patients.html', context)
 
 # Удалены статические представления для отдельных врачей
 # def HanTulpan(request):

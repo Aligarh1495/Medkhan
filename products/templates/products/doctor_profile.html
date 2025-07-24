@@ -59,6 +59,23 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/style9.css' %}">
+<style>
+    /* Стили для сообщений формы */
+    .form-message {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: 500;
+        text-align: center;
+        color: var(--white); /* Цвет текста для сообщений на зеленом фоне */
+    }
+    .form-message.success {
+        background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый для успеха */
+    }
+    .form-message.error {
+        background-color: rgba(255, 0, 0, 0.3); /* Полупрозрачный красный для ошибки */
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -347,21 +364,25 @@
             </div>
 
             <div class="contact-form-card">
-                <form id="consultationForm">
+                <form id="consultationForm" method="post" action="{% url 'submit_contact_form' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="doctor_id" value="{{ doctor.id }}"> {# Передаем ID врача #}
+                    <input type="hidden" name="source_page" value="doctor_profile_page"> {# Указываем источник заявки #}
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Как вас зовут?" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" name="phone" placeholder="Ваш номер телефона" required>
+                        <input type="tel" name="phone" placeholder="Ваш номер телефона" required inputmode="tel">
                     </div>
                     <div class="form-group">
-                        <textarea name="question" placeholder="Ваш вопрос (необязательно)" rows="3"></textarea>
+                        <textarea name="message" placeholder="Ваш вопрос (необязательно)" rows="3"></textarea> {# Имя поля изменено на 'message' #}
                     </div>
                     <div class="form-note">
                         <p>Нажимая на кнопку, вы соглашаетесь с условиями обработки данных в соответствии с <a href="#">политикой конфиденциальности</a></p>
                     </div>
                     <button type="submit" class="btn btn-primary">Получить консультацию</button>
                 </form>
+                <div id="consultationFormMessage" class="form-message" style="display: none;"></div> {# Сообщение для формы #}
             </div>
         </div>
     </div>
@@ -391,19 +412,126 @@ function toggleAccordion(element) {
 
 // Обработка формы консультации
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('consultationForm');
+    const consultationForm = document.getElementById('consultationForm');
+    const consultationFormMessage = document.getElementById('consultationFormMessage');
+    const phoneInput = consultationForm.querySelector('input[name="phone"]');
 
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+    // Function to format phone number to +7 (XXX) XXX-XX-XX
+    function formatPhoneNumber(input) {
+        let value = input.value.replace(/\D/g, ''); // Remove all non-digits
 
-            // Здесь можно добавить логику отправки формы
-            const formData = new FormData(form);
-            console.log('Отправка формы:', Object.fromEntries(formData));
+        // If starts with 8, replace with 7 for consistent formatting
+        if (value.startsWith('8')) {
+            value = '7' + value.substring(1);
+        }
 
-            // Показать уведомление об успешной отправке
-            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-            form.reset();
+        // If it doesn't start with 7, prepend 7
+        if (!value.startsWith('7') && value.length > 0) {
+            value = '7' + value;
+        }
+
+        // Limit to 11 digits (including the initial 7)
+        value = value.substring(0, 11);
+
+        let formattedValue = '';
+        if (value.length > 0) {
+            formattedValue += '+' + value[0]; // +7
+        }
+        if (value.length > 1) {
+            formattedValue += ' (' + value.substring(1, 4);
+        }
+        if (value.length >= 5) {
+            formattedValue += ') ' + value.substring(4, 7);
+        }
+        if (value.length >= 8) {
+            formattedValue += '-' + value.substring(7, 9);
+        }
+        if (value.length >= 10) {
+            formattedValue += '-' + value.substring(9, 11);
+        }
+
+        input.value = formattedValue;
+    }
+
+    // Add event listener for phone input formatting
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        // Initial formatting in case of pre-filled value
+        phoneInput.addEventListener('focus', function() {
+            formatPhoneNumber(this);
+        });
+        phoneInput.addEventListener('blur', function() {
+            // On blur, if not 11 digits (after cleaning), clear or show error
+            let cleaned = this.value.replace(/\D/g, '');
+            if (cleaned.length !== 11 || !cleaned.startsWith('7')) {
+                this.value = ''; // Clear if invalid
+                // Optionally, show a client-side error message here
+                // consultationFormMessage.textContent = 'Пожалуйста, введите полный номер телефона (11 цифр, начиная с +7 или 8).';
+                // consultationFormMessage.className = 'form-message error';
+                // consultationFormMessage.style.display = 'block';
+            }
+        });
+    }
+
+    // Обработка формы консультации
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Предотвращаем стандартную отправку формы
+
+            const formData = new FormData(consultationForm);
+            const csrfToken = formData.get('csrfmiddlewaretoken'); // Получаем CSRF токен
+
+            // Собираем данные для отправки в JSON
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                message: formData.get('message'), // Используем 'message' для вопроса
+                doctor_id: formData.get('doctor_id'), // Получаем ID врача
+                source_page: formData.get('source_page'), // Получаем источник страницы
+            };
+
+            fetch(consultationForm.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken, // Отправляем CSRF токен в заголовке
+                    'X-Requested-With': 'XMLHttpRequest', // Указываем, что это AJAX запрос
+                    'Content-Type': 'application/json', // Указываем тип контента JSON
+                },
+                body: JSON.stringify(data), // Отправляем данные в формате JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    consultationFormMessage.textContent = data.message;
+                    consultationFormMessage.className = 'form-message success';
+                    consultationFormMessage.style.display = 'block';
+                    consultationForm.reset(); // Очищаем форму
+                    if (phoneInput) phoneInput.value = ''; // Очищаем поле телефона после сброса формы
+                } else {
+                    let errorMessage = 'Произошла ошибка при отправке заявки.';
+                    if (data.errors) {
+                        try {
+                            const errors = JSON.parse(data.errors);
+                            // Извлекаем сообщения об ошибках из JSON
+                            errorMessage = Object.values(errors).map(errList => errList.map(err => err.message).join(', ')).join('; ');
+                        } catch (e) {
+                            console.error("Failed to parse errors:", e);
+                        }
+                    }
+                    consultationFormMessage.textContent = errorMessage;
+                    consultationFormMessage.className = 'form-message error';
+                    consultationFormMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке формы:', error);
+                consultationFormMessage.textContent = 'Произошла ошибка сети. Пожалуйста, попробуйте еще раз.';
+                consultationFormMessage.className = 'form-message error';
+                consultationFormMessage.style.display = 'block';
+            });
         });
     }
 

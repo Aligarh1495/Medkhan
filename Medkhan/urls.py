@@ -3,7 +3,7 @@ from django.urls import path
 from products.views import (
     main, services, stocks, specialists, AboutSenter, magazine, BackPain,
     patients, dynamic_department, dynamic_service, dynamic_checkup,
-    submit_contact_request, quick_contact_request, dynamic_doctor_profile
+    submit_contact_form, quick_contact_request, dynamic_doctor_profile
 )
 
 urlpatterns = [
@@ -19,9 +19,9 @@ urlpatterns = [
     path('doctor/<int:doctor_id>/', dynamic_doctor_profile, name='dynamic_doctor_profile'),
 
     # API для заявок
-    path('api/contact-request/', submit_contact_request, name='submit_contact_request'),
+    path('api/contact-request/', submit_contact_form, name='submit_contact_form'),
     path('api/quick-contact/', quick_contact_request, name='quick_contact_request'),
-    path('submit-contact/', submit_contact_request, name='submit_contact_request'),
+    path('submit-contact/', submit_contact_form, name='submit_contact_form'),
 
     # Остальные страницы (статические страницы врачей удалены)
     path('specialists/', specialists, name='specialists'),
