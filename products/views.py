@@ -88,7 +88,7 @@ def services(request):
         department_services = department.services.all()
         if department_services.exists():
             products.append({
-                'image': f'/static/images/{department.name.lower()}.png',
+                'image': f'/static/images/department/{department.name.lower()}.png',
                 'name': department.name,
                 'description': department.description,
                 'services_count': department_services.count(),

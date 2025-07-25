@@ -181,32 +181,40 @@
             {% endif %}
         </article>
 
-        <!-- Неврология -->
+        <!-- Травматология -->
         <article class="service-card" role="listitem">
-            {% if departments_dict.Неврология %}
-            <a href="{% url 'dynamic_department' departments_dict.Неврология.id %}">
-            {% endif %}
+            {% for dept_name, dept in departments_dict.items %}
+                {% if 'Травматология' in dept_name or 'травматология' in dept_name %}
+                <a href="{% url 'dynamic_department' dept.id %}">
+                {% endif %}
+            {% endfor %}
                 <div class="service-content">
-                    <h3>Неврология</h3>
-                    <img src="{% static 'images/нервы_1.png' %}" alt="Иконка неврологии" class="service-icon" loading="lazy">
+                    <h3>Травматология</h3>
+                    <img src="{% static 'images/department/травматология.png' %}" alt="Иконка Травматология" class="service-icon" loading="lazy">
                 </div>
-            {% if departments_dict.Неврология %}
-            </a>
-            {% endif %}
+            {% for dept_name, dept in departments_dict.items %}
+                {% if 'Травматология' in dept_name or 'травматология' in dept_name %}
+                </a>
+                {% endif %}
+            {% endfor %}
         </article>
 
-        <!-- Гастроэнтерология -->
+        <!-- Эндоскопия -->
         <article class="service-card green-bg" role="listitem">
-            {% if departments_dict.Гастроэнтерология %}
-            <a href="{% url 'dynamic_department' departments_dict.Гастроэнтерология.id %}">
-            {% endif %}
+            {% for dept_name, dept in departments_dict.items %}
+                {% if 'Эндоскопия' in dept_name or 'эндоскопия' in dept_name %}
+                <a href="{% url 'dynamic_department' dept.id %}">
+                {% endif %}
+            {% endfor %}
                 <div class="service-content">
-                    <h3>Гастроэнтерология</h3>
-                    <img src="{% static 'images/желудок.png' %}" alt="Иконка гастроэнтерологии" class="service-icon" loading="lazy">
+                    <h3>Эндоскопия</h3>
+                    <img src="{% static 'images/department/эндоскопия.png' %}" alt="Иконка Эндоскопии" class="service-icon" loading="lazy">
                 </div>
-            {% if departments_dict.Гастроэнтерология %}
-            </a>
-            {% endif %}
+            {% for dept_name, dept in departments_dict.items %}
+                {% if 'Эндоскопия' in dept_name or 'эндоскопия' in dept_name %}
+                </a>
+                {% endif %}
+            {% endfor %}
         </article>
 
         <!-- Хирургия -->
@@ -355,52 +363,124 @@
             </header>
 
             <div class="specialists-grid" role="list" aria-label="Список врачей-специалистов">
-                <!-- Специалист 1 -->
+                <!-- Специалист 1 - Нудельман Наталия Федоровна -->
                 <article class="specialist-card" role="listitem">
-                    <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-1.png' %}" alt="Фото врача Нудельман Наталия Федоровна, невролог" class="specialist-photo" loading="lazy">
-                        <div class="price-badge">Услуги от 1500 ₽</div>
-                    </div>
-                    <div class="specialist-info">
-                        <h3 class="specialist-name">Нудельман<br>Наталия Федоровна</h3>
-                        <p class="specialist-position">Врач-невролог</p>
-                    </div>
+                    {% for doctor in doctors %}
+                        {% if "Нудельман Наталия Федоровна" in doctor.full_name %}
+                            <a href="{% url 'dynamic_doctor_profile' doctor.id %}" class="specialist-profile-link" aria-label="Профиль врача {{ doctor.full_name }}">
+                                <div class="specialist-photo-container">
+                                    <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}{% static 'images/specialist-1.png' %}{% endif %}"
+                                         alt="Фото врача {{ doctor.full_name }}" class="specialist-photo" loading="lazy">
+                                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                                </div>
+                                <div class="specialist-info">
+                                    <h3 class="specialist-name">{{ doctor.full_name|linebreaksbr }}</h3>
+                                    <p class="specialist-position">{{ doctor.category|default:"Врач-невролог" }}</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% empty %}
+                        <a href="{% url 'specialists' %}" class="specialist-profile-link">
+                            <div class="specialist-photo-container">
+                                <img src="{% static 'images/specialist-1.png' %}" alt="Фото врача Нудельман Наталия Федоровна, невролог" class="specialist-photo" loading="lazy">
+                                <div class="price-badge">Услуги от 1500 ₽</div>
+                            </div>
+                            <div class="specialist-info">
+                                <h3 class="specialist-name">Нудельман<br>Наталия Федоровна</h3>
+                                <p class="specialist-position">Врач-невролог</p>
+                            </div>
+                        </a>
+                    {% endfor %}
                 </article>
 
-                <!-- Специалист 2 -->
+                <!-- Специалист 2 - Хан Умар Хаят -->
                 <article class="specialist-card" role="listitem">
-                    <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-2.png' %}" alt="Фото врача Хан Умар Хаят, андролог, главный врач, уролог" class="specialist-photo" loading="lazy">
-                        <div class="price-badge">Услуги от 1500 ₽</div>
-                    </div>
-                    <div class="specialist-info">
-                        <h3 class="specialist-name">Хан<br>Умар Хаят</h3>
-                        <p class="specialist-position">Андролог, главный врач, уролог</p>
-                    </div>
+                    {% for doctor in doctors %}
+                        {% if "Умар" in doctor.full_name %}
+                            <a href="{% url 'dynamic_doctor_profile' doctor.id %}" class="specialist-profile-link" aria-label="Профиль врача {{ doctor.full_name }}">
+                                <div class="specialist-photo-container">
+                                    <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}{% static 'images/specialist-2.png' %}{% endif %}"
+                                         alt="Фото врача {{ doctor.full_name }}" class="specialist-photo" loading="lazy">
+                                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                                </div>
+                                <div class="specialist-info">
+                                    <h3 class="specialist-name">{{ doctor.full_name|linebreaksbr }}</h3>
+                                    <p class="specialist-position">{{ doctor.category|default:"Андролог, главный врач, уролог" }}</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% empty %}
+                        <a href="{% url 'specialists' %}" class="specialist-profile-link">
+                            <div class="specialist-photo-container">
+                                <img src="{% static 'images/specialist-2.png' %}" alt="Фото врача Хан Умар Хаят, андролог, главный врач, уролог" class="specialist-photo" loading="lazy">
+                                <div class="price-badge">Услуги от 1500 ₽</div>
+                            </div>
+                            <div class="specialist-info">
+                                <h3 class="specialist-name">Хан<br>Умар Хаят</h3>
+                                <p class="specialist-position">Андролог, главный врач, уролог</p>
+                            </div>
+                        </a>
+                    {% endfor %}
                 </article>
 
-                <!-- Специалист 3 -->
+                <!-- Специалист 3 - Хан Тюльпан Тимергалиевна -->
                 <article class="specialist-card" role="listitem">
-                    <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-3.png' %}" alt="Фото врача Хан Тюльпан Тимергалиевна, акушер-гинеколог" class="specialist-photo" loading="lazy">
-                        <div class="price-badge">Услуги от 1500 ₽</div>
-                    </div>
-                    <div class="specialist-info">
-                        <h3 class="specialist-name">Хан<br>Тюльпан Тимергалиевна</h3>
-                        <p class="specialist-position">Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог</p>
-                    </div>
+                    {% for doctor in doctors %}
+                        {% if "Тюльпан" in doctor.full_name %}
+                            <a href="{% url 'dynamic_doctor_profile' doctor.id %}" class="specialist-profile-link" aria-label="Профиль врача {{ doctor.full_name }}">
+                                <div class="specialist-photo-container">
+                                    <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}{% static 'images/specialist-3.png' %}{% endif %}"
+                                         alt="Фото врача {{ doctor.full_name }}" class="specialist-photo" loading="lazy">
+                                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                                </div>
+                                <div class="specialist-info">
+                                    <h3 class="specialist-name">{{ doctor.full_name|linebreaksbr }}</h3>
+                                    <p class="specialist-position">{{ doctor.category|default:"Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог" }}</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% empty %}
+                        <a href="{% url 'specialists' %}" class="specialist-profile-link">
+                            <div class="specialist-photo-container">
+                                <img src="{% static 'images/specialist-3.png' %}" alt="Фото врача Хан Тюльпан Тимергалиевна, акушер-гинеколог" class="specialist-photo" loading="lazy">
+                                <div class="price-badge">Услуги от 1500 ₽</div>
+                            </div>
+                            <div class="specialist-info">
+                                <h3 class="specialist-name">Хан<br>Тюльпан Тимергалиевна</h3>
+                                <p class="specialist-position">Акушер-гинеколог, врач УЗИ, генеральный директор, гинеколог</p>
+                            </div>
+                        </a>
+                    {% endfor %}
                 </article>
 
-                <!-- Специалист 4 -->
+                <!-- Специалист 4 - Башарова Альбина Шарипзяновна -->
                 <article class="specialist-card" role="listitem">
-                    <div class="specialist-photo-container">
-                        <img src="{% static 'images/specialist-4.png' %}" alt="Фото врача Башарова Альбина Шарипзяновна, терапевт" class="specialist-photo" loading="lazy">
-                        <div class="price-badge">Услуги от 1500 ₽</div>
-                    </div>
-                    <div class="specialist-info">
-                        <h3 class="specialist-name">Башарова<br>Альбина Шарипзяновна</h3>
-                        <p class="specialist-position">Терапевт, главный специалист в сфере медицины</p>
-                    </div>
+                    {% for doctor in doctors %}
+                        {% if "Башарова" in doctor.full_name %}
+                            <a href="{% url 'dynamic_doctor_profile' doctor.id %}" class="specialist-profile-link" aria-label="Профиль врача {{ doctor.full_name }}">
+                                <div class="specialist-photo-container">
+                                    <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}{% static 'images/specialist-4.png' %}{% endif %}"
+                                         alt="Фото врача {{ doctor.full_name }}" class="specialist-photo" loading="lazy">
+                                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                                </div>
+                                <div class="specialist-info">
+                                    <h3 class="specialist-name">{{ doctor.full_name|linebreaksbr }}</h3>
+                                    <p class="specialist-position">{{ doctor.category|default:"Терапевт, главный специалист в сфере медицины" }}</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% empty %}
+                        <a href="{% url 'specialists' %}" class="specialist-profile-link">
+                            <div class="specialist-photo-container">
+                                <img src="{% static 'images/specialist-4.png' %}" alt="Фото врача Башарова Альбина Шарипзяновна, терапевт" class="specialist-photo" loading="lazy">
+                                <div class="price-badge">Услуги от 1500 ₽</div>
+                            </div>
+                            <div class="specialist-info">
+                                <h3 class="specialist-name">Башарова<br>Альбина Шарипзяновна</h3>
+                                <p class="specialist-position">Терапевт, главный специалист в сфере медицины</p>
+                            </div>
+                        </a>
+                    {% endfor %}
                 </article>
             </div>
         </section>

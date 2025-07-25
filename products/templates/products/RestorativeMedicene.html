@@ -123,9 +123,10 @@
 
         <div class="specialists-grid">
             {% for doctor in doctors %}
-            <div class="specialist-card">
+            <a href="{% url 'dynamic_doctor_profile' doctor.id %}" class="specialist-card">
                 <div class="specialist-image">
-                    <img src="{% static 'images/specialist-1.png' %}" alt="{{ doctor.full_name }}">
+                    <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}/placeholder.svg?height=250&width=250&query=doctor%20{{ doctor.full_name }}{% endif %}"
+                         alt="Фото врача {{ doctor.full_name }}" loading="lazy">
                     <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
                 </div>
                 <div class="specialist-info">
@@ -133,10 +134,10 @@
                     <p class="specialist-position">{{ doctor.category|default:"Специалист" }}</p>
                     <p class="specialist-experience">Опыт: {{ doctor.experience_years }} лет</p>
                 </div>
-            </div>
+            </a>
             {% empty %}
             <!-- Статические карточки если нет врачей в БД -->
-            <div class="specialist-card">
+            <a href="#" class="specialist-card">
                 <div class="specialist-image">
                     <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна">
                     <div class="price-badge">Услуги от 1500 ₽</div>
@@ -145,7 +146,7 @@
                     <h3>Нудельман<br>Наталия Федоровна</h3>
                     <p class="specialist-position">Врач-невролог</p>
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
     </div>

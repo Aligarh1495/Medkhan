@@ -174,8 +174,11 @@
             {% for doctor in doctors %}
             <div class="specialist-card">
                 <div class="specialist-image">
-                    <img src="{% static 'images/gallery4.png' %}" alt="{{ doctor.full_name }}">
-                    <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                    <a href="{% url 'dynamic_doctor_profile' doctor.id %}" aria-label="Профиль врача {{ doctor.full_name }}">
+                        <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}/placeholder.svg?height=250&width=250&query=doctor%20{{ doctor.full_name }}{% endif %}"
+                             alt="Фото врача {{ doctor.full_name }}" loading="lazy">
+                        <div class="price-badge">Услуги от {{ doctor.consultation_cost|default:"1500" }} ₽</div>
+                    </a>
                 </div>
                 <div class="specialist-info">
                     <h3>{{ doctor.full_name }}</h3>
