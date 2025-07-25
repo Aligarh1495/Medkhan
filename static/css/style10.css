@@ -84,6 +84,17 @@ body {
   color: var(--primary-green);
 }
 
+.license-number a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.license-number a:hover {
+    color: var(--primary-green);
+    text-decoration: underline;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
