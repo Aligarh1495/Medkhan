@@ -122,7 +122,12 @@
   top: 50%;
   transform: translateY(-50%);
 }
-
+.contact-phone {
+  color: var(--green);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+}
 /* About Promotion */
 .about-promotion {
   padding: 60px 0;
