@@ -68,6 +68,17 @@ WSGI_APPLICATION = 'Medkhan.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 if LOCAL:
+    '''DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            # 'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'medkhan_db',
+            'USER': 'medkhan_user',
+            'PASSWORD': '5941',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }'''
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,18 +97,6 @@ else:
             "PORT": "",
         }
     }
-
-''' DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'medkhan_db',
-        'USER': 'medkhan_user',
-        'PASSWORD': '5941',
-        'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }'''
 
 
 AUTH_PASSWORD_VALIDATORS = [
