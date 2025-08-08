@@ -31,12 +31,16 @@ body {
 
 /* Header */
 .header {
+  height: 100px;
+  padding: 0;
+  display: flex;
+  align-items: center;
   background-color: var(--white);
   box-shadow: var(--shadow);
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 15px 0;
+  overflow: hidden;
 }
 
 .header-container {
@@ -52,8 +56,9 @@ body {
 }
 
 .logo img {
-  height: 90px;
+  height: 81px;
   width: auto;
+  max-width: 150px;
 }
 
 .phone-number {

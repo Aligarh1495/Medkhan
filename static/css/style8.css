@@ -22,12 +22,16 @@ body {
 
 /* Header Styles */
 .header {
+  height: 100px;
+  padding: 0;
+  display: flex;
+  align-items: center;
   background-color: var(--white);
   box-shadow: var(--shadow);
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 15px 0;
+  overflow: hidden;
 }
 
 .container {
@@ -45,11 +49,10 @@ body {
 
 .logo {
   flex-shrink: 0;
-  transform: scale(1.6);
 }
 
 .logo img {
-  height: 45px;
+  height: 81px;
   width: auto;
   max-width: 150px;
 }

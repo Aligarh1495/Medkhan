@@ -37,11 +37,11 @@
 
             <nav class="main-nav">
                 <ul>
-                    <li><a href="{% url 'services' %}" class="active">Услуги</a></li>
-                    <li><a href="{% url 'stocks' %}">Акции</a></li>
-                    <li><a href="{% url 'specialists' %}">Специалисты</a></li>
-                    <li><a href="#reviews">Отзывы</a></li>
-                    <li><a href="{% url 'magazine' %}">Журнал</a></li>
+        <li><a href="{% url 'services' %}" {% if request.resolver_match.url_name == 'services' %}class="active"{% endif %}>Услуги</a></li>
+        <li><a href="{% url 'stocks' %}" {% if request.resolver_match.url_name == 'stocks' %}class="active"{% endif %}>Акции</a></li>
+        <li><a href="{% url 'specialists' %}" {% if request.resolver_match.url_name == 'specialists' %}class="active"{% endif %}>Специалисты</a></li>
+        <li><a href="{% url 'main' %}#reviews">Отзывы</a></li> <!-- без class="active" -->
+        <li><a href="{% url 'magazine' %}" {% if request.resolver_match.url_name == 'magazine' %}class="active"{% endif %}>Журнал</a></li>
                 </ul>
             </nav>
 
