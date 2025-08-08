@@ -225,6 +225,22 @@ h2 {
   color: var(--light-text);
   font-size: 14px;
 }
+/* Добавляем стили для текста внутри карточки */
+.specialist-info h3,
+.specialist-position,
+.specialist-experience {
+  color: var(--dark-text); /* Черный цвет текста */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+/* Убираем стандартные стили ссылки */
+.specialist-card:link,
+.specialist-card:visited,
+.specialist-card:hover,
+.specialist-card:active {
+  text-decoration: none;
+  color: var(--dark-text);
+}
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
