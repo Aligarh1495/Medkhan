@@ -175,10 +175,16 @@ h2 {
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: transform 0.3s ease;
+  text-decoration: none; /* Убираем подчеркивание */
+  color: var(--dark-text); /* Черный цвет текста */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .specialist-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .specialist-image {

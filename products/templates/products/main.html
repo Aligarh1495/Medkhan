@@ -184,39 +184,31 @@
         </article>
 
         <!-- Травматология -->
-        <article class="service-card" role="listitem">
-            {% for dept_name, dept in departments_dict.items %}
-                {% if 'Травматология' in dept_name or 'травматология' in dept_name %}
-                <a href="{% url 'dynamic_department' dept.id %}">
-                {% endif %}
-            {% endfor %}
+        <article class="service-card green-bg" role="listitem">
+            {% if departments_dict.Травматология %}
+            <a href="{% url 'dynamic_department' departments_dict.Травматология.id %}">
+            {% endif %}
                 <div class="service-content">
                     <h3>Травматология</h3>
-                    <img src="{% static 'images/department/травматология.png' %}" alt="Иконка Травматология" class="service-icon" loading="lazy">
+                    <img src="{% static 'images/department/Травматология.png' %}" alt="Иконка травмотологии" class="service-icon" loading="lazy">
                 </div>
-            {% for dept_name, dept in departments_dict.items %}
-                {% if 'Травматология' in dept_name or 'травматология' in dept_name %}
-                </a>
-                {% endif %}
-            {% endfor %}
+            {% if departments_dict.Травматология %}
+            </a>
+            {% endif %}
         </article>
 
         <!-- Эндоскопия -->
         <article class="service-card green-bg" role="listitem">
-            {% for dept_name, dept in departments_dict.items %}
-                {% if 'Эндоскопия' in dept_name or 'эндоскопия' in dept_name %}
-                <a href="{% url 'dynamic_department' dept.id %}">
-                {% endif %}
-            {% endfor %}
+            {% if departments_dict.Эндоскопия %}
+            <a href="{% url 'dynamic_department' departments_dict.Эндоскопия.id %}">
+            {% endif %}
                 <div class="service-content">
                     <h3>Эндоскопия</h3>
-                    <img src="{% static 'images/department/эндоскопия.png' %}" alt="Иконка Эндоскопии" class="service-icon" loading="lazy">
+                    <img src="{% static 'images/department/Эндоскопия.png' %}" alt="Иконка Эндоскопии" class="service-icon" loading="lazy">
                 </div>
-            {% for dept_name, dept in departments_dict.items %}
-                {% if 'Эндоскопия' in dept_name or 'эндоскопия' in dept_name %}
-                </a>
-                {% endif %}
-            {% endfor %}
+            {% if departments_dict.Эндоскопия %}
+            </a>
+            {% endif %}
         </article>
 
         <!-- Хирургия -->

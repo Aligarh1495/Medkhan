@@ -25,7 +25,10 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
-
+/* Убираем подчеркивания у всех ссылок */
+a {
+  text-decoration: none;
+}
 /* Header Styles */
 .header {
   height: 100px;
@@ -304,7 +307,7 @@ body {
 .current-price {
   font-size: 24px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--primary-green) !important; /* Делаем все актуальные цены зелеными */
   margin-right: 10px;
 }
 
@@ -315,7 +318,7 @@ body {
 
 .old-price {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--light-text) !important;
   text-decoration: line-through;
 }
 
@@ -340,7 +343,24 @@ body {
   text-align: center;
   grid-column: 1 / -1;
 }
+/* Для большой карточки (featured) */
+.promotion-card.featured .current-price {
+  font-size: 28px;
+}
 
+.promotion-card.featured .old-price {
+  font-size: 18px;
+}
+
+/* Убираем подчеркивание при наведении */
+.promotion-card a:hover {
+  text-decoration: none;
+}
+
+/* Убираем подчеркивание в хлебных крошках */
+.breadcrumbs a:hover {
+  text-decoration: none;
+}
 /* Contact Info Section */
 .contact-info-section {
   padding: 60px 0;

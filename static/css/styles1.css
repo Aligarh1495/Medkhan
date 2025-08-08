@@ -671,7 +671,9 @@
             max-width: 50%;
         }
 
-        .large .current-price,
+        .large .current-price {
+            color: var(--primary-green) !important; /* Явно указываем зеленый цвет */
+        }
         .large .check-up,
         .large .promo-name {
             color: black;

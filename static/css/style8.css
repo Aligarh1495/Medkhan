@@ -234,7 +234,8 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
-  margin-bottom: 40px;
+
+  align-items: stretch; /* Добавлено для выравнивания высоты карточек */
 }
 
 .specialist-card {
@@ -242,7 +243,9 @@ body {
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: transform 0.3s ease;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .specialist-card:hover {
@@ -253,13 +256,15 @@ body {
   position: relative;
   height: 250px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .specialist-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: contain; /* Изменено с cover на contain */
+  object-position: top center;
+  background-color: #f0f0f0; /* Фон для прозрачных изображений */
 }
 
 .experience-badge {
@@ -276,7 +281,10 @@ body {
 
 .specialist-info {
   padding: 20px;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 180px;
 }
 
 .specialist-info h3 {
@@ -284,7 +292,6 @@ body {
   font-weight: 600;
   margin-bottom: 8px;
   line-height: 1.3;
-  color: var(--dark-text);
 }
 
 .specialist-position {
@@ -296,6 +303,9 @@ body {
 
 .appointment-btn {
   width: 100%;
+  margin-top: auto; /* Ключевое изменение - прижимает кнопку к низу */
+  padding: 12px;
+  text-align: center
 }
 
 /* Show More */
