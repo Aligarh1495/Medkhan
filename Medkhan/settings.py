@@ -69,16 +69,16 @@ WSGI_APPLICATION = 'Medkhan.wsgi.application'
 
 if LOCAL:
     '''DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
             # 'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'medkhan_db',
             'USER': 'medkhan_user',
             'PASSWORD': '5941',
             'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }'''
+                'PORT': '5432',
+            }
+        }'''
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -130,8 +130,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Для collectstatic
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
