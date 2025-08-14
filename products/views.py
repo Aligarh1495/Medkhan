@@ -67,7 +67,8 @@ def main(request):
     popular_departments = Department.objects.filter(
         name__in=[
             'Урология', 'Гинекология', 'Неврология',
-            'Гастроэнтерология', 'Хирургия', 'Проктология'
+            'Хирургия', 'Проктология', 'Эндоскопия',
+            'Травматология'
         ]
     )
     departments_dict = {dept.name: dept for dept in popular_departments}
