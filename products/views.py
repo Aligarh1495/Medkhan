@@ -83,7 +83,6 @@ def main(request):
 
 def services(request):
     departments = Department.objects.prefetch_related('services').all()
-
     products = []
     for department in departments:
         department_services = department.services.all()
