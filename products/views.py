@@ -161,7 +161,6 @@ def stocks(request):
     }
     return render(request, 'products/stocks.html', context)
 
-
 # НОВЫЕ ПРЕДСТАВЛЕНИЯ ДЛЯ ОБРАБОТКИ ЗАЯВОК
 
 @csrf_exempt

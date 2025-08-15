@@ -1,452 +1,311 @@
+{% extends 'products/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+{% block title %}Медицинские услуги - МедХан{% endblock %}
 
-    <!-- Базовые стили -->
-    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
-<!--    <link rel="stylesheet" href="/static/css/base.css">-->
+{% block meta_description %}
+<meta name="description" content="Медицинские услуги клиники МедХан: урология, гинекология, неврология, хирургия. Запись на прием онлайн. Набережные Челны, 52-й комплекс, 20А">
+{% endblock %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{% block meta_keywords %}
+<meta name="keywords" content="медицинские услуги, врачи, клиника, Набережные Челны, МедХан, запись к врачу">
+{% endblock %}
 
-    <meta name="description" content="Медицинские услуги клиники МедХан: урология, гинекология, неврология, хирургия. Запись на прием онлайн. Набережные Челны, 52-й комплекс, 20А">
-    <meta name="keywords" content="медицинские услуги, врачи, клиника, Набережные Челны, МедХан, запись к врачу">
-</head>
-<body>
-    <!-- Шапка сайта -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="{% url 'main' %}" class="logo">
-                <img src="{% static 'images/лого_верх.png' %}" alt="MedKhan">
-            </a>
-            <div class="phone-number">
-                <a href="tel:+79011433434">+7 (901) 143-34-34</a>
-            </div>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+{% endblock %}
 
-            <!-- Мобильное меню -->
-            <button class="mobile-menu-toggle" aria-label="Открыть меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <nav class="main-nav">
-                <ul>
-        <li><a href="{% url 'services' %}" {% if request.resolver_match.url_name == 'services' %}class="active"{% endif %}>Услуги</a></li>
-        <li><a href="{% url 'stocks' %}" {% if request.resolver_match.url_name == 'stocks' %}class="active"{% endif %}>Акции</a></li>
-        <li><a href="{% url 'specialists' %}" {% if request.resolver_match.url_name == 'specialists' %}class="active"{% endif %}>Специалисты</a></li>
-        <li><a href="{% url 'main' %}#reviews">Отзывы</a></li> <!-- без class="active" -->
-        <li><a href="{% url 'magazine' %}" {% if request.resolver_match.url_name == 'magazine' %}class="active"{% endif %}>Журнал</a></li>
-                </ul>
-            </nav>
-
-            <!-- Активная кнопка записи -->
-            <a href="https://booking.medflex.ru?user=33f85b2ad6c658bc5ed6f3e1afb512a6&source=3"
-               target="_blank"
-               class="btn btn-primary booking-btn"
-               rel="noopener noreferrer">
-                Записаться
-            </a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1 class="page-title">Медицинские услуги</h1>
-                <div class="search-container">
-                    <div class="search-box">
-                        <input type="text" class="search-input" placeholder="Поиск по названию услуги" id="searchInput">
-                        <div class="search-icon">🔍</div>
-                    </div>
-                    <div class="search-dropdown" id="searchDropdown">
-                        <div class="services-categories">
-                            <div class="service-category">
-                                <h4>Тип мед. учреждения</h4>
-                                <ul>
-                                    <li>диагностический центр</li>
-                                    <li>центр планирования семьи</li>
-                                    <li>медицинская лаборатория</li>
-                                    <li>многопрофильная клиника</li>
-                                </ul>
-                            </div>
-                            <div class="service-category">
-                                <h4>Диагностика</h4>
-                                <ul>
-                                    <li>УЗИ</li>
-                                    <li>анализ на коронавирус</li>
-                                    <li>скрининг</li>
-                                    <li>УЗИ по беременности</li>
-                                    <li>лабораторная диагностика</li>
-                                    <li>эндоскопия</li>
-                                    <li>функциональная диагностика</li>
-                                    <li>генетическое обследование</li>
-                                    <li>программы комплексного обследования</li>
-                                    <li>обследование на ЗППП</li>
-                                </ul>
-                            </div>
-                            <div class="service-category">
-                                <h4>Общая медицина</h4>
-                                <ul>
-                                    <li>онкология</li>
-                                    <li>психология</li>
-                                    <li>кардиология</li>
-                                    <li>флебология</li>
-                                    <li>ведение беременности</li>
-                                    <li>эндокринология</li>
-                                    <li>маммология</li>
-                                    <li>гинекология</li>
-                                    <li>неврология</li>
-                                    <li>инфектология</li>
-                                    <li>урология</li>
-                                    <li>гематология</li>
-                                    <li>дерматология</li>
-                                    <li>гастроэнтерология</li>
-                                    <li>аллергология</li>
-                                    <li>ревматология</li>
-                                    <li>ангиология</li>
-                                    <li>колопроктология</li>
-                                    <li>андрология</li>
-                                    <li>общая терапия</li>
-                                    <li>венерология</li>
-                                </ul>
-                            </div>
-                            <div class="service-category">
-                                <h4>Восстановительная медицина</h4>
-                                <ul>
-                                    <li>косметология</li>
-                                    <li>физиотерапия</li>
-                                    <li>лучевая терапия</li>
-                                    <li>процедурный кабинет</li>
-                                    <li>ударно-волновая терапия</li>
-                                    <li>лечебный массаж</li>
-                                    <li>подготовка к беременности</li>
-                                    <li>лечение ЗППП</li>
-                                </ul>
-                            </div>
-                            <div class="service-category">
-                                <h4>Лицо и тело</h4>
-                                <ul>
-                                    <li>массаж</li>
-                                    <li>контурная пластика</li>
-                                </ul>
-                            </div>
-                            <div class="service-category">
-                                <h4>Медицина для детей</h4>
-                                <ul>
-                                    <li>УЗИ ребенку</li>
-                                    <li>детский массаж</li>
-                                    <li>массаж для грудничков</li>
-                                </ul>
-                            </div>
-                            <div class="service-category">
-                                <h4>Хирургия</h4>
-                                <ul>
-                                    <li>общая хирургия</li>
-                                    <li>сосудистая хирургия</li>
-                                    <li>удаление новообразований</li>
-                                    <li>амбулаторная хирургия</li>
-                                    <li>эндоскопическая хирургия</li>
-                                    <li>радиоволновая хирургия</li>
-                                    <li>хирургия-гинекология</li>
-                                </ul>
-                            </div>
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Медицинские услуги</h1>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Поиск по названию услуги" id="searchInput">
+                    <div class="search-icon">🔍</div>
+                </div>
+                <div class="search-dropdown" id="searchDropdown">
+                    <div class="services-categories">
+                        <div class="service-category">
+                            <h4>Тип мед. учреждения</h4>
+                            <ul>
+                                <li>диагностический центр</li>
+                                <li>центр планирования семьи</li>
+                                <li>медицинская лаборатория</li>
+                                <li>многопрофильная клиника</li>
+                            </ul>
+                        </div>
+                        <div class="service-category">
+                            <h4>Диагностика</h4>
+                            <ul>
+                                <li>УЗИ</li>
+                                <li>анализ на коронавирус</li>
+                                <li>скрининг</li>
+                                <li>УЗИ по беременности</li>
+                                <li>лабораторная диагностика</li>
+                                <li>эндоскопия</li>
+                                <li>функциональная диагностика</li>
+                                <li>генетическое обследование</li>
+                                <li>программы комплексного обследования</li>
+                                <li>обследование на ЗППП</li>
+                            </ul>
+                        </div>
+                        <div class="service-category">
+                            <h4>Общая медицина</h4>
+                            <ul>
+                                <li>онкология</li>
+                                <li>психология</li>
+                                <li>кардиология</li>
+                                <li>флебология</li>
+                                <li>ведение беременности</li>
+                                <li>эндокринология</li>
+                                <li>маммология</li>
+                                <li>гинекология</li>
+                                <li>неврология</li>
+                                <li>инфектология</li>
+                                <li>урология</li>
+                                <li>гематология</li>
+                                <li>дерматология</li>
+                                <li>гастроэнтерология</li>
+                                <li>аллергология</li>
+                                <li>ревматология</li>
+                                <li>ангиология</li>
+                                <li>колопроктология</li>
+                                <li>андрология</li>
+                                <li>общая терапия</li>
+                                <li>венерология</li>
+                            </ul>
+                        </div>
+                        <div class="service-category">
+                            <h4>Восстановительная медицина</h4>
+                            <ul>
+                                <li>косметология</li>
+                                <li>физиотерапия</li>
+                                <li>лучевая терапия</li>
+                                <li>процедурный кабинет</li>
+                                <li>ударно-волновая терапия</li>
+                                <li>лечебный массаж</li>
+                                <li>подготовка к беременности</li>
+                                <li>лечение ЗППП</li>
+                            </ul>
+                        </div>
+                        <div class="service-category">
+                            <h4>Лицо и тело</h4>
+                            <ul>
+                                <li>массаж</li>
+                                <li>контурная пластика</li>
+                            </ul>
+                        </div>
+                        <div class="service-category">
+                            <h4>Медицина для детей</h4>
+                            <ul>
+                                <li>УЗИ ребенку</li>
+                                <li>детский массаж</li>
+                                <li>массаж для грудничков</li>
+                            </ul>
+                        </div>
+                        <div class="service-category">
+                            <h4>Хирургия</h4>
+                            <ul>
+                                <li>общая хирургия</li>
+                                <li>сосудистая хирургия</li>
+                                <li>удаление новообразований</li>
+                                <li>амбулаторная хирургия</li>
+                                <li>эндоскопическая хирургия</li>
+                                <li>радиоволновая хирургия</li>
+                                <li>хирургия-гинекология</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Services Grid -->
-            <div class="services-grid">
-                {% for product in products %}
-                    <article class="service-card" role="listitem">
-                        <div class="service-content">
-                            <h3>{{ product.name }}</h3>
-                            <a href="{% url 'dynamic_department' product.department_id %}" class="circle-btn" aria-label="Подробнее о {{ product.name }}">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                        </div>
-                        <div class="service-image">
-                            <img src="{{ product.image }}" alt="Иконка услуги {{ product.name }}" loading="lazy" onerror="this.src='{% static 'images/default-service.png' %}'">
-                        </div>
-                    </article>
-                {% endfor %}
+        <!-- Services Grid -->
+        <div class="services-grid">
+            {% for product in products %}
+                <article class="service-card" role="listitem">
+                    <div class="service-content">
+                        <h3>{{ product.name }}</h3>
+                        <a href="{% url 'dynamic_department' product.department_id %}" class="circle-btn" aria-label="Подробнее о {{ product.name }}">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M9 18L15 12L9 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="service-image">
+                        <img src="{{ product.image }}" alt="Иконка услуги {{ product.name }}" loading="lazy" onerror="this.src='{% static 'images/default-service.png' %}'">
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+        <!-- Examinations Section -->
+        <section class="examinations-section">
+            <div class="section-header">
+                <h2 class="section-title">Комплексные обследования</h2>
+                <a href="{% url 'stocks' %}" class="view-all-link">
+                    Все обследования
+                    <span>→</span>
+                </a>
             </div>
+            <div class="examinations-grid">
+                <div class="examination-card">
+                    <div class="examination-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4>Годовые программы прикрепления</h4>
+                    <button class="btn-select" onclick="openBookingWidget()">Выбрать</button>
+                </div>
+                <div class="examination-card">
+                    <div class="examination-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 16V8C20.9996 7.64928 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64928 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4>Программы обследования</h4>
+                    <a href="{% url 'stocks' %}" class="btn-select">Выбрать</a>
+                </div>
+                <div class="examination-card">
+                    <div class="examination-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3L21 21M9 9L3 15L9 21L15 15M21 3L15 9L21 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4>Улучшение качества жизни</h4>
+                    <button class="btn-select" onclick="openBookingWidget()">Выбрать</button>
+                </div>
+                <div class="examination-card">
+                    <div class="examination-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4>Планирование семьи</h4>
+                    <button class="btn-select" onclick="openBookingWidget()">Выбрать</button>
+                </div>
+            </div>
+        </section>
 
-            <!-- Examinations Section -->
-            <section class="examinations-section">
-                <div class="section-header">
-                    <h2 class="section-title">Комплексные обследования</h2>
-                    <a href="{% url 'stocks' %}" class="view-all-link">
-                        Все обследования
-                        <span>→</span>
+        <!-- Specialists Section -->
+        <section class="specialists-section">
+            <div class="section-header">
+                <h2 class="section-title">Команда специалистов</h2>
+                <a href="{% url 'specialists' %}" class="view-all-link">
+                    Все специалисты
+                    <span>→</span>
+                </a>
+            </div>
+            <div class="specialists-grid">
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <a href="{% url 'specialists' %}">
+                            <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна" class="specialist-photo">
+                        </a>
+                    </div>
+                    <div class="specialist-info">
+                        <div class="price-badge">Услуги от 2500 ₽</div>
+                        <div class="specialist-name">Нудельман</div>
+                        <div class="specialist-surname">Наталия Федоровна</div>
+                        <div class="specialist-role">Врач-невролог</div>
+                    </div>
+                </div>
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <a href="{% url 'specialists' %}">
+                            <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят" class="specialist-photo">
+                        </a>
+                    </div>
+                    <div class="specialist-info">
+                        <div class="price-badge">Услуги от 2500 ₽</div>
+                        <div class="specialist-name">Хан</div>
+                        <div class="specialist-surname">Умар Хаят</div>
+                        <div class="specialist-role">Андролог, главный врач, уролог</div>
+                    </div>
+                </div>
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <a href="{% url 'specialists' %}">
+                            <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна" class="specialist-photo">
+                        </a>
+                    </div>
+                    <div class="specialist-info">
+                        <div class="price-badge">Услуги от 600 ₽</div>
+                        <div class="specialist-name">Хан</div>
+                        <div class="specialist-surname">Тюльпан Тимергалиевна</div>
+                        <div class="specialist-role">Акушер-гинеколог, врач УЗИ, генеральный директор</div>
+                    </div>
+                </div>
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <a href="{% url 'specialists' %}">
+                            <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна" class="specialist-photo">
+                        </a>
+                    </div>
+                    <div class="specialist-info">
+                        <div class="price-badge">Услуги от 450 ₽</div>
+                        <div class="specialist-name">Башарова</div>
+                        <div class="specialist-surname">Альбина Шарипяновна</div>
+                        <div class="specialist-role">Терапевт, главный специалист в сфере медицины</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <div class="contact-content">
+                <h2>Можете связаться с нами удобным для вас способом</h2>
+                <div class="contact-details">
+                    <p>Набережные Челны,<br>52-й комплекс, 20А</p>
+                    <a href="tel:+79011433434" class="contact-phone">+7 (901) 143-34-34</a>
+                </div>
+                <div class="contact-icons">
+                    <a href="mailto:medkhan@mail.ru" class="contact-icon" aria-label="Написать email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/medkhancl" class="contact-icon" aria-label="Написать в Telegram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://vk.com/medkhanc" class="contact-icon" aria-label="Написать в Вконтакте">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="white" d="M20.14 7.43C20.31 6.86 20.14 6.5 19.34 6.5H17.72C17.05 6.5 16.75 6.83 16.57 7.23C16.57 7.23 15.53 9.67 14.13 11.07C13.71 11.49 13.5 11.62 13.27 11.62C13.1 11.62 12.89 11.49 12.89 11.03V7.43C12.89 6.77 12.7 6.5 12.18 6.5H9.83C9.41 6.5 9.15 6.78 9.15 7.05C9.15 7.68 10.09 7.83 10.22 9.36V11.03C10.22 11.75 10.08 11.88 9.85 11.88C9.42 11.88 8.48 10.77 7.7 8.79C7.42 8.06 7.16 7.5 6.49 7.5H4.86C4.14 7.5 4 7.83 4 8.23C4 8.93 4.87 10.08 5.81 11.19C6.75 12.3 8.09 13.5 9.83 13.5H10.22V16.5C10.22 17.16 10.41 17.43 10.94 17.43H13.27C13.7 17.43 13.89 17.16 13.89 16.5V14.83C13.89 14.11 14.03 13.98 14.26 13.98C14.69 13.98 15.63 15.09 16.41 17.07C16.69 17.8 16.95 18.36 17.62 18.36H19.25C19.97 18.36 20.08 18.03 20.08 17.63C20.08 16.93 19.21 15.78 18.27 14.67C17.33 13.56 16.08 12.36 16.08 12.36C16.08 12.36 20.14 7.43 20.14 7.43Z"/>
+                        </svg>
                     </a>
                 </div>
-                <div class="examinations-grid">
-                    <div class="examination-card">
-                        <div class="examination-icon">
-                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h4>Годовые программы прикрепления</h4>
-                        <button class="btn-select" onclick="openBookingWidget()">Выбрать</button>
-                    </div>
-                    <div class="examination-card">
-                        <div class="examination-icon">
-                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 16V8C20.9996 7.64928 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64928 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h4>Программы обследования</h4>
-                        <a href="{% url 'stocks' %}" class="btn-select">Выбрать</a>
-                    </div>
-                    <div class="examination-card">
-                        <div class="examination-icon">
-                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 3L21 21M9 9L3 15L9 21L15 15M21 3L15 9L21 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h4>Улучшение качества жизни</h4>
-                        <button class="btn-select" onclick="openBookingWidget()">Выбрать</button>
-                    </div>
-                    <div class="examination-card">
-                        <div class="examination-icon">
-                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-                                <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h4>Планирование семьи</h4>
-                        <button class="btn-select" onclick="openBookingWidget()">Выбрать</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Specialists Section -->
-            <section class="specialists-section">
-                <div class="section-header">
-                    <h2 class="section-title">Команда специалистов</h2>
-                    <a href="{% url 'specialists' %}" class="view-all-link">
-                        Все специалисты
-                        <span>→</span>
-                    </a>
-                </div>
-                <div class="specialists-grid">
-                    <div class="specialist-card">
-                        <div class="specialist-image">
-                            <a href="{% url 'specialists' %}">
-                                <img src="{% static 'images/specialist-1.png' %}" alt="Нудельман Наталия Федоровна" class="specialist-photo">
-
-                            </a>
-                        </div>
-                        <div class="specialist-info">
-                            <div class="price-badge">Услуги от 2500 ₽</div>
-                            <div class="specialist-name">Нудельман</div>
-                            <div class="specialist-surname">Наталия Федоровна</div>
-                            <div class="specialist-role">Врач-невролог</div>
-                        </div>
-                    </div>
-                    <div class="specialist-card">
-                        <div class="specialist-image">
-                            <a href="{% url 'specialists' %}">
-                                <img src="{% static 'images/specialist-2.png' %}" alt="Хан Умар Хаят" class="specialist-photo">
-
-                            </a>
-                        </div>
-                        <div class="specialist-info">
-                            <div class="price-badge">Услуги от 2500 ₽</div>
-                            <div class="specialist-name">Хан</div>
-                            <div class="specialist-surname">Умар Хаят</div>
-                            <div class="specialist-role">Андролог, главный врач, уролог</div>
-                        </div>
-                    </div>
-                    <div class="specialist-card">
-                        <div class="specialist-image">
-                            <a href="{% url 'specialists' %}">
-                                <img src="{% static 'images/specialist-3.png' %}" alt="Хан Тюльпан Тимергалиевна" class="specialist-photo">
-
-                            </a>
-                        </div>
-                        <div class="specialist-info">
-                            <div class="price-badge">Услуги от 600 ₽</div>
-                            <div class="specialist-name">Хан</div>
-                            <div class="specialist-surname">Тюльпан Тимергалиевна</div>
-                            <div class="specialist-role">Акушер-гинеколог, врач УЗИ, генеральный директор</div>
-                        </div>
-                    </div>
-                    <div class="specialist-card">
-                        <div class="specialist-image">
-                            <a href="{% url 'specialists' %}">
-                                <img src="{% static 'images/specialist-4.png' %}" alt="Башарова Альбина Шарипяновна" class="specialist-photo">
-
-                            </a>
-                        </div>
-                        <div class="specialist-info">
-                            <div class="price-badge">Услуги от 450 ₽</div>
-                            <div class="specialist-name">Башарова</div>
-                            <div class="specialist-surname">Альбина Шарипяновна</div>
-                            <div class="specialist-role">Терапевт, главный специалист в сфере медицины</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contact Section -->
-            <div class="contact-section">
-                <div class="contact-content">
-                    <h2>Можете связаться с нами удобным для вас способом</h2>
-                    <div class="contact-details">
-                        <p>Набережные Челны,<br>52-й комплекс, 20А</p>
-                        <a href="tel:+79011433434" class="contact-phone">+7 (901) 143-34-34</a>
-                    </div>
-                    <div class="contact-icons">
-                        <a href="mailto:medkhan@mail.ru" class="contact-icon" aria-label="Написать email">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <a href="https://t.me/medkhancl" class="contact-icon" aria-label="Написать в Telegram">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <a href="https://vk.com/medkhanc" class="contact-icon" aria-label="Написать в Вконтакте">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="white" d="M20.14 7.43C20.31 6.86 20.14 6.5 19.34 6.5H17.72C17.05 6.5 16.75 6.83 16.57 7.23C16.57 7.23 15.53 9.67 14.13 11.07C13.71 11.49 13.5 11.62 13.27 11.62C13.1 11.62 12.89 11.49 12.89 11.03V7.43C12.89 6.77 12.7 6.5 12.18 6.5H9.83C9.41 6.5 9.15 6.78 9.15 7.05C9.15 7.68 10.09 7.83 10.22 9.36V11.03C10.22 11.75 10.08 11.88 9.85 11.88C9.42 11.88 8.48 10.77 7.7 8.79C7.42 8.06 7.16 7.5 6.49 7.5H4.86C4.14 7.5 4 7.83 4 8.23C4 8.93 4.87 10.08 5.81 11.19C6.75 12.3 8.09 13.5 9.83 13.5H10.22V16.5C10.22 17.16 10.41 17.43 10.94 17.43H13.27C13.7 17.43 13.89 17.16 13.89 16.5V14.83C13.89 14.11 14.03 13.98 14.26 13.98C14.69 13.98 15.63 15.09 16.41 17.07C16.69 17.8 16.95 18.36 17.62 18.36H19.25C19.97 18.36 20.08 18.03 20.08 17.63C20.08 16.93 19.21 15.78 18.27 14.67C17.33 13.56 16.08 12.36 16.08 12.36C16.08 12.36 20.14 7.43 20.14 7.43Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="appointment-section">
-                    <h3>Или заполните анкету первичного приёма</h3>
-                    <button class="btn-appointment" onclick="openBookingWidget()">Перейти к заполнению</button>
-                    <img src="{% static 'images/tools.png' %}" alt="Медицинские инструменты" class="medical-image" loading="lazy">
-                </div>
+            </div>
+            <div class="appointment-section">
+                <h3>Или заполните анкету первичного приёма</h3>
+                <button class="btn-appointment" onclick="openBookingWidget()">Перейти к заполнению</button>
+                <img src="{% static 'images/tools.png' %}" alt="Медицинские инструменты" class="medical-image" loading="lazy">
             </div>
         </div>
-    </main>
+    </div>
+</div>
+{% endblock %}
 
-    <!-- Footer Info Section -->
-    <section class="footer-info-section">
-        <div class="container">
-            <div class="info-grid">
-                <div class="footer-contact-block">
-                    <div class="footer-contact-header">
-                        <div class="footer-logo-section">
-                            <div class="logo-text">
-                                <img src="{% static 'images/logo.png' %}" alt="MedKhan Logo">
-                            </div>
-                        </div>
-                        <div class="footer-contact-details">
-                            <div class="footer-address">Набережные Челны,<br>52-й комплекс, 20А</div>
-                            <a href="tel:+79011433434" class="footer-phone">+7 (901) 143-34-34</a>
-                        </div>
-                    </div>
-                    <div class="footer-contact-bottom">
-                        <div class="footer-contact-text">
-                            <p>Пишите<br>нам по любым<br>вопросам</p>
-                        </div>
-                        <div class="footer-social-icons">
-                            <a href="mailto:medkhan@mail.ru" class="footer-social-icon" aria-label="Написать email">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                            <a href="https://t.me/medkhancl" class="footer-social-icon" aria-label="Написать в Telegram">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                            <a href="https://vk.com/medkhanc" class="footer-social-icon" aria-label="Написать в Вконтакте">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill="white" d="M20.14 7.43C20.31 6.86 20.14 6.5 19.34 6.5H17.72C17.05 6.5 16.75 6.83 16.57 7.23C16.57 7.23 15.53 9.67 14.13 11.07C13.71 11.49 13.5 11.62 13.27 11.62C13.1 11.62 12.89 11.49 12.89 11.03V7.43C12.89 6.77 12.7 6.5 12.18 6.5H9.83C9.41 6.5 9.15 6.78 9.15 7.05C9.15 7.68 10.09 7.83 10.22 9.36V11.03C10.22 11.75 10.08 11.88 9.85 11.88C9.42 11.88 8.48 10.77 7.7 8.79C7.42 8.06 7.16 7.5 6.49 7.5H4.86C4.14 7.5 4 7.83 4 8.23C4 8.93 4.87 10.08 5.81 11.19C6.75 12.3 8.09 13.5 9.83 13.5H10.22V16.5C10.22 17.16 10.41 17.43 10.94 17.43H13.27C13.7 17.43 13.89 17.16 13.89 16.5V14.83C13.89 14.11 14.03 13.98 14.26 13.98C14.69 13.98 15.63 15.09 16.41 17.07C16.69 17.8 16.95 18.36 17.62 18.36H19.25C19.97 18.36 20.08 18.03 20.08 17.63C20.08 16.93 19.21 15.78 18.27 14.67C17.33 13.56 16.08 12.36 16.08 12.36C16.08 12.36 20.14 7.43 20.14 7.43Z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+{% block extra_js %}
+<script>
+    // Функция для открытия виджета записи
+    function openBookingWidget() {
+        window.open('https://booking.medflex.ru?user=33f85b2ad6c658bc5ed6f3e1afb512a6&source=3', '_blank', 'noopener,noreferrer');
+    }
 
-                <div class="footer-license-block">
-                    <h3>Лицензия<br>на медицинскую<br>деятельность</h3>
-                    <a href="{% static 'images/Лицензия 2024.BMP' %}" target="_blank" class="verify-license">проверить лицензию</a>
-                </div>
-                <!-- Рейтинги -->
-                <div class="footer-ratings-section">
-                    <div class="footer-rating-card">
-                        <span class="footer-rating-score">4.7</span>
-                        <a href="https://clck.ru/3NHwZa" target="_blank" rel="noopener noreferrer">
-                            <img src="{% static 'images/yandex_logo.png' %}" alt="Яндекс" class="rating-logo yandex-logo">
-                        </a>
-                    </div>
-                    <div class="footer-rating-card">
-                        <span class="footer-rating-score">4.6</span>
-                        <a href="https://clck.ru/3NHyhu" target="_blank" rel="noopener noreferrer">
-                           <img src="{% static 'images/gis_logo.png' %}" alt="2ГИС" class="rating-logo gis-logo">
-                        </a>
-                    </div>
-                </div>
-            </div>
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const searchDropdown = document.getElementById('searchDropdown');
 
-            <div class="footer-social-links">
-                <a href="https://t.me/medkhancl" class="footer-social-link" target="_blank" rel="noopener noreferrer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    MedKhan в тг
-                </a>
-                <a href="https://vk.com/medkhanc" class="footer-social-link" target="_blank" rel="noopener noreferrer">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20.14 7.43C20.31 6.86 20.14 6.5 19.34 6.5H17.72C17.05 6.5 16.75 6.83 16.57 7.23C16.57 7.23 15.53 9.67 14.13 11.07C13.71 11.49 13.5 11.62 13.27 11.62C13.1 11.62 12.89 11.49 12.89 11.03V7.43C12.89 6.77 12.7 6.5 12.18 6.5H9.83C9.41 6.5 9.15 6.78 9.15 7.05C9.15 7.68 10.09 7.83 10.22 9.36V11.03C10.22 11.75 10.08 11.88 9.85 11.88C9.42 11.88 8.48 10.77 7.7 8.79C7.42 8.06 7.16 7.5 6.49 7.5H4.86C4.14 7.5 4 7.83 4 8.23C4 8.93 4.87 10.08 5.81 11.19C6.75 12.3 8.09 13.5 9.83 13.5H10.22V16.5C10.22 17.16 10.41 17.43 10.94 17.43H13.27C13.7 17.43 13.89 17.16 13.89 16.5V14.83C13.89 14.11 14.03 13.98 14.26 13.98C14.69 13.98 15.63 15.09 16.41 17.07C16.69 17.8 16.95 18.36 17.62 18.36H19.25C19.97 18.36 20.08 18.03 20.08 17.63C20.08 16.93 19.21 15.78 18.27 14.67C17.33 13.56 16.08 12.36 16.08 12.36C16.08 12.36 20.14 7.43 20.14 7.43Z"/>
-                    </svg>
-                    MedKhan в вк
-                </a>
-                <a href="mailto:medkhan@mail.ru" class="footer-social-link" target="_blank" rel="noopener noreferrer">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M22 6L12 13L2 6" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    MedKhan в youtube
-                </a>
-            </div>
-
-            <footer class="footer">
-                <p class="copyright">© 2023-2025 г. «Медицинский центр МедХан»</p>
-                <div class="footer-links">
-                    <a href="#">Политика конфиденциальности</a>
-                    <a href="#">Реквизиты</a>
-                </div>
-            </footer>
-        </div>
-    </section>
-
-    <!-- Круглый виджет онлайн-записи MedFlex -->
-    <div id="medflexRoundWidgetData" data-src="https://booking.medflex.ru?user=33f85b2ad6c658bc5ed6f3e1afb512a6&isRoundWidget=true"></div>
-
-    <!-- Скрипт виджета онлайн-записи -->
-    <script defer src="https://booking.medflex.ru/components/round/round_widget_button.js" charset="utf-8"></script>
-
-    <!-- JavaScript -->
-    <script>
-        // Функция для открытия виджета записи
-        function openBookingWidget() {
-            window.open('https://booking.medflex.ru?user=33f85b2ad6c658bc5ed6f3e1afb512a6&source=3', '_blank', 'noopener,noreferrer');
-        }
-
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        const searchDropdown = document.getElementById('searchDropdown');
-
+    if (searchInput && searchDropdown) {
         searchInput.addEventListener('focus', function() {
             searchDropdown.style.display = 'block';
         });
@@ -491,35 +350,6 @@
                 console.log('Выбрана услуга:', e.target.textContent);
             }
         });
-
-        // Мобильное меню
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            const mainNav = document.querySelector('.main-nav');
-            if (mobileMenuToggle && mainNav) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                    this.classList.toggle('active');
-                });
-
-                // Закрытие меню при клике на ссылку
-                const navLinks = mainNav.querySelectorAll('a');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        mainNav.classList.remove('active');
-                        mobileMenuToggle.classList.remove('active');
-                    });
-                });
-
-                // Закрытие меню при клике вне его
-                document.addEventListener('click', function(event) {
-                    if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                        mainNav.classList.remove('active');
-                        mobileMenuToggle.classList.remove('active');
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+    }
+</script>
+{% endblock %}
