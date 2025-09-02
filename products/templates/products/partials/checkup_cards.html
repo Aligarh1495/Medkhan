@@ -1,0 +1,32 @@
+{% load static %}
+
+{% for checkup in checkups %}
+    <div class="promotion-card"> {# Всегда белая карточка #}
+        <a href="{% url 'dynamic_checkup' checkup.id %}">
+            <div class="promotion-content">
+                <div class="promotion-header">
+                    <div class="gender-icon">
+                        {% if checkup.gender == 'female' %}
+                            <img src="{% static 'images/womanicon.png' %}" alt="Female Icon" class="icon-image">
+                        {% elif checkup.gender == 'male' %}
+                            <img src="{% static 'images/manicon.png' %}" alt="Male Icon" class="icon-image">
+                        {% elif checkup.gender == 'child' %}
+                            <img src="{% static 'images/childicon.png' %}" alt="Child Icon" class="icon-image">
+                        {% else %}
+                            <img src="{% static 'images/group.png' %}" alt="Group Icon" class="icon-image">
+                        {% endif %}
+                    </div>
+                    <div class="top-badges">
+                        <div class="validity">до 5 марта</div>
+                        <div class="discount">-{{ checkup.discount_percent }}%</div>
+                    </div>
+                </div>
+                <div class="price">
+                    <span class="current-price">{{ checkup.discounted_price }} ₽</span>
+                    <span class="old-price">{{ checkup.original_price }} ₽</span>
+                </div>
+                <h3>CHECK UP<br>{{ checkup.name }}</h3>
+            </div>
+        </a>
+    </div>
+{% endfor %}

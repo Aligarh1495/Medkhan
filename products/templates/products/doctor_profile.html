@@ -1,0 +1,554 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% load doctor_filters %} {# Загружаем наши пользовательские фильтры #}
+
+{% block title %}{{ doctor.full_name }} - MedKhan®{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Профиль врача {{ doctor.full_name }} - {{ doctor.category|default:'Специалист' }} клиники МедХан. Стаж {{ doctor.experience_years }} лет. Запись на прием онлайн.">
+{% endblock %}
+
+{% block meta_keywords %}
+<meta name="keywords" content="{{ doctor.full_name }}, {{ doctor.category|default:'врач' }}, {{ doctor.full_name|lower|cut:' ' }}, {{ doctor.category|lower|cut:' ' }}, МедХан, запись к врачу">
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "name": "{{ doctor.full_name }}",
+  "jobTitle": "{{ doctor.category }}",
+  "image": "{% if doctor.image %}{{ doctor.image.url }}{% else %}/placeholder.svg?height=400&width=400&query=doctor%20{{ doctor.full_name }}{% endif %}",
+  "url": "{{ request.build_absolute_uri }}",
+  "medicalSpecialty": "{{ doctor.category }}",
+  "worksFor": {
+    "@type": "MedicalOrganization",
+    "name": "МедХан",
+    "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'main' %}"
+  },
+  "description": "{{ doctor.profile_treatment|truncatechars:200 }}",
+  "experienceInYears": "{{ doctor.experience_years }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "52-й комплекс, 20А",
+    "addressLocality": "Набережные Челны",
+    "addressRegion": "Республика Татарстан",
+    "addressCountry": "RU"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Услуги врача {{ doctor.full_name }}",
+    "itemListElement": [
+      {% for service in doctor.doctorservice_set.all %}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "MedicalProcedure",
+          "name": "{{ service.service.name }}",
+          "description": "{{ service.service.description|truncatechars:100 }}",
+          "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'dynamic_service' service.service.id %}"
+        }
+      }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style9.css' %}">
+<style>
+    /* Стили для сообщений формы */
+    .form-message {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: 500;
+        text-align: center;
+        color: var(--white); /* Цвет текста для сообщений на зеленом фоне */
+    }
+    .form-message.success {
+        background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый для успеха */
+    }
+    .form-message.error {
+        background-color: rgba(255, 0, 0, 0.3); /* Полупрозрачный красный для ошибки */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="breadcrumbs">
+        <a href="{% url 'main' %}">Главная</a> / <a href="{% url 'specialists' %}">Специалисты</a> / <span>{{ doctor.full_name }}</span>
+    </div>
+</div>
+
+<!-- Профиль врача -->
+<section class="doctor-profile">
+    <div class="container">
+        <div class="profile-grid">
+            <!-- Фото врача -->
+            <div class="doctor-photo">
+                <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}/placeholder.svg?height=400&width=400&query=doctor%20{{ doctor.full_name }}{% endif %}" alt="{{ doctor.full_name }}">
+                {% if doctor.online_booking_link %}
+                <a href="{{ doctor.online_booking_link }}" target="_blank" class="btn btn-primary appointment-btn">Записаться на приём</a>
+                {% else %}
+                <button class="btn btn-primary appointment-btn" onclick="alert('Онлайн-запись для этого врача пока недоступна.')">Записаться на приём</button>
+                {% endif %}
+            </div>
+
+            <!-- Информация о враче -->
+            <div class="doctor-info">
+                <h1>{{ doctor.full_name|linebreaksbr }}</h1>
+                <p class="doctor-position">{{ doctor.category|default:"Специалист" }}</p>
+                <div class="doctor-experience">
+                    <div class="experience-item">
+                        <span class="experience-number">{{ doctor.experience_years }}</span>
+                        <span class="experience-text">лет опыта</span>
+                    </div>
+                    <div class="experience-item">
+                        <span class="experience-number">5000+</span> {# Это поле не динамическое, если нет в БД #}
+                        <span class="experience-text">пациентов</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Видеовизитка -->
+            <div class="video-card">
+                <div class="video-placeholder">
+                    <div class="play-button">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="30" cy="30" r="30" fill="rgba(255, 255, 255, 0.2)"/>
+                            <path d="M25 20L40 30L25 40V20Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h3>Видеовизитка</h3>
+                    <p>Узнайте больше о докторе</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Специализация -->
+        <div class="specialization-card">
+            <h2>Специализация</h2>
+            <div class="specialization-content">
+                {# Используем split_by_newline для profile_treatment #}
+                {% if doctor.profile_treatment %}
+                    <ul>
+                        {% for item in doctor.profile_treatment|split_by_newline %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Информация о специализации пока недоступна.</p>
+                {% endif %}
+            </div>
+            {# Если у вас есть теги или связанные специализации, их можно вывести здесь #}
+            <div class="specialization-badges">
+                {% for specialty in doctor.doctorspecialty_set.all %}
+                    <span class="badge">{{ specialty.specialty.name }}</span>
+                {% endfor %}
+                {# Пример статических бейджей, если нет динамических #}
+                {% if not doctor.doctorspecialty_set.all %}
+                    <span class="badge">Высокие технологии</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Акции -->
+<section class="promotions-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Акции, в которых участвует врач</h2>
+            <a href="{% url 'stocks' %}" class="all-link">
+                Все акции
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="promotions-grid">
+            {% for checkup in promotions %}
+            <div class="promotion-card">
+                <a href="{% url 'dynamic_checkup' checkup.id %}">
+                    <div class="promotion-image">
+                        <div class="gender-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {% if checkup.gender == 'female' %}
+                                <circle cx="12" cy="8" r="5" stroke="green" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="green" stroke-width="2" stroke-linecap="round"/>
+                                {% elif checkup.gender == 'male' %}
+                                <circle cx="12" cy="8" r="5" stroke="blue" stroke-width="2"/>
+                                <path d="M15 9L18 6M18 6H15M18 6V9" stroke="blue" stroke-width="2" stroke-linecap="round"/>
+                                {% else %} {# Для NULL или других значений, если есть #}
+                                <circle cx="12" cy="8" r="5" stroke="gray" stroke-width="2"/>
+                                <path d="M12 13v8M8 17h8" stroke="gray" stroke-width="2" stroke-linecap="round"/>
+                                {% endif %}
+                            </svg>
+                        </div>
+                        <div class="promotion-date">до 5 марта</div> {# Это поле не динамическое в модели Checkup #}
+                        <div class="discount-badge">-{{ checkup.discount_percent }}%</div>
+                    </div>
+                    <div class="promotion-content">
+                        <div class="promotion-price">
+                            <span class="new-price">{{ checkup.discounted_price }} ₽</span>
+                            <span class="old-price">{{ checkup.original_price }} ₽</span>
+                        </div>
+                        <h3 class="promotion-title">CHECK UP<br>{{ checkup.name }}</h3>
+                    </div>
+                </a>
+            </div>
+            {% empty %}
+            <p>Акций с участием этого врача пока нет.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- О враче -->
+<section class="about-doctor">
+    <div class="container">
+        <h2>О враче</h2>
+
+        <div class="accordion">
+            <!-- Образование -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3>Образование</h3>
+                    <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 15L12 9L6 15" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="education-timeline">
+                        {% if doctor.education %}
+                            {% for item in doctor.education|parse_education_timeline %}
+                                <div class="timeline-item">
+                                    {% if item.year %}
+                                    <div class="timeline-year">{{ item.year }}</div>
+                                    {% endif %}
+                                    <div class="timeline-content">
+                                        <p>{{ item.description }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Информация об образовании пока недоступна.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Профессиональная деятельность -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3>Профессиональная деятельность</h3>
+                    <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 15L12 9L6 15" stroke="#00C087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <ul class="activity-list">
+                        {% if doctor.work_experience %}
+                            {% for item in doctor.work_experience|split_by_newline %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>Информация о профессиональной деятельности пока недоступна.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Основные направления деятельности -->
+<section class="directions-section">
+    <div class="container">
+        <h2>Основные направления деятельности</h2>
+        <div class="directions-grid">
+            {# Здесь можно вывести услуги, которые предоставляет врач, если они связаны через DoctorService #}
+            {% for ds in doctor.doctorservice_set.all %}
+            <div class="direction-card">
+                <h3>{{ ds.service.name }}</h3>
+                <p>{{ ds.service.description|truncatechars:80 }}</p>
+                <div class="direction-number">{{ forloop.counter }}</div>
+            </div>
+            {% empty %}
+            <div class="direction-card">
+                <h3>Консультативная помощь</h3>
+                <p>Экспертные консультации и диагностика</p>
+                <div class="direction-number">1</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Другие специалисты -->
+<section class="other-specialists">
+    <div class="container">
+        <div class="section-header">
+            <h2>Другие специалисты в этом направлении</h2>
+            <a href="{% url 'specialists' %}" class="all-link">
+                Все специалисты
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 5L21 12M21 12L14 19M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="specialists-grid">
+            {% for other_doctor in other_specialists %}
+            <div class="specialist-card">
+                <div class="specialist-image">
+                    <a href="{% url 'dynamic_doctor_profile' other_doctor.id %}">
+                        <img src="{% if other_doctor.image %}{{ other_doctor.image.url }}{% else %}/placeholder.svg?height=280&width=280&query=doctor%20{{ other_doctor.full_name }}{% endif %}" alt="{{ other_doctor.full_name }}">
+                    </a>
+                    {% if other_doctor.online_booking_link %}
+                    <a href="{{ other_doctor.online_booking_link }}" target="_blank" class="btn btn-primary small-btn">Записаться</a>
+                    {% else %}
+                    <button class="btn btn-primary small-btn" onclick="alert('Онлайн-запись для этого врача пока недоступна.')">Записаться</button>
+                    {% endif %}
+                </div>
+                <div class="specialist-info">
+                    <h3>{{ other_doctor.full_name|linebreaksbr }}</h3>
+                    <p class="specialist-position">{{ other_doctor.category|default:"Специалист" }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p>Другие специалисты не найдены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Форма обратной связи -->
+<section class="contact-form-section">
+    <div class="container">
+        <div class="contact-form-grid">
+            <div class="contact-info-card">
+                <h3>Нужна дополнительная информация?</h3>
+                <p>Не нашли ответ на свой вопрос? Оставьте заявку и наши специалисты проконсультируют Вас в течение 15 минут.</p>
+                <div class="contact-features">
+                    <div class="feature">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.6667 9.16667C16.6667 13.0152 13.5152 16.1667 9.66667 16.1667C5.81814 16.1667 2.66667 13.0152 2.66667 9.16667C2.66667 5.31814 5.81814 2.16667 9.66667 2.16667C13.5152 2.16667 16.6667 5.31814 16.6667 9.16667Z" stroke="var(--primary-green)" stroke-width="2"/>
+                            <path d="M7.5 9.16667L8.83333 10.5L12.5 6.83333" stroke="var(--primary-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Быстрый ответ</span>
+                    </div>
+                    <div class="feature">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 1.66667V10L13.3333 13.3333" stroke="var(--primary-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="10" cy="10" r="8.33333" stroke="var(--primary-green)" stroke-width="2"/>
+                        </svg>
+                        <span>Работаем 24/7</span>
+                    </div>
+                    <div class="feature">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.3333 14.1667V16.6667C18.3333 17.5833 17.5833 18.3333 16.6667 18.3333H3.33333C2.41667 18.3333 1.66667 17.5833 1.66667 16.6667V14.1667" stroke="var(--primary-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="var(--primary-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 1.66667V12.5" stroke="var(--primary-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Конфиденциально</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-card">
+                <form id="consultationForm" method="post" action="{% url 'submit_contact_form' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="doctor_id" value="{{ doctor.id }}"> {# Передаем ID врача #}
+                    <input type="hidden" name="source_page" value="doctor_profile_page"> {# Указываем источник заявки #}
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Как вас зовут?" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Ваш номер телефона" required inputmode="tel">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Ваш вопрос (необязательно)" rows="3"></textarea> {# Имя поля изменено на 'message' #}
+                    </div>
+                    <div class="form-note">
+                        <p>Нажимая на кнопку, вы соглашаетесь с условиями обработки данных в соответствии с <a href="#">политикой конфиденциальности</a></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Получить консультацию</button>
+                </form>
+                <div id="consultationFormMessage" class="form-message" style="display: none;"></div> {# Сообщение для формы #}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Функция для аккордеона
+function toggleAccordion(element) {
+    const content = element.nextElementSibling;
+    const parent = element.parentElement;
+    const isActive = parent.classList.contains('active');
+
+    // Закрываем все аккордеоны
+    document.querySelectorAll('.accordion-item').forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.accordion-content').style.maxHeight = null;
+    });
+
+    // Если текущий элемент был закрыт, открываем его
+    if (!isActive) {
+        parent.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + "px";
+    }
+}
+
+// Обработка формы консультации
+document.addEventListener('DOMContentLoaded', function() {
+    const consultationForm = document.getElementById('consultationForm');
+    const consultationFormMessage = document.getElementById('consultationFormMessage');
+    const phoneInput = consultationForm.querySelector('input[name="phone"]');
+
+    // Function to format phone number to +7 (XXX) XXX-XX-XX
+    function formatPhoneNumber(input) {
+        let value = input.value.replace(/\D/g, ''); // Remove all non-digits
+
+        // If starts with 8, replace with 7 for consistent formatting
+        if (value.startsWith('8')) {
+            value = '7' + value.substring(1);
+        }
+
+        // If it doesn't start with 7, prepend 7
+        if (!value.startsWith('7') && value.length > 0) {
+            value = '7' + value;
+        }
+
+        // Limit to 11 digits (including the initial 7)
+        value = value.substring(0, 11);
+
+        let formattedValue = '';
+        if (value.length > 0) {
+            formattedValue += '+' + value[0]; // +7
+        }
+        if (value.length > 1) {
+            formattedValue += ' (' + value.substring(1, 4);
+        }
+        if (value.length >= 5) {
+            formattedValue += ') ' + value.substring(4, 7);
+        }
+        if (value.length >= 8) {
+            formattedValue += '-' + value.substring(7, 9);
+        }
+        if (value.length >= 10) {
+            formattedValue += '-' + value.substring(9, 11);
+        }
+
+        input.value = formattedValue;
+    }
+
+    // Add event listener for phone input formatting
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        // Initial formatting in case of pre-filled value
+        phoneInput.addEventListener('focus', function() {
+            formatPhoneNumber(this);
+        });
+        phoneInput.addEventListener('blur', function() {
+            // On blur, if not 11 digits (after cleaning), clear or show error
+            let cleaned = this.value.replace(/\D/g, '');
+            if (cleaned.length !== 11 || !cleaned.startsWith('7')) {
+                this.value = ''; // Clear if invalid
+                // Optionally, show a client-side error message here
+                // consultationFormMessage.textContent = 'Пожалуйста, введите полный номер телефона (11 цифр, начиная с +7 или 8).';
+                // consultationFormMessage.className = 'form-message error';
+                // consultationFormMessage.style.display = 'block';
+            }
+        });
+    }
+
+    // Обработка формы консультации
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Предотвращаем стандартную отправку формы
+
+            const formData = new FormData(consultationForm);
+            const csrfToken = formData.get('csrfmiddlewaretoken'); // Получаем CSRF токен
+
+            // Собираем данные для отправки в JSON
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                message: formData.get('message'), // Используем 'message' для вопроса
+                doctor_id: formData.get('doctor_id'), // Получаем ID врача
+                source_page: formData.get('source_page'), // Получаем источник страницы
+            };
+
+            fetch(consultationForm.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken, // Отправляем CSRF токен в заголовке
+                    'X-Requested-With': 'XMLHttpRequest', // Указываем, что это AJAX запрос
+                    'Content-Type': 'application/json', // Указываем тип контента JSON
+                },
+                body: JSON.stringify(data), // Отправляем данные в формате JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    consultationFormMessage.textContent = data.message;
+                    consultationFormMessage.className = 'form-message success';
+                    consultationFormMessage.style.display = 'block';
+                    consultationForm.reset(); // Очищаем форму
+                    if (phoneInput) phoneInput.value = ''; // Очищаем поле телефона после сброса формы
+                } else {
+                    let errorMessage = 'Произошла ошибка при отправке заявки.';
+                    if (data.errors) {
+                        try {
+                            const errors = JSON.parse(data.errors);
+                            // Извлекаем сообщения об ошибках из JSON
+                            errorMessage = Object.values(errors).map(errList => errList.map(err => err.message).join(', ')).join('; ');
+                        } catch (e) {
+                            console.error("Failed to parse errors:", e);
+                        }
+                    }
+                    consultationFormMessage.textContent = errorMessage;
+                    consultationFormMessage.className = 'form-message error';
+                    consultationFormMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке формы:', error);
+                consultationFormMessage.textContent = 'Произошла ошибка сети. Пожалуйста, попробуйте еще раз.';
+                consultationFormMessage.className = 'form-message error';
+                consultationFormMessage.style.display = 'block';
+            });
+        });
+    }
+
+    // Анимация для видео карточки
+    const videoCard = document.querySelector('.video-card');
+    if (videoCard) {
+        videoCard.addEventListener('click', function() {
+            // Здесь можно добавить логику воспроизведения видео
+            console.log('Воспроизведение видеовизитки');
+        });
+    }
+
+    // Плавная анимация для карточек направлений
+    const directionCards = document.querySelectorAll('.direction-card');
+    directionCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+});
+</script>
+{% endblock %}
