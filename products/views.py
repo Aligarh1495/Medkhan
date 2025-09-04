@@ -365,6 +365,9 @@ def magazine(request):
   context = {'title': 'Журнал О Здоровье - MedKhan®'}
   return render(request, 'products/magazine.html', context)
 
+def scince(request):
+  context = {'title': 'Наука - MedKhan®'}
+  return render(request, 'products/scince.html', context)
 
 def BackPain(request):
   context = {'title': 'CHECK UP «Боль в спине Расширенный» - MedKhan®'}

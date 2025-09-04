@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from products.views import (
     main, services, stocks, specialists, AboutSenter, magazine, BackPain,
     patients, dynamic_department, dynamic_service, dynamic_checkup,
-    submit_contact_form, quick_contact_request, dynamic_doctor_profile
+    submit_contact_form, quick_contact_request, dynamic_doctor_profile,scince
 )
 
 urlpatterns = [
@@ -31,6 +31,7 @@ urlpatterns = [
     path('magazine/', magazine, name='magazine'),
     path('BackPain/', BackPain, name='BackPain'),
     path('patients/', patients, name='patients'),
+    path('scince/', magazine, name='science'),
 ]
 
 
