@@ -15,6 +15,14 @@
   color: var(--primary-green);
 }
 
+              .container2 {
+            width: 100%;
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+
 /* Section Headers */
 h1,
 h2 {
@@ -346,101 +354,4 @@ h3 {
 .specialist-position {
   color: var(--light-text);
   font-size: 14px;
-}
-
-/* Responsive Styles */
-@media (max-width: 992px) {
-  .hero-text {
-    max-width: 60%;
-  }
-
-  .advantages-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .about-service-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .specialists-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .specialist-card {
-    height: 250px; /* Подогнали высоту карточки специалистов */
-  }
-
-  .specialist-image {
-    height: 250px; /* Высота изображения специалистов */
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-text {
-    max-width: 100%;
-  }
-
-  .hero-content {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .search-bar {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .hero-buttons .btn {
-    width: 100%;
-  }
-
-  .price-table-header,
-  .price-table-row {
-    padding: 10px 20px; /* Меньше отступы на мобильных устройствах */
-  }
-
-  .price-table-cost {
-    width: 120px; /* Сжимаем стоимость в таблице */
-  }
-}
-
-@media (max-width: 576px) {
-  .advantages-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .specialists-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .price-table-header,
-  .price-table-row {
-    padding: 15px;
-  }
-
-  .price-table-cost {
-    width: 100px;
-  }
-
-  /* Уменьшаем размер текста в карточках и заголовках */
-  h1, h2 {
-    font-size: 28px;
-  }
-
-  .hero-text p {
-    font-size: 16px; /* Уменьшаем размер текста */
-  }
 }

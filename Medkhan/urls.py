@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from products.views import (
     main, services, stocks, specialists, AboutSenter, magazine, BackPain,
     patients, dynamic_department, dynamic_service, dynamic_checkup,
@@ -30,3 +32,7 @@ urlpatterns = [
     path('BackPain/', BackPain, name='BackPain'),
     path('patients/', patients, name='patients'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

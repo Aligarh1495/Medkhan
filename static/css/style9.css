@@ -22,6 +22,13 @@ body {
   padding: 0 20px;
 }
 
+              .container2 {
+            width: 100%;
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
 .breadcrumbs {
   margin: 20px 0;
   font-size: 14px;
@@ -74,7 +81,7 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow);
   position: relative;
-  padding-bottom: 20px; /* Отступ для кнопки */
+  height: 350px
 }
 
 .doctor-photo img {
@@ -101,6 +108,7 @@ body {
   border-radius: var(--border-radius);
   padding: 40px;
   box-shadow: var(--shadow);
+  height: 350px
 }
 
 .doctor-info h1 {
@@ -112,7 +120,6 @@ body {
 
 .doctor-info .doctor-position {
   font-size: 18px;
-  color: var(--primary-green);
   margin-bottom: 30px;
 }
 
@@ -148,6 +155,7 @@ body {
   min-height: 250px;
   cursor: pointer;
   transition: transform 0.3s ease;
+  height: 350px
 }
 
 .video-card:hover {
@@ -367,7 +375,6 @@ body {
 /* About Doctor Section (Accordion) */
 .about-doctor {
   padding: 60px 0;
-  background-color: var(--light-green);
   border-radius: var(--border-radius);
   margin-top: 60px;
 }
@@ -812,132 +819,16 @@ body {
   background-color: #f0f0f0;
   transform: translateY(-2px);
 }
-
-/* Responsive Design */
-@media (max-width: 992px) {
-  .profile-grid {
-    grid-template-columns: 1fr;
-  }
-  .doctor-photo .appointment-btn {
-    position: static;
-    transform: none;
-    margin: 20px auto;
-    width: calc(100% - 40px);
-  }
-  .contact-form-grid {
-    grid-template-columns: 1fr;
-  }
+.promotions-section .promotion-card {
+    text-decoration: none !important;
 }
 
-/* Для экранов до 768px (мобильные устройства и планшеты) */
-@media (max-width: 768px) {
-  .doctor-info {
-    padding: 30px;
-  }
-  .doctor-info h1 {
-    font-size: 28px;
-  }
-  .doctor-experience {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .experience-number {
-    font-size: 36px;
-  }
-  .specialization-card,
-  .promotions-section .section-header,
-  .other-specialists .section-header,
-  .about-doctor h2,
-  .directions-section h2,
-  .other-specialists h2 {
-    text-align: left;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-  .accordion-header {
-    padding: 20px 25px;
-  }
-  .accordion-header h3 {
-    font-size: 18px;
-  }
-  .accordion-content {
-    padding: 0 25px;
-  }
-  .accordion-item.active .accordion-content {
-    padding-bottom: 25px;
-  }
-  .education-timeline {
-    padding-left: 30px;
-  }
-  .timeline-item::before {
-    left: -20px;
-  }
-  .activity-list li,
-  .achievements-section ul li,
-  .specialization-content ul li {
-    font-size: 15px;
-  }
-}
-
-/* Для экранов до 576px (мобильные устройства) */
-@media (max-width: 576px) {
-  .doctor-photo img {
-    height: 250px;
-  }
-  .doctor-info {
-    padding: 20px;
-  }
-  .doctor-info h1 {
-    font-size: 24px;
-  }
-  .doctor-info .doctor-position {
-    font-size: 16px;
-  }
-  .specialization-card,
-  .contact-info-card,
-  .contact-form-card {
-    padding: 25px;
-  }
-  .promotions-section .promotions-grid,
-  .directions-grid,
-  .other-specialists .specialists-grid {
-    grid-template-columns: 1fr;
-  }
-  .btn {
-    padding: 14px 28px;
-    font-size: 16px;
-  }
-  .doctor-info h1 {
-    font-size: 22px;
-  }
-  .doctor-info .doctor-position {
-    font-size: 14px;
-  }
-  .specialization-card h2 {
-    font-size: 24px;
-  }
-  .specialization-card,
-  .promotion-card,
-  .direction-card,
-  .specialist-card {
-    width: 100%;
-    padding: 15px;
-  }
-  .nav-menu {
-    display: none;
-  }
-  .menu-icon {
+.promotions-section .promotion-card a {
+    text-decoration: none !important;
     display: block;
-  }
-  .doctor-photo img {
-    height: auto;
-  }
 }
 
-/* Для горизонтальных экранов мобильных устройств */
-@media (max-width: 768px) and (orientation: landscape) {
-  .doctor-info {
-    padding: 20px;
-  }
+.promotions-section .promotion-content,
+.promotions-section .promotion-content * {
+    text-decoration: none !important;
 }
