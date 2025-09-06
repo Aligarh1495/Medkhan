@@ -284,7 +284,6 @@ display: flex;
 }
 
 .doctor-card {
-  background-color: var(--light-green);
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -443,4 +442,3 @@ display: flex;
   background-color: #f0f0f0;
   transform: translateY(-2px);
 }
-

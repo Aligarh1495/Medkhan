@@ -156,7 +156,6 @@ body {
 /* Info Section */
 .info-section {
   padding: 60px 0 40px;
-  background-color: #f5f5f5;
 }
 
 .magazine-info-section {
@@ -356,9 +355,7 @@ body {
 }
 
 .shadow-wrapper {
-  background-color: white;
   border-radius: 30px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   padding: 40px;
 }
 
@@ -523,4 +520,3 @@ body {
 html {
   scroll-behavior: smooth;
 }
-

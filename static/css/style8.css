@@ -250,14 +250,13 @@ body {
   height: 285px;
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тень вокруг элемента */
   transition: transform 0.3s ease;
 }
 
 .specialist-card:hover {
   transform: translateY(-5px);
 }
-
 .specialist-image {
   width: 35%; /* Задаём ширину для изображения */
   height: 100%;
@@ -662,4 +661,3 @@ body {
   background-color: var(--primary-green);
   color: var(--white);
 }
-

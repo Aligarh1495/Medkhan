@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1280, initial-scale=0.3">   
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
     <!-- Базовые стили -->
@@ -45,7 +45,6 @@
                     <li><a href="{% url 'specialists' %}" {% if 'specialists' in request.path %}class="active"{% endif %}>Специалисты</a></li>
                     <li><a href="#reviews" {% if 'reviews' in request.path %}class="active"{% endif %}>Отзывы</a></li>
                     <li><a href="{% url 'magazine' %}" {% if 'magazine' in request.path %}class="active"{% endif %}>Журнал</a></li>
-                    <li><a href="{% url 'scince' %}" {% if 'scince' in request.path %}class="active"{% endif %}>Наука</a></li>
                 </ul>
             </nav>
 
