@@ -63,10 +63,12 @@ def main(request):
                 checkup.discount_percent = 0
         popular_checkups = list(all_checkups)
 
+    doctors = Doctor.objects.all()
+
     # Получаем популярные отделения
     popular_departments = Department.objects.filter(
         name__in=[
-            'Урология', 'Гинекология', 'Неврология',
+            'Урология', 'Гинекология', 'Сосудистая хирургия',
             'Хирургия', 'Проктология', 'Эндоскопия',
             'Травматология'
         ]
@@ -77,6 +79,7 @@ def main(request):
         'title': 'MedKhan® - Главная',
         'departments_dict': departments_dict,
         'popular_checkups': popular_checkups,
+        'doctors': doctors,
     }
     return render(request, 'products/main.html', context)
 
@@ -84,21 +87,25 @@ def main(request):
 def services(request):
     departments = Department.objects.prefetch_related('services').all()
     products = []
+    department_dict = {}
     for department in departments:
         department_services = department.services.all()
         if department_services.exists():
-            products.append({
+            product_data = {
                 'image': f'/static/images/department/{department.name.lower()}.png',
                 'name': department.name,
                 'description': department.description,
                 'services_count': department_services.count(),
                 'department_id': department.id
-            })
+            }
+            products.append(product_data)
+            department_dict[department.name] = product_data
 
     context = {
         'title': 'Услуги - MedKhan®',
         'products': products,
         'departments': departments,
+        'department_dict': department_dict,
     }
     return render(request, 'products/services.html', context)
 
