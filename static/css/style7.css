@@ -23,6 +23,15 @@ body {
   line-height: 1.6;
 }
 
+.mobile-menu-header{display: none;}
+
+.mobile-header, .mobile-nav, .backdrop { display:none; }
+.hero-background-mobile, .mobile-addres {
+    display: none;
+}
+.podval-mobile{
+    display: none;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;

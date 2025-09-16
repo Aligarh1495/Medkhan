@@ -12,6 +12,14 @@
   align-items: center;
   margin-bottom: 40px;
 }
+.podval-mobile{
+    display: none;
+}
+.mobile-menu-header{display: none;}
+.mobile-header, .mobile-nav, .backdrop { display:none; }
+.hero-background-mobile, .mobile-addres {
+    display: none;
+}
 
 .page-title {
   font-size: 36px;

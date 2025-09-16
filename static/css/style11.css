@@ -18,7 +18,14 @@
   margin-bottom: 2rem;
   color: #333;
 }
-
+.mobile-header, .mobile-nav, .backdrop { display:none; }
+.hero-background-mobile, .mobile-addres {
+    display: none;
+}
+.mobile-menu-header{display: none;}
+.podval-mobile{
+    display: none;
+}
 /* Cards Grid */
 .cards-grid {
   display: grid;

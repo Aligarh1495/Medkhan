@@ -10,7 +10,15 @@
 .breadcrumbs a {
   color: var(--light-text);
 }
+.podval-mobile{
+    display: none;
+}
 
+.mobile-header, .mobile-nav, .backdrop { display:none; }
+.hero-background-mobile, .mobile-addres {
+    display: none;
+}
+.mobile-menu-header{display: none;}
 .breadcrumbs a:hover {
   color: var(--primary-green);
 }

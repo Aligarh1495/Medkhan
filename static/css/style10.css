@@ -13,13 +13,20 @@
   padding: 0;
   box-sizing: border-box;
 }
+.mobile-menu-header{display: none;}
+.mobile-header, .mobile-nav, .backdrop { display:none; }
+.hero-background-mobile, .mobile-addres {
+    display: none;
+}
 
 body {
   font-family: "Inter", sans-serif;
   color: var(--dark-text);
   background-color: #f5f5f5;
 }
-
+.podval-mobile{
+    display: none;
+}
 /* Header Styles */
 .header {
   background-color: var(--white);

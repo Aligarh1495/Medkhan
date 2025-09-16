@@ -12,8 +12,16 @@
 
 /* Promotion Hero */
 
+.podval-mobile{
+    display: none;
+}
 
+.mobile-menu-header{display: none;}
 
+.mobile-header, .mobile-nav, .backdrop { display:none; }
+.hero-background-mobile, .mobile-addres {
+    display: none;
+}
 .promotion-hero{
 justify-content: center; 
 display: flex;

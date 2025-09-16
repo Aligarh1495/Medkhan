@@ -20,6 +20,15 @@ body {
   background-color: #f5f5f5;
 }
 
+.mobile-menu-header{display: none;}
+
+.mobile-header, .mobile-nav, .backdrop { display:none; }
+.hero-background-mobile, .mobile-addres {
+    display: none;
+}
+.podval-mobile{
+    display: none;
+}
 .container2 {
   width: 100%;
   max-width: 1350px;
