@@ -31,7 +31,7 @@ urlpatterns = [
     path('magazine/', magazine, name='magazine'),
     path('BackPain/', BackPain, name='BackPain'),
     path('patients/', patients, name='patients'),
-    path('scince/', magazine, name='science'),
+    path('scince/', scince, name='scince'),
 ]
 
 
