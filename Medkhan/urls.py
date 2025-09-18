@@ -9,7 +9,7 @@ from products.views import (
 )
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', main, name='main'),
     path('services/', services, name='services'),
     path('stocks/', stocks, name='stocks'),
